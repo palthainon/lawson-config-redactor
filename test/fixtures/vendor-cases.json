@@ -1,0 +1,143 @@
+[
+  {
+    "profile": "cisco-ios",
+    "source": "hostname SEED-HOST\nusername SEED-USER secret 9 SEED-HASH\ninterface GigabitEthernet0/1\n ip address 192.0.2.10 255.255.255.0\n",
+    "remove": [
+      "SEED-HOST",
+      "SEED-USER",
+      "SEED-HASH"
+    ],
+    "keep": [
+      "GigabitEthernet0/1",
+      "255.255.255.0"
+    ]
+  },
+  {
+    "profile": "panos-set",
+    "source": "set deviceconfig system hostname SEED-HOST\nset mgt-config users SEED-USER phash SEED-HASH\nset network ike gateway SEED-GATEWAY authentication pre-shared-key key SEED-PSK\nset shared address SEED-OBJECT ip-netmask 192.0.2.10/24\nset rulebase security rules SEED-RULE source [ SEED-OBJECT ]\nset deviceconfig system snmp-setting access-setting version v2c snmp-community SEED-COMMUNITY\n",
+    "remove": [
+      "SEED-HOST",
+      "SEED-USER",
+      "SEED-HASH",
+      "SEED-GATEWAY",
+      "SEED-PSK",
+      "SEED-OBJECT",
+      "SEED-RULE",
+      "SEED-COMMUNITY"
+    ],
+    "keep": [
+      "set network ike gateway",
+      "/24"
+    ]
+  },
+  {
+    "profile": "panos-xml",
+    "source": "<?xml version=\"1.0\"?><config version=\"12.1\"><mgt-config><users><entry name=\"SEED-USER\"><phash>SEED-HASH</phash></entry></users></mgt-config><devices><entry name=\"SEED-DEVICE\"><deviceconfig><system><hostname>SEED-HOST</hostname><ip-address>192.0.2.10</ip-address><netmask>255.255.255.0</netmask></system></deviceconfig><network><ike><gateway><entry name=\"SEED-GATEWAY\"><authentication><pre-shared-key><key>SEED-PSK</key></pre-shared-key></authentication></entry></gateway></ike></network></entry></devices></config>",
+    "remove": [
+      "SEED-USER",
+      "SEED-HASH",
+      "SEED-DEVICE",
+      "SEED-HOST",
+      "SEED-GATEWAY",
+      "SEED-PSK"
+    ],
+    "keep": [
+      "<config",
+      "<phash>",
+      "255.255.255.0"
+    ]
+  },
+  {
+    "profile": "junos-set",
+    "source": "set system host-name SEED-HOST\nset system login user SEED-USER full-name \"SEED-PERSON\"\nset system login user SEED-USER authentication encrypted-password \"SEED-HASH\"\nset system login user SEED-USER authentication ssh-ed25519 \"ssh-ed25519 SEED-SSH\"\nset system radius-server 192.0.2.20 secret \"SEED-RADIUS\"\nset snmp community SEED-COMMUNITY authorization read-only\nset security ike policy SEED-POLICY pre-shared-key ascii-text \"SEED-PSK\"\nset interfaces ge-0/0/0 unit 0 family inet address 192.0.2.10/24\nset snmp v3 usm local-engine user SEED-USER privacy-aes128 privacy-key \"SEED-PRIVACY-KEY\"\nset snmp v3 usm local-engine user SEED-USER privacy-des privacy-password \"SEED-PRIVACY-PASSWORD\"\n",
+    "remove": [
+      "SEED-HOST",
+      "SEED-USER",
+      "SEED-PERSON",
+      "SEED-HASH",
+      "SEED-SSH",
+      "SEED-RADIUS",
+      "SEED-COMMUNITY",
+      "SEED-POLICY",
+      "SEED-PSK",
+      "SEED-PRIVACY-KEY",
+      "SEED-PRIVACY-PASSWORD"
+    ],
+    "keep": [
+      "ge-0/0/0",
+      "/24",
+      "authorization read-only"
+    ]
+  },
+  {
+    "profile": "junos-hierarchical",
+    "source": "system {\n host-name SEED-HOST;\n login { user SEED-USER { full-name \"SEED-PERSON\"; authentication { encrypted-password \"SEED-HASH\"; ssh-rsa \"ssh-rsa SEED-SSH\"; } } }\n radius-server 192.0.2.20 { secret \"SEED-RADIUS\"; }\n}\nsnmp { community \"SEED-COMMUNITY\" { authorization read-only; } }\nsecurity { ike { policy SEED-POLICY { pre-shared-key { ascii-text \"SEED-PSK\"; } } } }\ninterfaces { ge-0/0/0 { unit 0 { family inet { address 192.0.2.10/24; } } } }\nsnmp { v3 { usm { local-engine { user SEED-USER { privacy-aes128 { privacy-key \"SEED-PRIVACY-KEY\"; } } user SEED-PRIVACY-USER { privacy-des { privacy-password \"SEED-PRIVACY-PASSWORD\"; } } } } } }\n",
+    "remove": [
+      "SEED-HOST",
+      "SEED-USER",
+      "SEED-PERSON",
+      "SEED-HASH",
+      "SEED-SSH",
+      "SEED-RADIUS",
+      "SEED-COMMUNITY",
+      "SEED-POLICY",
+      "SEED-PSK",
+      "SEED-PRIVACY-KEY",
+      "SEED-PRIVACY-PASSWORD",
+      "SEED-PRIVACY-USER"
+    ],
+    "keep": [
+      "ge-0/0/0",
+      "/24",
+      "authorization read-only"
+    ]
+  },
+  {
+    "profile": "dell-os6",
+    "source": "hostname SEED-HOST\nusername SEED-USER password 9 SEED-HASH privilege 15\nsnmp-server community SEED-COMMUNITY ro\nradius server auth 192.0.2.20\n key 7 SEED-RADIUS\n!\ninterface ethernet 1/1/1\n description SEED-DESCRIPTION\n ip address 192.0.2.10/24\n",
+    "remove": [
+      "SEED-HOST",
+      "SEED-USER",
+      "SEED-HASH",
+      "SEED-COMMUNITY",
+      "SEED-RADIUS",
+      "SEED-DESCRIPTION"
+    ],
+    "keep": [
+      "interface ethernet",
+      "/24"
+    ]
+  },
+  {
+    "profile": "dell-os9",
+    "source": "hostname SEED-HOST\nusername SEED-USER sha256-password 9 SEED-HASH privilege 15\nsnmp-server community SEED-COMMUNITY ro\nradius server auth 192.0.2.20\n key 7 SEED-RADIUS\n!\ninterface ethernet 1/1/1\n description SEED-DESCRIPTION\n ip address 192.0.2.10/24\n",
+    "remove": [
+      "SEED-HOST",
+      "SEED-USER",
+      "SEED-HASH",
+      "SEED-COMMUNITY",
+      "SEED-RADIUS",
+      "SEED-DESCRIPTION"
+    ],
+    "keep": [
+      "interface ethernet",
+      "/24"
+    ]
+  },
+  {
+    "profile": "dell-os10",
+    "source": "hostname SEED-HOST\nusername SEED-USER password 9 SEED-HASH privilege 15\nsnmp-server community SEED-COMMUNITY ro\nradius server auth 192.0.2.20\n key 7 SEED-RADIUS\n!\ninterface ethernet 1/1/1\n description SEED-DESCRIPTION\n ip address 192.0.2.10/24\n",
+    "remove": [
+      "SEED-HOST",
+      "SEED-USER",
+      "SEED-HASH",
+      "SEED-COMMUNITY",
+      "SEED-RADIUS",
+      "SEED-DESCRIPTION"
+    ],
+    "keep": [
+      "interface ethernet",
+      "/24"
+    ]
+  }
+]

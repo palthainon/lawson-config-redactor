@@ -1,3 +1,4 @@
+import {PROFILES} from './profiles';
 import * as vscode from 'vscode';
 import {randomBytes} from 'node:crypto';
 export function render(webview: vscode.Webview, root: vscode.Uri): string {
@@ -5,7 +6,8 @@ export function render(webview: vscode.Webview, root: vscode.Uri): string {
   const nonce = randomBytes(18).toString('hex');
   return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource}; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';"><link rel="stylesheet" href="${resource('review.css')}"><title>Network Config Redactor</title></head><body>
 <header><img src="${resource('logo.png')}" alt="Lawson Cyber LLC shield"><div><span class="brand">LAWSON CYBER LLC</span><h1>Network Config Redactor</h1></div><span class="local">LOCAL · REVIEW TEXT</span></header>
-<main><p>Prepare one Cisco IOS or IOS-XE configuration for technical review.</p><p class="notice">The output contains replacement values. Do not deploy it to a device. Unknown sensitive content can still remain. Review the full comparison before export.</p>
+<main><p>Prepare one network device configuration for technical review. Select the vendor and configuration format.</p><p class="notice">The output contains replacement values. Do not deploy it to a device. Unknown sensitive content can still remain. Review the full comparison before export.</p>
+<section><h2>Device profile</h2><label for="device-profile">Vendor and configuration format</label> <select id="device-profile">${PROFILES.map(profile=>`<option value="${profile.id}">${profile.label}</option>`).join('')}</select><p>Choose the exact format. Unsupported sensitive forms block export. XML mode masks text values and attributes conservatively. The output is review text, not an importable configuration.</p></section>
 <div id="state" role="status" aria-live="polite">Scan the source document.</div><div id="totals" aria-label="Replacement totals"></div>
 <div class="toolbar"><button id="scan">Scan current source</button><button id="compare" disabled>Open comparison</button><button id="source">Show source</button></div>
 <section><h2>Address replacement</h2><label for="address-mode">Choose the address format</label> <select id="address-mode"><option value="labels">Named labels: &lt;IP_001&gt;</option><option value="addresses">New IP addresses: preserve network class</option></select><p>New addresses preserve observed subnets and repeated references. Public addresses stay public. Private addresses stay private. Default routes retain their zero address. Generated public addresses can belong to other networks. Use the output for review only.</p></section>

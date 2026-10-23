@@ -1,7 +1,10 @@
+import {DeviceProfile, isProfile} from './profiles';
 import {manualSpans, replace} from './replacements';
 import {randomBytes} from 'node:crypto';
 import {AddressMode, Result, Scan} from './types';
 export class ReviewSession {
+  profile: DeviceProfile = 'cisco-ios';
+  setProfile(value: unknown): void {if(!isProfile(value))throw new Error('Choose a supported device profile.');if(value!==this.profile){this.profile=value;this.invalidate();}}
   source = ''; version = -1; result?: Result; stale = true; reviewed = false;
   addressMode: AddressMode = 'labels'; private key = randomBytes(32);
   private scan?: Scan; private selections: {start: number; end: number}[] = [];
@@ -12,7 +15,7 @@ export class ReviewSession {
   acknowledge(value: boolean): void {this.reviewed = value === true && !this.stale && !!this.result && this.result.flags.length === 0;}
   export(version: number): string {if (this.stale || version !== this.version || !this.result) throw new Error('The preview is outdated. Scan the current source first.'); if (this.result.flags.length) throw new Error('Mask each flagged section before export.'); if (!this.reviewed) throw new Error('Review the comparison and confirm the review before export.'); return this.result.output;}
   dispose(): void {this.invalidate();}
-  metadata() {return {addressMode:this.addressMode,stale: this.stale, reviewed: this.reviewed, canExport: !this.stale && this.reviewed && !!this.result && this.result.flags.length === 0,
+  metadata() {return {profile:this.profile,addressMode:this.addressMode,stale: this.stale, reviewed: this.reviewed, canExport: !this.stale && this.reviewed && !!this.result && this.result.flags.length === 0,
     replacements: this.result?.replacements.map(({category,label,line,rule}) => ({category,label,line,rule})) || [],
     flags: this.result?.flags.map(({rule,line},index) => ({index,rule,line})) || []};}
 }

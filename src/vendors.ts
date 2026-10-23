@@ -3,8 +3,8 @@ import {Category, Scan, Span} from './types';
 import {DeviceProfile} from './profiles';
 import {linesOf} from './cisco';
 interface Token {value:string; start:number; end:number}
-const sensitive = /(?:password|secret|community|passphrase|private-key|shared-key|authentication-key|key-string|phash|api-key|token)/i;
-const secretFields = new Set(['password','encrypted-password','plain-text-password','secret','community','phash','private-key','public-key','certificate','passphrase','api-key','auth-password','priv-password','snmp-community','authpwd','privpwd','bind-password','shared-secret','authentication-key','key-string','ssh-rsa','ssh-dsa','ssh-ecdsa','ssh-ed25519']);
+const sensitive = /(?:password|secret|community|passphrase|private-key|shared-key|authentication-key|privacy-key|key-string|phash|api-key|token)/i;
+const secretFields = new Set(['password','encrypted-password','plain-text-password','secret','community','phash','private-key','public-key','certificate','passphrase','api-key','auth-password','priv-password','snmp-community','authpwd','privpwd','bind-password','shared-secret','authentication-key','privacy-key','privacy-password','key-string','ssh-rsa','ssh-dsa','ssh-ecdsa','ssh-ed25519']);
 const names = new Set(['users','user','address-group','address-set','policy-statement','prefix-list','routing-instances','groups','group','zone','security-zone','zones','rules','rule','gateway','ike-gateway','virtual-router','virtual-wire','template','device-group','authentication-profile','certificate-profile','profile-group','filter','policy','proposal','key-chain']);
 function maskPrefix(value:string):number|undefined {if(isIP(value)!==4)return;const bits=value.split('.').map(n=>Number(n).toString(2).padStart(8,'0')).join('');if(/^1*0*$/.test(bits))return bits.indexOf('0')<0?32:bits.indexOf('0');}
 const textFields = new Set(['description','full-name','contact','location','login-banner','message','comments','comment']);
@@ -71,6 +71,10 @@ export function scanCli(source:string,profile:DeviceProfile):Scan {
       // Junos communities and PAN-OS named address objects are values in the path.
       if(word==='community' && words.includes('snmp')) mark(next,'SECRET','SNMP community',100);
       if(word==='address' && profile==='panos-set' && !words.includes('interface'))declare(next,'NAME');
+      if((word==='privacy-key' || word==='privacy-password') &&
+          (opening || !next || i+2!==path.length || ['{','}',';','[',']'].includes(next.value))) {
+        block(result,source,'A privacy credential requires one scalar value. Mask the configuration.');continue;
+      }
       if(secretFields.has(word) || (word==='key' && words.some(w=>/radius|tacacs|tacplus|authentication|pre-shared-key|auth-key/.test(w)))) {
         if(next && !['{','}',';','[',']'].includes(next.value))mark(next,'SECRET','Credential or key',100);
         else if(!opening && !ancestors.includes(t)) block(result,source,'A sensitive field has no supported value. Mask the configuration.');

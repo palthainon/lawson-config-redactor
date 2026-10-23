@@ -49,7 +49,7 @@
   },
   {
     "profile": "junos-set",
-    "source": "set system host-name SEED-HOST\nset system login user SEED-USER full-name \"SEED-PERSON\"\nset system login user SEED-USER authentication encrypted-password \"SEED-HASH\"\nset system login user SEED-USER authentication ssh-ed25519 \"ssh-ed25519 SEED-SSH\"\nset system radius-server 192.0.2.20 secret \"SEED-RADIUS\"\nset snmp community SEED-COMMUNITY authorization read-only\nset security ike policy SEED-POLICY pre-shared-key ascii-text \"SEED-PSK\"\nset interfaces ge-0/0/0 unit 0 family inet address 192.0.2.10/24\n",
+    "source": "set system host-name SEED-HOST\nset system login user SEED-USER full-name \"SEED-PERSON\"\nset system login user SEED-USER authentication encrypted-password \"SEED-HASH\"\nset system login user SEED-USER authentication ssh-ed25519 \"ssh-ed25519 SEED-SSH\"\nset system radius-server 192.0.2.20 secret \"SEED-RADIUS\"\nset snmp community SEED-COMMUNITY authorization read-only\nset security ike policy SEED-POLICY pre-shared-key ascii-text \"SEED-PSK\"\nset interfaces ge-0/0/0 unit 0 family inet address 192.0.2.10/24\nset snmp v3 usm local-engine user SEED-USER privacy-aes128 privacy-key \"SEED-PRIVACY-KEY\"\nset snmp v3 usm local-engine user SEED-USER privacy-des privacy-password \"SEED-PRIVACY-PASSWORD\"\n",
     "remove": [
       "SEED-HOST",
       "SEED-USER",
@@ -59,7 +59,9 @@
       "SEED-RADIUS",
       "SEED-COMMUNITY",
       "SEED-POLICY",
-      "SEED-PSK"
+      "SEED-PSK",
+      "SEED-PRIVACY-KEY",
+      "SEED-PRIVACY-PASSWORD"
     ],
     "keep": [
       "ge-0/0/0",
@@ -69,7 +71,7 @@
   },
   {
     "profile": "junos-hierarchical",
-    "source": "system {\n host-name SEED-HOST;\n login { user SEED-USER { full-name \"SEED-PERSON\"; authentication { encrypted-password \"SEED-HASH\"; ssh-rsa \"ssh-rsa SEED-SSH\"; } } }\n radius-server 192.0.2.20 { secret \"SEED-RADIUS\"; }\n}\nsnmp { community \"SEED-COMMUNITY\" { authorization read-only; } }\nsecurity { ike { policy SEED-POLICY { pre-shared-key { ascii-text \"SEED-PSK\"; } } } }\ninterfaces { ge-0/0/0 { unit 0 { family inet { address 192.0.2.10/24; } } } }\n",
+    "source": "system {\n host-name SEED-HOST;\n login { user SEED-USER { full-name \"SEED-PERSON\"; authentication { encrypted-password \"SEED-HASH\"; ssh-rsa \"ssh-rsa SEED-SSH\"; } } }\n radius-server 192.0.2.20 { secret \"SEED-RADIUS\"; }\n}\nsnmp { community \"SEED-COMMUNITY\" { authorization read-only; } }\nsecurity { ike { policy SEED-POLICY { pre-shared-key { ascii-text \"SEED-PSK\"; } } } }\ninterfaces { ge-0/0/0 { unit 0 { family inet { address 192.0.2.10/24; } } } }\nsnmp { v3 { usm { local-engine { user SEED-USER { privacy-aes128 { privacy-key \"SEED-PRIVACY-KEY\"; } } user SEED-PRIVACY-USER { privacy-des { privacy-password \"SEED-PRIVACY-PASSWORD\"; } } } } } }\n",
     "remove": [
       "SEED-HOST",
       "SEED-USER",
@@ -79,7 +81,10 @@
       "SEED-RADIUS",
       "SEED-COMMUNITY",
       "SEED-POLICY",
-      "SEED-PSK"
+      "SEED-PSK",
+      "SEED-PRIVACY-KEY",
+      "SEED-PRIVACY-PASSWORD",
+      "SEED-PRIVACY-USER"
     ],
     "keep": [
       "ge-0/0/0",

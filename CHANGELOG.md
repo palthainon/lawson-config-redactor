@@ -2,6 +2,7 @@
 
 ## 0.4.0 — Unreleased
 
+- Mask Junos privacy keys and passwords. Block unsupported privacy credential forms before export.
 - Added a vendor and format selector with eight device profiles.
 - Added Palo Alto set and XML formats, Junos set and hierarchy formats, and Dell OS6, OS9, and OS10 rules.
 - Required a new scan and review after a profile change.

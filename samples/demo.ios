@@ -1,0 +1,30 @@
+! Synthetic example. All names and credential values are test data.
+hostname CLIENT-A
+ip domain name example.invalid
+username DEMO-USER privilege 15 secret 9 DEMO-HASH-ONLY
+enable secret 9 DEMO-ENABLE-HASH
+snmp-server community DEMO-COMMUNITY RO REVIEW-ACL
+snmp-server location Synthetic demonstration location
+radius server DEMO-RADIUS
+ address ipv4 192.0.2.20 auth-port 1812 acct-port 1813
+ key 7 DEMO-SERVER-KEY
+!
+ip access-list extended REVIEW-ACL
+ remark Synthetic review example
+ 10 permit tcp 192.0.2.0 0.0.0.255 host 198.51.100.10 eq 443
+!
+interface GigabitEthernet1/0/1
+ description Synthetic customer-facing circuit
+ ip address 192.0.2.1 255.255.255.0
+ ipv6 address 2001:db8::1/64
+ ip access-group REVIEW-ACL in
+!
+route-map REVIEW-POLICY permit 10
+ match ip address REVIEW-ACL
+!
+banner motd ^C
+Synthetic access notice for CLIENT-A.
+Use this example only for prototype review.
+^C
+!
+end

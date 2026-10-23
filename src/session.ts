@@ -1,0 +1,15 @@
+import {manualSpans, replace} from './replacements';
+import {Result, Scan} from './types';
+export class ReviewSession {
+  source = ''; version = -1; result?: Result; stale = true; reviewed = false;
+  private scan?: Scan; private selections: {start: number; end: number}[] = [];
+  load(source: string, version: number, scan: Scan): void {this.source = source; this.version = version; this.scan = scan; this.selections = []; this.result = replace(source, scan); this.stale = false; this.reviewed = false;}
+  invalidate(): void {this.stale = true; this.reviewed = false; this.result = undefined; this.source = ''; this.scan = undefined; this.selections = [];}
+  mask(start: number, end: number): void {if (this.stale || !this.scan) throw new Error('Scan the current source first.'); this.selections.push({start,end}); this.result = replace(this.source, this.scan, manualSpans(this.source, this.selections)); this.reviewed = false;}
+  acknowledge(value: boolean): void {this.reviewed = value === true && !this.stale && !!this.result && this.result.flags.length === 0;}
+  export(version: number): string {if (this.stale || version !== this.version || !this.result) throw new Error('The preview is outdated. Scan the current source first.'); if (this.result.flags.length) throw new Error('Mask each flagged section before export.'); if (!this.reviewed) throw new Error('Review the comparison and confirm the review before export.'); return this.result.output;}
+  dispose(): void {this.invalidate();}
+  metadata() {return {stale: this.stale, reviewed: this.reviewed, canExport: !this.stale && this.reviewed && !!this.result && this.result.flags.length === 0,
+    replacements: this.result?.replacements.map(({category,label,line,rule}) => ({category,label,line,rule})) || [],
+    flags: this.result?.flags.map(({rule,line},index) => ({index,rule,line})) || []};}
+}

@@ -1,0 +1,15 @@
+import * as vscode from 'vscode';
+import {randomBytes} from 'node:crypto';
+export function render(webview: vscode.Webview, root: vscode.Uri): string {
+  const resource = (file: string) => webview.asWebviewUri(vscode.Uri.joinPath(root, 'media', file));
+  const nonce = randomBytes(18).toString('hex');
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource}; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';"><link rel="stylesheet" href="${resource('review.css')}"><title>Network Config Redactor</title></head><body>
+<header><img src="${resource('logo.png')}" alt="Lawson Cyber LLC shield"><div><span class="brand">LAWSON CYBER LLC</span><h1>Network Config Redactor</h1></div><span class="local">LOCAL · REVIEW TEXT</span></header>
+<main><p>Prepare one Cisco IOS or IOS-XE configuration for technical review.</p><p class="notice">The output contains placeholders. Do not deploy it to a device. Unknown sensitive content can still remain. Review the full comparison before export.</p>
+<div id="state" role="status" aria-live="polite">Scan the source document.</div><div id="totals" aria-label="Replacement totals"></div>
+<div class="toolbar"><button id="scan">Scan current source</button><button id="compare" disabled>Open comparison</button><button id="source">Show source</button></div>
+<section><h2>Sections that need masking</h2><p id="flag-summary"></p><div id="flags"></div></section>
+<section><h2>Proposed replacements</h2><p>Original values stay in the editor comparison. Select missed content in the source, then run Lawson Cyber: Redact Selected Text.</p><div class="table-scroll"><table><thead><tr><th>Line</th><th>Category</th><th>Replacement</th><th>Rule</th></tr></thead><tbody id="replacements"></tbody></table></div><button id="more" hidden>Show more replacements</button></section>
+<section class="export"><label><input id="reviewed" type="checkbox" disabled> I reviewed the comparison and checked for remaining sensitive content.</label><div class="toolbar"><button id="copy" disabled>Copy redacted text</button><button id="save" disabled>Save redacted copy</button></div></section>
+<details><summary>About</summary><p>Lawson Cyber LLC builds tools for network engineering and technical review.</p><button id="website">Visit lawsoncyber.com</button></details></main><script nonce="${nonce}" src="${resource('review.js')}"></script></body></html>`;
+}

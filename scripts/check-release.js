@@ -1,5 +1,5 @@
 // Release checks run outside the extension. They never read configuration input.
-const fs=require('node:fs'),path=require('node:path');
+const fs=require('node:fs'),path=require('node:path'),{createHash}=require('node:crypto');
 const root=path.join(__dirname,'..'),manifest=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
 const local=process.argv.includes('--local');
 function requireCheck(condition,message){if(!condition)throw new Error(message);}
@@ -11,6 +11,7 @@ function imageSize(file){
 }
 (async()=>{
  requireCheck(manifest.name==='lawson-config-redactor' && manifest.publisher==='DerickL','Keep the selected extension identity.');
+ requireCheck(manifest.displayName==='Network Config Redactor \u2014 Lawson Cyber LLC','Keep the company listing name free of encoding errors.');
  requireCheck(manifest.license==='MIT','Select the approved MIT license.');
  const license=fs.readFileSync(path.join(root,'LICENSE'),'utf8');requireCheck(license.includes('MIT License')&&license.includes('2026 Lawson Cyber LLC'),'Include the company MIT license.');
  requireCheck(JSON.stringify(manifest.extensionKind)==='["ui"]','Run the extension in the local desktop host.');
@@ -22,9 +23,9 @@ function imageSize(file){
  const images=[...readme.matchAll(/!\[[^\]]*\]\(([^)]+)\)/g)].map(match=>match[1]);requireCheck(images.length>=2,'Include both address-mode screenshots.');
  for(const image of images){requireCheck(!/^(?:https?:|data:)/.test(image),'Keep source screenshots in the local repository.');const relative=path.relative(root,path.resolve(root,image));requireCheck(!relative.startsWith('..')&&!path.isAbsolute(relative),'Keep screenshots inside the repository.');const size=imageSize(path.join(root,image));requireCheck(size.width>=1000&&size.height>=600,'Use a readable editor screenshot.');}
  for(const file of ['PRIVACY.md','SUPPORT.md','CHANGELOG.md'])requireCheck(fs.existsSync(path.join(root,file)),`Include ${file}.`);
- if(local){console.log(JSON.stringify({localChecks:'passed',icon:logo,screenshots:images.length,marketplaceUploadReady:false,pending:'Configure and verify public HTTPS screenshot hosting before building the upload package.'},null,2));return;}
+ if(local){console.log(JSON.stringify({localChecks:'passed',icon:logo,screenshots:images.length,marketplaceUploadReady:false,pending:'Run the public screenshot checks before building the upload package.'},null,2));return;}
  const base=manifest.vsce?.baseImagesUrl;
  requireCheck(typeof base==='string'&&base.startsWith('https://'),'Public HTTPS screenshot hosting is not configured. The local preview is not an upload package.');
- for(const image of images){const url=new URL(image,base.endsWith('/')?base:base+'/');const response=await fetch(url,{method:'HEAD',signal:AbortSignal.timeout(15000)});requireCheck(response.ok&&response.headers.get('content-type')?.includes('image/'),`Screenshot hosting check failed: ${url.href}`);}
+ for(const image of images){const url=new URL(image,base.endsWith('/')?base:base+'/');const response=await fetch(url,{method:'GET',signal:AbortSignal.timeout(15000)});requireCheck(response.ok&&response.headers.get('content-type')?.includes('image/'),`Screenshot hosting check failed: ${url.href}`);const remote=Buffer.from(await response.arrayBuffer()),expected=fs.readFileSync(path.join(root,image));requireCheck(createHash('sha256').update(remote).digest('hex')===createHash('sha256').update(expected).digest('hex'),`The hosted screenshot differs from the local asset: ${url.href}`);}
  console.log('Marketplace metadata and public screenshot checks passed. Publisher access and publication approval remain separate.');
 })().catch(error=>{console.error(error.message);process.exitCode=1;});

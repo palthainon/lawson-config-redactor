@@ -1,16 +1,16 @@
-# Marketplace preparation
+# Marketplace release
 
-The listing targets engineers who prepare Cisco configurations for peer review. Its main claim is local processing. The requested first action is to open the synthetic demo. The About view provides the company website route. No claim of customer adoption is made.
+The public source repository is [palthainon/lawson-config-redactor](https://github.com/palthainon/lawson-config-redactor). The default branch is `main`.
 
-## Prepared files
+Version 0.3.0 uses publisher `DerickL` and extension name `lawson-config-redactor`. It remains marked Preview. The license is MIT. The company banner color is `#3a2414`. The manifest requests the local desktop extension host.
 
-The root `README.md` is the proposed Marketplace description. `PRIVACY.md` states the data handling boundary. `SUPPORT.md` gives the support route. `CHANGELOG.md` records the release history. `LICENSE` contains the approved MIT terms.
+The root `README.md` supplies the Marketplace description. `PRIVACY.md` states the data handling boundary. `SUPPORT.md` gives the support route. `CHANGELOG.md` records the release history. `LICENSE` contains the MIT terms.
 
-The existing 400 by 400 pixel company logo is `media/logo.png`. The two editor captures are `media/screenshots/named-labels.jpg` and `media/screenshots/new-addresses.jpg`. Both captures use `samples/marketplace-demo.ios`. The original values are synthetic. The captures show the real desktop extension.
+The company logo is `media/logo.png`. Both screenshots use synthetic input from `samples/marketplace-demo.ios`. They show the real desktop extension. The README source uses relative image paths. The package tool rewrites them to public HTTPS URLs.
 
-Version 0.3.0 retains publisher `DerickL` and extension name `lawson-config-redactor`. The first listing remains marked Preview. The company banner color is `#3a2414`. The manifest requests the local desktop extension host.
+The `vsce.baseImagesUrl` setting pins the images to source commit `72f3654792fc9cfbc2255cd0892bea41dc281f88`. This keeps the listing images stable when the default branch changes. The release check downloads each public image without authentication. It checks the content type and compares its hash with the local asset.
 
-## Local review
+## Repeat the release checks
 
 Run these commands from the repository root:
 
@@ -18,26 +18,20 @@ Run these commands from the repository root:
 npm ci
 npm test
 npm run test:host
-node scripts/check-release.js --local
-npx @vscode/vsce package --allow-missing-repository --no-rewrite-relative-links --no-dependencies --out lawson-config-redactor-0.3.0-local-preview.vsix
+node scripts/check-release.js
+npx @vscode/vsce package --no-dependencies --out lawson-config-redactor-0.3.0.vsix
 ```
 
-The local preview includes screenshots and retains relative image paths. It is for local review. It is not the upload package.
+The upload package is `lawson-config-redactor-0.3.0.vsix`. The earlier `lawson-config-redactor-0.3.0-local-preview.vsix` keeps relative image paths for local review. Use the upload package for the Marketplace.
 
-## Remaining release steps
+Inspect the packaged README, public image URLs, company license, and runtime files before upload. Tests, development scripts, release notes for maintainers, and configuration captures must stay out of the package. The two synthetic examples are intentional package content.
 
-1. Approve a public location for the screenshots. No accessible public repository is currently configured for this project. The local repository has no remote.
-2. Upload only the approved listing assets, or publish the approved source repository. Keep configuration inputs and private review data out of the upload.
-3. Set `vsce.baseImagesUrl` in `package.json` to the approved HTTPS base URL. The base must preserve the relative `media/screenshots/` paths in the README.
-4. Run `node scripts/check-release.js`. It requires both screenshot URLs to return image content. The check does not read configurations.
-5. Build the upload package with relative link rewriting enabled. Use `npx @vscode/vsce package --allow-missing-repository --no-dependencies --out lawson-config-redactor-0.3.0.vsix`.
-6. Inspect the packaged README and image URLs. Confirm the package contains the company license and no tests, development notes, or configuration captures.
-7. Confirm publisher access, the final name, and publication approval. Upload only the reviewed package through the publisher account.
+## Publication boundary
 
-No publisher login, public asset upload, repository upload, or Marketplace publication occurs during preparation.
+Derick approved the public repository and screenshot upload on 2026-10-23. Marketplace publication remains separate. Confirm publisher account access and publication approval before uploading the reviewed package. This repository has no automatic Marketplace publication workflow.
 
 ## References
 
-- [Microsoft publishing guidance](https://code.visualstudio.com/api/working-with-extensions/publishing-extension): README image URLs must resolve to HTTPS URLs. The packaging tool can rewrite relative links with a repository URL or a configured image base.
+- [Microsoft publishing guidance](https://code.visualstudio.com/api/working-with-extensions/publishing-extension): image URLs, packaging, and publication.
 - [Microsoft manifest reference](https://code.visualstudio.com/api/references/extension-manifest): icon, banner, keywords, Preview label, and extension host location.
-- [MIT terms](https://opensource.org/license/mit): the approved release license.
+- [MIT terms](https://opensource.org/license/mit): the release license.

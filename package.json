@@ -1,6 +1,6 @@
 {
   "name": "lawson-config-redactor",
-  "displayName": "Network Config Redactor \u00e2\u20ac\u201d Lawson Cyber LLC",
+  "displayName": "Network Config Redactor — Lawson Cyber LLC",
   "description": "Redact Cisco configs locally. Review passwords, keys, and address replacements before sharing. No uploads or telemetry.",
   "version": "0.3.0",
   "publisher": "DerickL",
@@ -73,6 +73,15 @@
     "ui"
   ],
   "bugs": {
-    "email": "derick@lawsoncyber.com"
+    "email": "derick@lawsoncyber.com",
+    "url": "https://github.com/palthainon/lawson-config-redactor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/palthainon/lawson-config-redactor.git"
+  },
+  "vsce": {
+    "baseImagesUrl": "https://raw.githubusercontent.com/palthainon/lawson-config-redactor/72f3654792fc9cfbc2255cd0892bea41dc281f88/",
+    "dependencies": false
   }
 }

@@ -69,6 +69,8 @@ Tests in Visual Studio Code check the comparison, clipboard output, saved output
 
 For help, email [derick@lawsoncyber.com](mailto:derick@lawsoncyber.com). Send the extension version, editor version, and reproduction steps. Use synthetic input. Do not send production configurations or live credentials.
 
-Lawson Cyber LLC publishes this release under the MIT license. The company name and logo identify Lawson Cyber LLC. They do not imply endorsement of a modified copy.
+Lawson Cyber LLC publishes this release under the [MIT license](LICENSE). The company name and logo identify Lawson Cyber LLC. They do not imply endorsement of a modified copy.
 
 [Lawson Cyber LLC](https://lawsoncyber.com)
+
+[Source and screenshots](https://github.com/palthainon/lawson-config-redactor) | [Report a problem](https://github.com/palthainon/lawson-config-redactor/issues)

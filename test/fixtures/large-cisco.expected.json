@@ -1,0 +1,4326 @@
+{
+  "note": "Synthetic input expectations. This file contains no replacement mapping.",
+  "lines": 1567,
+  "bytes": 62692,
+  "secrets": [
+    "$1$LabOnly1$5uCW9.eeLZPF0OF2rgRB81",
+    "003736232016242823180160262D48365F2F293203080165031411372429367F",
+    "SEED-ADMIN-TYPE9",
+    "SEED-OPERATOR-TYPE8",
+    "SEED-TACACS-TYPE6",
+    "SEED-PRIVATE-SERVER",
+    "SEED-LEGACY-RADIUS",
+    "SEED-SNMP-COMMUNITY",
+    "SEED-SNMP-AUTH",
+    "SEED-SNMP-PRIV",
+    "SEED-SNMP-DESTINATION",
+    "SEED-NTP-MD5",
+    "SEED-IPSEC-SHARED",
+    "SEED-IKE-LOCAL",
+    "SEED-IKE-REMOTE",
+    "SEED-CHAIN-001",
+    "SEED-HSRP-001",
+    "SEED-CHAIN-002",
+    "SEED-HSRP-002",
+    "SEED-CHAIN-003",
+    "SEED-HSRP-003",
+    "SEED-CHAIN-004",
+    "SEED-HSRP-004",
+    "SEED-CHAIN-005",
+    "SEED-HSRP-005",
+    "SEED-CHAIN-006",
+    "SEED-HSRP-006",
+    "SEED-CHAIN-007",
+    "SEED-HSRP-007",
+    "SEED-CHAIN-008",
+    "SEED-HSRP-008",
+    "SEED-CHAIN-009",
+    "SEED-HSRP-009",
+    "SEED-CHAIN-010",
+    "SEED-HSRP-010",
+    "SEED-CHAIN-011",
+    "SEED-HSRP-011",
+    "SEED-CHAIN-012",
+    "SEED-HSRP-012",
+    "SEED-CHAIN-013",
+    "SEED-HSRP-013",
+    "SEED-CHAIN-014",
+    "SEED-HSRP-014",
+    "SEED-CHAIN-015",
+    "SEED-HSRP-015",
+    "SEED-CHAIN-016",
+    "SEED-HSRP-016",
+    "SEED-CHAIN-017",
+    "SEED-HSRP-017",
+    "SEED-CHAIN-018",
+    "SEED-HSRP-018",
+    "SEED-CHAIN-019",
+    "SEED-HSRP-019",
+    "SEED-CHAIN-020",
+    "SEED-HSRP-020",
+    "SEED-CHAIN-021",
+    "SEED-HSRP-021",
+    "SEED-CHAIN-022",
+    "SEED-HSRP-022",
+    "SEED-CHAIN-023",
+    "SEED-HSRP-023",
+    "SEED-CHAIN-024",
+    "SEED-HSRP-024",
+    "SEED-CHAIN-025",
+    "SEED-HSRP-025",
+    "SEED-CHAIN-026",
+    "SEED-HSRP-026",
+    "SEED-CHAIN-027",
+    "SEED-HSRP-027",
+    "SEED-CHAIN-028",
+    "SEED-HSRP-028",
+    "SEED-CHAIN-029",
+    "SEED-HSRP-029",
+    "SEED-CHAIN-030",
+    "SEED-HSRP-030",
+    "SEED-CHAIN-031",
+    "SEED-HSRP-031",
+    "SEED-CHAIN-032",
+    "SEED-HSRP-032",
+    "SEED-CHAIN-033",
+    "SEED-HSRP-033",
+    "SEED-CHAIN-034",
+    "SEED-HSRP-034",
+    "SEED-CHAIN-035",
+    "SEED-HSRP-035",
+    "SEED-CHAIN-036",
+    "SEED-HSRP-036",
+    "SEED-CHAIN-037",
+    "SEED-HSRP-037",
+    "SEED-CHAIN-038",
+    "SEED-HSRP-038",
+    "SEED-CHAIN-039",
+    "SEED-HSRP-039",
+    "SEED-CHAIN-040",
+    "SEED-HSRP-040",
+    "SEED-CHAIN-041",
+    "SEED-HSRP-041",
+    "SEED-CHAIN-042",
+    "SEED-HSRP-042",
+    "SEED-CHAIN-043",
+    "SEED-HSRP-043",
+    "SEED-CHAIN-044",
+    "SEED-HSRP-044",
+    "SEED-CHAIN-045",
+    "SEED-HSRP-045",
+    "SEED-CHAIN-046",
+    "SEED-HSRP-046",
+    "SEED-CHAIN-047",
+    "SEED-HSRP-047",
+    "SEED-CHAIN-048",
+    "SEED-HSRP-048",
+    "SEED-BGP-001",
+    "SEED-BGP-002",
+    "SEED-BGP-003",
+    "SEED-BGP-004",
+    "SEED-BGP-005",
+    "SEED-BGP-006",
+    "SEED-BGP-007",
+    "SEED-BGP-008",
+    "SEED-BGP-009",
+    "SEED-BGP-010",
+    "SEED-BGP-011",
+    "SEED-BGP-012",
+    "SEED-BGP-013",
+    "SEED-BGP-014",
+    "SEED-BGP-015",
+    "SEED-BGP-016",
+    "SEED-BGP-017",
+    "SEED-BGP-018",
+    "SEED-BGP-019",
+    "SEED-BGP-020",
+    "SEED-BGP-021",
+    "SEED-BGP-022",
+    "SEED-BGP-023",
+    "SEED-BGP-024",
+    "SEED-BGP-025",
+    "SEED-BGP-026",
+    "SEED-BGP-027",
+    "SEED-BGP-028",
+    "SEED-BGP-029",
+    "SEED-BGP-030",
+    "SEED-BGP-031",
+    "SEED-BGP-032",
+    "SEED-BGP-033",
+    "SEED-BGP-034",
+    "SEED-BGP-035",
+    "SEED-BGP-036",
+    "SEED-BGP-037",
+    "SEED-BGP-038",
+    "SEED-BGP-039",
+    "SEED-BGP-040",
+    "SEED-BGP-041",
+    "SEED-BGP-042",
+    "SEED-BGP-043",
+    "SEED-BGP-044",
+    "SEED-BGP-045",
+    "SEED-BGP-046",
+    "SEED-BGP-047",
+    "SEED-BGP-048",
+    "SEED-PUBLIC-BGP",
+    "SEED-CONSOLE"
+  ],
+  "addresses": [
+    {
+      "value": "10.42.1.20",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.1.20",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.1.20",
+      "kind": "private4"
+    },
+    {
+      "value": "8.8.8.25",
+      "kind": "public4"
+    },
+    {
+      "value": "9.9.9.25",
+      "kind": "public4"
+    },
+    {
+      "value": "9.9.9.2",
+      "kind": "public4"
+    },
+    {
+      "value": "8.8.8.0",
+      "kind": "public4"
+    },
+    {
+      "value": "8.8.8.1",
+      "kind": "public4"
+    },
+    {
+      "value": "8.8.8.2",
+      "kind": "public4"
+    },
+    {
+      "value": "9.9.9.0",
+      "kind": "public4"
+    },
+    {
+      "value": "9.9.9.1",
+      "kind": "public4"
+    },
+    {
+      "value": "2606:4700:42::",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678::",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.1.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.1.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.1.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.1.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.1.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:1::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:1::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.1.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.1.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.1.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.1.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.1.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:2::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:2::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.1.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.1.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.1.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.1.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.1.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:3::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:3::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:3::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:3::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:3::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:3::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.2.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.2.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.2.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.2.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.2.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:4::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:4::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:4::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:4::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:4::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:4::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.2.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.2.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.2.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.2.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.2.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:5::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:5::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:5::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:5::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:5::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:5::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.2.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.2.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.2.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.2.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.2.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:6::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:6::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:6::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:6::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:6::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:6::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.3.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.3.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.3.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.3.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.3.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:7::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:7::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:7::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:7::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:7::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:7::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.3.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.3.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.3.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.3.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.3.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:8::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:8::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:8::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:8::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:8::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:8::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.3.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.3.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.3.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.3.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.3.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:9::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:9::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:9::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:9::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:9::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:9::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.4.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.4.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.4.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.4.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.4.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:a::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:a::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:a::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:a::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:a::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:a::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.4.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.4.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.4.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.4.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.4.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:b::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:b::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:b::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:b::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:b::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:b::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.4.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.4.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.4.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.4.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.4.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:c::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:c::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:c::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:c::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:c::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:c::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.5.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.5.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.5.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.5.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.5.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:d::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:d::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:d::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:d::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:d::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:d::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.5.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.5.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.5.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.5.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.5.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:e::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:e::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:e::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:e::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:e::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:e::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.5.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.5.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.5.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.5.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.5.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:f::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:f::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:f::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:f::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:f::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:f::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.6.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.6.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.6.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.6.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.6.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:10::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:10::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:10::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:10::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:10::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:10::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.6.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.6.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.6.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.6.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.6.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:11::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:11::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:11::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:11::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:11::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:11::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.6.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.6.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.6.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.6.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.6.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:12::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:12::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:12::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:12::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:12::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:12::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.7.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.7.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.7.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.7.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.7.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:13::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:13::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:13::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:13::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:13::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:13::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.7.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.7.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.7.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.7.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.7.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:14::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:14::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:14::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:14::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:14::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:14::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.7.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.7.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.7.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.7.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.7.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:15::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:15::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:15::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:15::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:15::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:15::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.8.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.8.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.8.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.8.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.8.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:16::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:16::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:16::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:16::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:16::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:16::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.8.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.8.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.8.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.8.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.8.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:17::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:17::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:17::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:17::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:17::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:17::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.8.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.8.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.8.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.8.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.8.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:18::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:18::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:18::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:18::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:18::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:18::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.9.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.9.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.9.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.9.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.9.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:19::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:19::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:19::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:19::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:19::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:19::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.9.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.9.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.9.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.9.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.9.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:1a::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1a::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1a::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:1a::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1a::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1a::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.9.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.9.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.9.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.9.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.9.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:1b::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1b::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1b::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:1b::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1b::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1b::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.10.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.10.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.10.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.10.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.10.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:1c::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1c::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1c::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:1c::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1c::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1c::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.10.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.10.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.10.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.10.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.10.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:1d::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1d::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1d::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:1d::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1d::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1d::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.10.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.10.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.10.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.10.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.10.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:1e::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1e::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1e::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:1e::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1e::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1e::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.11.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.11.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.11.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.11.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.11.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:1f::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1f::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:1f::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:1f::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1f::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:1f::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.11.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.11.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.11.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.11.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.11.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:20::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:20::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:20::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:20::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:20::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:20::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.11.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.11.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.11.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.11.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.11.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:21::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:21::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:21::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:21::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:21::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:21::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.12.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.12.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.12.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.12.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.12.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:22::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:22::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:22::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:22::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:22::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:22::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.12.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.12.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.12.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.12.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.12.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:23::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:23::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:23::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:23::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:23::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:23::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.12.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.12.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.12.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.12.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.12.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:24::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:24::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:24::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:24::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:24::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:24::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.13.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.13.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.13.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.13.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.13.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:25::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:25::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:25::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:25::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:25::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:25::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.13.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.13.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.13.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.13.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.13.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:26::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:26::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:26::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:26::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:26::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:26::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.13.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.13.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.13.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.13.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.13.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:27::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:27::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:27::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:27::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:27::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:27::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.14.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.14.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.14.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.14.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.14.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:28::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:28::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:28::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:28::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:28::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:28::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.14.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.14.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.14.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.14.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.14.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:29::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:29::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:29::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:29::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:29::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:29::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.14.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.14.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.14.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.14.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.14.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:2a::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2a::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2a::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:2a::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2a::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2a::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.15.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.15.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.15.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.15.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.15.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:2b::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2b::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2b::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:2b::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2b::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2b::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.15.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.15.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.15.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.15.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.15.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:2c::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2c::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2c::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:2c::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2c::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2c::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.15.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.15.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.15.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.15.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.15.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:2d::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2d::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2d::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:2d::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2d::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2d::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.16.0",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.16.1",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.16.2",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.16.25",
+      "kind": "private4"
+    },
+    {
+      "value": "10.42.16.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:2e::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2e::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2e::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:2e::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2e::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2e::2",
+      "kind": "private6"
+    },
+    {
+      "value": "172.20.16.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.16.1",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.16.2",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.16.25",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.16.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:2f::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2f::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:2f::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:2f::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2f::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:2f::2",
+      "kind": "private6"
+    },
+    {
+      "value": "192.168.16.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.16.1",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.16.2",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.16.25",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.16.254",
+      "kind": "private4"
+    },
+    {
+      "value": "2606:4700:42:30::",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:30::1",
+      "kind": "public6"
+    },
+    {
+      "value": "2606:4700:42:30::2",
+      "kind": "public6"
+    },
+    {
+      "value": "fd42:1234:5678:30::",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:30::1",
+      "kind": "private6"
+    },
+    {
+      "value": "fd42:1234:5678:30::2",
+      "kind": "private6"
+    },
+    {
+      "value": "10.42.0.0",
+      "kind": "private4"
+    },
+    {
+      "value": "172.20.0.0",
+      "kind": "private4"
+    },
+    {
+      "value": "192.168.0.0",
+      "kind": "private4"
+    }
+  ],
+  "networks": [
+    {
+      "network": "8.8.8.0",
+      "prefix": 24,
+      "members": [
+        "8.8.8.1",
+        "8.8.8.2",
+        "8.8.8.25"
+      ],
+      "kind": "public4"
+    },
+    {
+      "network": "9.9.9.0",
+      "prefix": 24,
+      "members": [
+        "9.9.9.1",
+        "9.9.9.2",
+        "9.9.9.25"
+      ],
+      "kind": "public4"
+    },
+    {
+      "network": "2606:4700:42::",
+      "prefix": 48,
+      "members": [
+        "2606:4700:42:1::",
+        "2606:4700:42:1::1",
+        "2606:4700:42:1::2",
+        "2606:4700:42:2::",
+        "2606:4700:42:2::1",
+        "2606:4700:42:2::2",
+        "2606:4700:42:3::",
+        "2606:4700:42:3::1",
+        "2606:4700:42:3::2",
+        "2606:4700:42:4::",
+        "2606:4700:42:4::1",
+        "2606:4700:42:4::2",
+        "2606:4700:42:5::",
+        "2606:4700:42:5::1",
+        "2606:4700:42:5::2",
+        "2606:4700:42:6::",
+        "2606:4700:42:6::1",
+        "2606:4700:42:6::2",
+        "2606:4700:42:7::",
+        "2606:4700:42:7::1",
+        "2606:4700:42:7::2",
+        "2606:4700:42:8::",
+        "2606:4700:42:8::1",
+        "2606:4700:42:8::2",
+        "2606:4700:42:9::",
+        "2606:4700:42:9::1",
+        "2606:4700:42:9::2",
+        "2606:4700:42:a::",
+        "2606:4700:42:a::1",
+        "2606:4700:42:a::2",
+        "2606:4700:42:b::",
+        "2606:4700:42:b::1",
+        "2606:4700:42:b::2",
+        "2606:4700:42:c::",
+        "2606:4700:42:c::1",
+        "2606:4700:42:c::2",
+        "2606:4700:42:d::",
+        "2606:4700:42:d::1",
+        "2606:4700:42:d::2",
+        "2606:4700:42:e::",
+        "2606:4700:42:e::1",
+        "2606:4700:42:e::2",
+        "2606:4700:42:f::",
+        "2606:4700:42:f::1",
+        "2606:4700:42:f::2",
+        "2606:4700:42:10::",
+        "2606:4700:42:10::1",
+        "2606:4700:42:10::2",
+        "2606:4700:42:11::",
+        "2606:4700:42:11::1",
+        "2606:4700:42:11::2",
+        "2606:4700:42:12::",
+        "2606:4700:42:12::1",
+        "2606:4700:42:12::2",
+        "2606:4700:42:13::",
+        "2606:4700:42:13::1",
+        "2606:4700:42:13::2",
+        "2606:4700:42:14::",
+        "2606:4700:42:14::1",
+        "2606:4700:42:14::2",
+        "2606:4700:42:15::",
+        "2606:4700:42:15::1",
+        "2606:4700:42:15::2",
+        "2606:4700:42:16::",
+        "2606:4700:42:16::1",
+        "2606:4700:42:16::2",
+        "2606:4700:42:17::",
+        "2606:4700:42:17::1",
+        "2606:4700:42:17::2",
+        "2606:4700:42:18::",
+        "2606:4700:42:18::1",
+        "2606:4700:42:18::2",
+        "2606:4700:42:19::",
+        "2606:4700:42:19::1",
+        "2606:4700:42:19::2",
+        "2606:4700:42:1a::",
+        "2606:4700:42:1a::1",
+        "2606:4700:42:1a::2",
+        "2606:4700:42:1b::",
+        "2606:4700:42:1b::1",
+        "2606:4700:42:1b::2",
+        "2606:4700:42:1c::",
+        "2606:4700:42:1c::1",
+        "2606:4700:42:1c::2",
+        "2606:4700:42:1d::",
+        "2606:4700:42:1d::1",
+        "2606:4700:42:1d::2",
+        "2606:4700:42:1e::",
+        "2606:4700:42:1e::1",
+        "2606:4700:42:1e::2",
+        "2606:4700:42:1f::",
+        "2606:4700:42:1f::1",
+        "2606:4700:42:1f::2",
+        "2606:4700:42:20::",
+        "2606:4700:42:20::1",
+        "2606:4700:42:20::2",
+        "2606:4700:42:21::",
+        "2606:4700:42:21::1",
+        "2606:4700:42:21::2",
+        "2606:4700:42:22::",
+        "2606:4700:42:22::1",
+        "2606:4700:42:22::2",
+        "2606:4700:42:23::",
+        "2606:4700:42:23::1",
+        "2606:4700:42:23::2",
+        "2606:4700:42:24::",
+        "2606:4700:42:24::1",
+        "2606:4700:42:24::2",
+        "2606:4700:42:25::",
+        "2606:4700:42:25::1",
+        "2606:4700:42:25::2",
+        "2606:4700:42:26::",
+        "2606:4700:42:26::1",
+        "2606:4700:42:26::2",
+        "2606:4700:42:27::",
+        "2606:4700:42:27::1",
+        "2606:4700:42:27::2",
+        "2606:4700:42:28::",
+        "2606:4700:42:28::1",
+        "2606:4700:42:28::2",
+        "2606:4700:42:29::",
+        "2606:4700:42:29::1",
+        "2606:4700:42:29::2",
+        "2606:4700:42:2a::",
+        "2606:4700:42:2a::1",
+        "2606:4700:42:2a::2",
+        "2606:4700:42:2b::",
+        "2606:4700:42:2b::1",
+        "2606:4700:42:2b::2",
+        "2606:4700:42:2c::",
+        "2606:4700:42:2c::1",
+        "2606:4700:42:2c::2",
+        "2606:4700:42:2d::",
+        "2606:4700:42:2d::1",
+        "2606:4700:42:2d::2",
+        "2606:4700:42:2e::",
+        "2606:4700:42:2e::1",
+        "2606:4700:42:2e::2",
+        "2606:4700:42:2f::",
+        "2606:4700:42:2f::1",
+        "2606:4700:42:2f::2",
+        "2606:4700:42:30::",
+        "2606:4700:42:30::1",
+        "2606:4700:42:30::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678::",
+      "prefix": 48,
+      "members": [
+        "fd42:1234:5678:1::",
+        "fd42:1234:5678:1::1",
+        "fd42:1234:5678:1::2",
+        "fd42:1234:5678:2::",
+        "fd42:1234:5678:2::1",
+        "fd42:1234:5678:2::2",
+        "fd42:1234:5678:3::",
+        "fd42:1234:5678:3::1",
+        "fd42:1234:5678:3::2",
+        "fd42:1234:5678:4::",
+        "fd42:1234:5678:4::1",
+        "fd42:1234:5678:4::2",
+        "fd42:1234:5678:5::",
+        "fd42:1234:5678:5::1",
+        "fd42:1234:5678:5::2",
+        "fd42:1234:5678:6::",
+        "fd42:1234:5678:6::1",
+        "fd42:1234:5678:6::2",
+        "fd42:1234:5678:7::",
+        "fd42:1234:5678:7::1",
+        "fd42:1234:5678:7::2",
+        "fd42:1234:5678:8::",
+        "fd42:1234:5678:8::1",
+        "fd42:1234:5678:8::2",
+        "fd42:1234:5678:9::",
+        "fd42:1234:5678:9::1",
+        "fd42:1234:5678:9::2",
+        "fd42:1234:5678:a::",
+        "fd42:1234:5678:a::1",
+        "fd42:1234:5678:a::2",
+        "fd42:1234:5678:b::",
+        "fd42:1234:5678:b::1",
+        "fd42:1234:5678:b::2",
+        "fd42:1234:5678:c::",
+        "fd42:1234:5678:c::1",
+        "fd42:1234:5678:c::2",
+        "fd42:1234:5678:d::",
+        "fd42:1234:5678:d::1",
+        "fd42:1234:5678:d::2",
+        "fd42:1234:5678:e::",
+        "fd42:1234:5678:e::1",
+        "fd42:1234:5678:e::2",
+        "fd42:1234:5678:f::",
+        "fd42:1234:5678:f::1",
+        "fd42:1234:5678:f::2",
+        "fd42:1234:5678:10::",
+        "fd42:1234:5678:10::1",
+        "fd42:1234:5678:10::2",
+        "fd42:1234:5678:11::",
+        "fd42:1234:5678:11::1",
+        "fd42:1234:5678:11::2",
+        "fd42:1234:5678:12::",
+        "fd42:1234:5678:12::1",
+        "fd42:1234:5678:12::2",
+        "fd42:1234:5678:13::",
+        "fd42:1234:5678:13::1",
+        "fd42:1234:5678:13::2",
+        "fd42:1234:5678:14::",
+        "fd42:1234:5678:14::1",
+        "fd42:1234:5678:14::2",
+        "fd42:1234:5678:15::",
+        "fd42:1234:5678:15::1",
+        "fd42:1234:5678:15::2",
+        "fd42:1234:5678:16::",
+        "fd42:1234:5678:16::1",
+        "fd42:1234:5678:16::2",
+        "fd42:1234:5678:17::",
+        "fd42:1234:5678:17::1",
+        "fd42:1234:5678:17::2",
+        "fd42:1234:5678:18::",
+        "fd42:1234:5678:18::1",
+        "fd42:1234:5678:18::2",
+        "fd42:1234:5678:19::",
+        "fd42:1234:5678:19::1",
+        "fd42:1234:5678:19::2",
+        "fd42:1234:5678:1a::",
+        "fd42:1234:5678:1a::1",
+        "fd42:1234:5678:1a::2",
+        "fd42:1234:5678:1b::",
+        "fd42:1234:5678:1b::1",
+        "fd42:1234:5678:1b::2",
+        "fd42:1234:5678:1c::",
+        "fd42:1234:5678:1c::1",
+        "fd42:1234:5678:1c::2",
+        "fd42:1234:5678:1d::",
+        "fd42:1234:5678:1d::1",
+        "fd42:1234:5678:1d::2",
+        "fd42:1234:5678:1e::",
+        "fd42:1234:5678:1e::1",
+        "fd42:1234:5678:1e::2",
+        "fd42:1234:5678:1f::",
+        "fd42:1234:5678:1f::1",
+        "fd42:1234:5678:1f::2",
+        "fd42:1234:5678:20::",
+        "fd42:1234:5678:20::1",
+        "fd42:1234:5678:20::2",
+        "fd42:1234:5678:21::",
+        "fd42:1234:5678:21::1",
+        "fd42:1234:5678:21::2",
+        "fd42:1234:5678:22::",
+        "fd42:1234:5678:22::1",
+        "fd42:1234:5678:22::2",
+        "fd42:1234:5678:23::",
+        "fd42:1234:5678:23::1",
+        "fd42:1234:5678:23::2",
+        "fd42:1234:5678:24::",
+        "fd42:1234:5678:24::1",
+        "fd42:1234:5678:24::2",
+        "fd42:1234:5678:25::",
+        "fd42:1234:5678:25::1",
+        "fd42:1234:5678:25::2",
+        "fd42:1234:5678:26::",
+        "fd42:1234:5678:26::1",
+        "fd42:1234:5678:26::2",
+        "fd42:1234:5678:27::",
+        "fd42:1234:5678:27::1",
+        "fd42:1234:5678:27::2",
+        "fd42:1234:5678:28::",
+        "fd42:1234:5678:28::1",
+        "fd42:1234:5678:28::2",
+        "fd42:1234:5678:29::",
+        "fd42:1234:5678:29::1",
+        "fd42:1234:5678:29::2",
+        "fd42:1234:5678:2a::",
+        "fd42:1234:5678:2a::1",
+        "fd42:1234:5678:2a::2",
+        "fd42:1234:5678:2b::",
+        "fd42:1234:5678:2b::1",
+        "fd42:1234:5678:2b::2",
+        "fd42:1234:5678:2c::",
+        "fd42:1234:5678:2c::1",
+        "fd42:1234:5678:2c::2",
+        "fd42:1234:5678:2d::",
+        "fd42:1234:5678:2d::1",
+        "fd42:1234:5678:2d::2",
+        "fd42:1234:5678:2e::",
+        "fd42:1234:5678:2e::1",
+        "fd42:1234:5678:2e::2",
+        "fd42:1234:5678:2f::",
+        "fd42:1234:5678:2f::1",
+        "fd42:1234:5678:2f::2",
+        "fd42:1234:5678:30::",
+        "fd42:1234:5678:30::1",
+        "fd42:1234:5678:30::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.1.0",
+      "prefix": 24,
+      "members": [
+        "10.42.1.1",
+        "10.42.1.2",
+        "10.42.1.25",
+        "10.42.1.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:1::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:1::1",
+        "2606:4700:42:1::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:1::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:1::1",
+        "fd42:1234:5678:1::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.1.0",
+      "prefix": 24,
+      "members": [
+        "172.20.1.1",
+        "172.20.1.2",
+        "172.20.1.25",
+        "172.20.1.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:2::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:2::1",
+        "2606:4700:42:2::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:2::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:2::1",
+        "fd42:1234:5678:2::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.1.0",
+      "prefix": 24,
+      "members": [
+        "192.168.1.1",
+        "192.168.1.2",
+        "192.168.1.25",
+        "192.168.1.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:3::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:3::1",
+        "2606:4700:42:3::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:3::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:3::1",
+        "fd42:1234:5678:3::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.2.0",
+      "prefix": 24,
+      "members": [
+        "10.42.2.1",
+        "10.42.2.2",
+        "10.42.2.25",
+        "10.42.2.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:4::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:4::1",
+        "2606:4700:42:4::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:4::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:4::1",
+        "fd42:1234:5678:4::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.2.0",
+      "prefix": 24,
+      "members": [
+        "172.20.2.1",
+        "172.20.2.2",
+        "172.20.2.25",
+        "172.20.2.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:5::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:5::1",
+        "2606:4700:42:5::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:5::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:5::1",
+        "fd42:1234:5678:5::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.2.0",
+      "prefix": 24,
+      "members": [
+        "192.168.2.1",
+        "192.168.2.2",
+        "192.168.2.25",
+        "192.168.2.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:6::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:6::1",
+        "2606:4700:42:6::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:6::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:6::1",
+        "fd42:1234:5678:6::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.3.0",
+      "prefix": 24,
+      "members": [
+        "10.42.3.1",
+        "10.42.3.2",
+        "10.42.3.25",
+        "10.42.3.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:7::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:7::1",
+        "2606:4700:42:7::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:7::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:7::1",
+        "fd42:1234:5678:7::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.3.0",
+      "prefix": 24,
+      "members": [
+        "172.20.3.1",
+        "172.20.3.2",
+        "172.20.3.25",
+        "172.20.3.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:8::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:8::1",
+        "2606:4700:42:8::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:8::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:8::1",
+        "fd42:1234:5678:8::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.3.0",
+      "prefix": 24,
+      "members": [
+        "192.168.3.1",
+        "192.168.3.2",
+        "192.168.3.25",
+        "192.168.3.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:9::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:9::1",
+        "2606:4700:42:9::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:9::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:9::1",
+        "fd42:1234:5678:9::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.4.0",
+      "prefix": 24,
+      "members": [
+        "10.42.4.1",
+        "10.42.4.2",
+        "10.42.4.25",
+        "10.42.4.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:a::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:a::1",
+        "2606:4700:42:a::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:a::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:a::1",
+        "fd42:1234:5678:a::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.4.0",
+      "prefix": 24,
+      "members": [
+        "172.20.4.1",
+        "172.20.4.2",
+        "172.20.4.25",
+        "172.20.4.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:b::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:b::1",
+        "2606:4700:42:b::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:b::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:b::1",
+        "fd42:1234:5678:b::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.4.0",
+      "prefix": 24,
+      "members": [
+        "192.168.4.1",
+        "192.168.4.2",
+        "192.168.4.25",
+        "192.168.4.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:c::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:c::1",
+        "2606:4700:42:c::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:c::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:c::1",
+        "fd42:1234:5678:c::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.5.0",
+      "prefix": 24,
+      "members": [
+        "10.42.5.1",
+        "10.42.5.2",
+        "10.42.5.25",
+        "10.42.5.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:d::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:d::1",
+        "2606:4700:42:d::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:d::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:d::1",
+        "fd42:1234:5678:d::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.5.0",
+      "prefix": 24,
+      "members": [
+        "172.20.5.1",
+        "172.20.5.2",
+        "172.20.5.25",
+        "172.20.5.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:e::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:e::1",
+        "2606:4700:42:e::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:e::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:e::1",
+        "fd42:1234:5678:e::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.5.0",
+      "prefix": 24,
+      "members": [
+        "192.168.5.1",
+        "192.168.5.2",
+        "192.168.5.25",
+        "192.168.5.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:f::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:f::1",
+        "2606:4700:42:f::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:f::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:f::1",
+        "fd42:1234:5678:f::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.6.0",
+      "prefix": 24,
+      "members": [
+        "10.42.6.1",
+        "10.42.6.2",
+        "10.42.6.25",
+        "10.42.6.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:10::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:10::1",
+        "2606:4700:42:10::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:10::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:10::1",
+        "fd42:1234:5678:10::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.6.0",
+      "prefix": 24,
+      "members": [
+        "172.20.6.1",
+        "172.20.6.2",
+        "172.20.6.25",
+        "172.20.6.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:11::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:11::1",
+        "2606:4700:42:11::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:11::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:11::1",
+        "fd42:1234:5678:11::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.6.0",
+      "prefix": 24,
+      "members": [
+        "192.168.6.1",
+        "192.168.6.2",
+        "192.168.6.25",
+        "192.168.6.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:12::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:12::1",
+        "2606:4700:42:12::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:12::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:12::1",
+        "fd42:1234:5678:12::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.7.0",
+      "prefix": 24,
+      "members": [
+        "10.42.7.1",
+        "10.42.7.2",
+        "10.42.7.25",
+        "10.42.7.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:13::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:13::1",
+        "2606:4700:42:13::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:13::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:13::1",
+        "fd42:1234:5678:13::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.7.0",
+      "prefix": 24,
+      "members": [
+        "172.20.7.1",
+        "172.20.7.2",
+        "172.20.7.25",
+        "172.20.7.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:14::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:14::1",
+        "2606:4700:42:14::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:14::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:14::1",
+        "fd42:1234:5678:14::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.7.0",
+      "prefix": 24,
+      "members": [
+        "192.168.7.1",
+        "192.168.7.2",
+        "192.168.7.25",
+        "192.168.7.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:15::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:15::1",
+        "2606:4700:42:15::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:15::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:15::1",
+        "fd42:1234:5678:15::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.8.0",
+      "prefix": 24,
+      "members": [
+        "10.42.8.1",
+        "10.42.8.2",
+        "10.42.8.25",
+        "10.42.8.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:16::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:16::1",
+        "2606:4700:42:16::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:16::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:16::1",
+        "fd42:1234:5678:16::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.8.0",
+      "prefix": 24,
+      "members": [
+        "172.20.8.1",
+        "172.20.8.2",
+        "172.20.8.25",
+        "172.20.8.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:17::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:17::1",
+        "2606:4700:42:17::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:17::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:17::1",
+        "fd42:1234:5678:17::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.8.0",
+      "prefix": 24,
+      "members": [
+        "192.168.8.1",
+        "192.168.8.2",
+        "192.168.8.25",
+        "192.168.8.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:18::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:18::1",
+        "2606:4700:42:18::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:18::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:18::1",
+        "fd42:1234:5678:18::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.9.0",
+      "prefix": 24,
+      "members": [
+        "10.42.9.1",
+        "10.42.9.2",
+        "10.42.9.25",
+        "10.42.9.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:19::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:19::1",
+        "2606:4700:42:19::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:19::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:19::1",
+        "fd42:1234:5678:19::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.9.0",
+      "prefix": 24,
+      "members": [
+        "172.20.9.1",
+        "172.20.9.2",
+        "172.20.9.25",
+        "172.20.9.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:1a::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:1a::1",
+        "2606:4700:42:1a::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:1a::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:1a::1",
+        "fd42:1234:5678:1a::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.9.0",
+      "prefix": 24,
+      "members": [
+        "192.168.9.1",
+        "192.168.9.2",
+        "192.168.9.25",
+        "192.168.9.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:1b::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:1b::1",
+        "2606:4700:42:1b::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:1b::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:1b::1",
+        "fd42:1234:5678:1b::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.10.0",
+      "prefix": 24,
+      "members": [
+        "10.42.10.1",
+        "10.42.10.2",
+        "10.42.10.25",
+        "10.42.10.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:1c::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:1c::1",
+        "2606:4700:42:1c::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:1c::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:1c::1",
+        "fd42:1234:5678:1c::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.10.0",
+      "prefix": 24,
+      "members": [
+        "172.20.10.1",
+        "172.20.10.2",
+        "172.20.10.25",
+        "172.20.10.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:1d::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:1d::1",
+        "2606:4700:42:1d::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:1d::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:1d::1",
+        "fd42:1234:5678:1d::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.10.0",
+      "prefix": 24,
+      "members": [
+        "192.168.10.1",
+        "192.168.10.2",
+        "192.168.10.25",
+        "192.168.10.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:1e::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:1e::1",
+        "2606:4700:42:1e::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:1e::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:1e::1",
+        "fd42:1234:5678:1e::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.11.0",
+      "prefix": 24,
+      "members": [
+        "10.42.11.1",
+        "10.42.11.2",
+        "10.42.11.25",
+        "10.42.11.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:1f::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:1f::1",
+        "2606:4700:42:1f::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:1f::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:1f::1",
+        "fd42:1234:5678:1f::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.11.0",
+      "prefix": 24,
+      "members": [
+        "172.20.11.1",
+        "172.20.11.2",
+        "172.20.11.25",
+        "172.20.11.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:20::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:20::1",
+        "2606:4700:42:20::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:20::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:20::1",
+        "fd42:1234:5678:20::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.11.0",
+      "prefix": 24,
+      "members": [
+        "192.168.11.1",
+        "192.168.11.2",
+        "192.168.11.25",
+        "192.168.11.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:21::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:21::1",
+        "2606:4700:42:21::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:21::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:21::1",
+        "fd42:1234:5678:21::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.12.0",
+      "prefix": 24,
+      "members": [
+        "10.42.12.1",
+        "10.42.12.2",
+        "10.42.12.25",
+        "10.42.12.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:22::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:22::1",
+        "2606:4700:42:22::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:22::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:22::1",
+        "fd42:1234:5678:22::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.12.0",
+      "prefix": 24,
+      "members": [
+        "172.20.12.1",
+        "172.20.12.2",
+        "172.20.12.25",
+        "172.20.12.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:23::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:23::1",
+        "2606:4700:42:23::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:23::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:23::1",
+        "fd42:1234:5678:23::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.12.0",
+      "prefix": 24,
+      "members": [
+        "192.168.12.1",
+        "192.168.12.2",
+        "192.168.12.25",
+        "192.168.12.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:24::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:24::1",
+        "2606:4700:42:24::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:24::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:24::1",
+        "fd42:1234:5678:24::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.13.0",
+      "prefix": 24,
+      "members": [
+        "10.42.13.1",
+        "10.42.13.2",
+        "10.42.13.25",
+        "10.42.13.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:25::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:25::1",
+        "2606:4700:42:25::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:25::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:25::1",
+        "fd42:1234:5678:25::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.13.0",
+      "prefix": 24,
+      "members": [
+        "172.20.13.1",
+        "172.20.13.2",
+        "172.20.13.25",
+        "172.20.13.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:26::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:26::1",
+        "2606:4700:42:26::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:26::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:26::1",
+        "fd42:1234:5678:26::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.13.0",
+      "prefix": 24,
+      "members": [
+        "192.168.13.1",
+        "192.168.13.2",
+        "192.168.13.25",
+        "192.168.13.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:27::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:27::1",
+        "2606:4700:42:27::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:27::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:27::1",
+        "fd42:1234:5678:27::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.14.0",
+      "prefix": 24,
+      "members": [
+        "10.42.14.1",
+        "10.42.14.2",
+        "10.42.14.25",
+        "10.42.14.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:28::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:28::1",
+        "2606:4700:42:28::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:28::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:28::1",
+        "fd42:1234:5678:28::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.14.0",
+      "prefix": 24,
+      "members": [
+        "172.20.14.1",
+        "172.20.14.2",
+        "172.20.14.25",
+        "172.20.14.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:29::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:29::1",
+        "2606:4700:42:29::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:29::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:29::1",
+        "fd42:1234:5678:29::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.14.0",
+      "prefix": 24,
+      "members": [
+        "192.168.14.1",
+        "192.168.14.2",
+        "192.168.14.25",
+        "192.168.14.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:2a::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:2a::1",
+        "2606:4700:42:2a::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:2a::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:2a::1",
+        "fd42:1234:5678:2a::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.15.0",
+      "prefix": 24,
+      "members": [
+        "10.42.15.1",
+        "10.42.15.2",
+        "10.42.15.25",
+        "10.42.15.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:2b::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:2b::1",
+        "2606:4700:42:2b::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:2b::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:2b::1",
+        "fd42:1234:5678:2b::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.15.0",
+      "prefix": 24,
+      "members": [
+        "172.20.15.1",
+        "172.20.15.2",
+        "172.20.15.25",
+        "172.20.15.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:2c::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:2c::1",
+        "2606:4700:42:2c::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:2c::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:2c::1",
+        "fd42:1234:5678:2c::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.15.0",
+      "prefix": 24,
+      "members": [
+        "192.168.15.1",
+        "192.168.15.2",
+        "192.168.15.25",
+        "192.168.15.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:2d::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:2d::1",
+        "2606:4700:42:2d::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:2d::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:2d::1",
+        "fd42:1234:5678:2d::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.16.0",
+      "prefix": 24,
+      "members": [
+        "10.42.16.1",
+        "10.42.16.2",
+        "10.42.16.25",
+        "10.42.16.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:2e::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:2e::1",
+        "2606:4700:42:2e::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:2e::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:2e::1",
+        "fd42:1234:5678:2e::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "172.20.16.0",
+      "prefix": 24,
+      "members": [
+        "172.20.16.1",
+        "172.20.16.2",
+        "172.20.16.25",
+        "172.20.16.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:2f::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:2f::1",
+        "2606:4700:42:2f::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:2f::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:2f::1",
+        "fd42:1234:5678:2f::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "192.168.16.0",
+      "prefix": 24,
+      "members": [
+        "192.168.16.1",
+        "192.168.16.2",
+        "192.168.16.25",
+        "192.168.16.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "2606:4700:42:30::",
+      "prefix": 64,
+      "members": [
+        "2606:4700:42:30::1",
+        "2606:4700:42:30::2"
+      ],
+      "kind": "public6"
+    },
+    {
+      "network": "fd42:1234:5678:30::",
+      "prefix": 64,
+      "members": [
+        "fd42:1234:5678:30::1",
+        "fd42:1234:5678:30::2"
+      ],
+      "kind": "private6"
+    },
+    {
+      "network": "10.42.0.0",
+      "prefix": 16,
+      "members": [
+        "10.42.1.20",
+        "10.42.1.0",
+        "10.42.1.1",
+        "10.42.1.2",
+        "10.42.1.25",
+        "10.42.1.254",
+        "10.42.2.0",
+        "10.42.2.1",
+        "10.42.2.2",
+        "10.42.2.25",
+        "10.42.2.254",
+        "10.42.3.0",
+        "10.42.3.1",
+        "10.42.3.2",
+        "10.42.3.25",
+        "10.42.3.254",
+        "10.42.4.0",
+        "10.42.4.1",
+        "10.42.4.2",
+        "10.42.4.25",
+        "10.42.4.254",
+        "10.42.5.0",
+        "10.42.5.1",
+        "10.42.5.2",
+        "10.42.5.25",
+        "10.42.5.254",
+        "10.42.6.0",
+        "10.42.6.1",
+        "10.42.6.2",
+        "10.42.6.25",
+        "10.42.6.254",
+        "10.42.7.0",
+        "10.42.7.1",
+        "10.42.7.2",
+        "10.42.7.25",
+        "10.42.7.254",
+        "10.42.8.0",
+        "10.42.8.1",
+        "10.42.8.2",
+        "10.42.8.25",
+        "10.42.8.254",
+        "10.42.9.0",
+        "10.42.9.1",
+        "10.42.9.2",
+        "10.42.9.25",
+        "10.42.9.254",
+        "10.42.10.0",
+        "10.42.10.1",
+        "10.42.10.2",
+        "10.42.10.25",
+        "10.42.10.254",
+        "10.42.11.0",
+        "10.42.11.1",
+        "10.42.11.2",
+        "10.42.11.25",
+        "10.42.11.254",
+        "10.42.12.0",
+        "10.42.12.1",
+        "10.42.12.2",
+        "10.42.12.25",
+        "10.42.12.254",
+        "10.42.13.0",
+        "10.42.13.1",
+        "10.42.13.2",
+        "10.42.13.25",
+        "10.42.13.254",
+        "10.42.14.0",
+        "10.42.14.1",
+        "10.42.14.2",
+        "10.42.14.25",
+        "10.42.14.254",
+        "10.42.15.0",
+        "10.42.15.1",
+        "10.42.15.2",
+        "10.42.15.25",
+        "10.42.15.254",
+        "10.42.16.0",
+        "10.42.16.1",
+        "10.42.16.2",
+        "10.42.16.25",
+        "10.42.16.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "172.20.0.0",
+      "prefix": 16,
+      "members": [
+        "172.20.1.20",
+        "172.20.1.0",
+        "172.20.1.1",
+        "172.20.1.2",
+        "172.20.1.25",
+        "172.20.1.254",
+        "172.20.2.0",
+        "172.20.2.1",
+        "172.20.2.2",
+        "172.20.2.25",
+        "172.20.2.254",
+        "172.20.3.0",
+        "172.20.3.1",
+        "172.20.3.2",
+        "172.20.3.25",
+        "172.20.3.254",
+        "172.20.4.0",
+        "172.20.4.1",
+        "172.20.4.2",
+        "172.20.4.25",
+        "172.20.4.254",
+        "172.20.5.0",
+        "172.20.5.1",
+        "172.20.5.2",
+        "172.20.5.25",
+        "172.20.5.254",
+        "172.20.6.0",
+        "172.20.6.1",
+        "172.20.6.2",
+        "172.20.6.25",
+        "172.20.6.254",
+        "172.20.7.0",
+        "172.20.7.1",
+        "172.20.7.2",
+        "172.20.7.25",
+        "172.20.7.254",
+        "172.20.8.0",
+        "172.20.8.1",
+        "172.20.8.2",
+        "172.20.8.25",
+        "172.20.8.254",
+        "172.20.9.0",
+        "172.20.9.1",
+        "172.20.9.2",
+        "172.20.9.25",
+        "172.20.9.254",
+        "172.20.10.0",
+        "172.20.10.1",
+        "172.20.10.2",
+        "172.20.10.25",
+        "172.20.10.254",
+        "172.20.11.0",
+        "172.20.11.1",
+        "172.20.11.2",
+        "172.20.11.25",
+        "172.20.11.254",
+        "172.20.12.0",
+        "172.20.12.1",
+        "172.20.12.2",
+        "172.20.12.25",
+        "172.20.12.254",
+        "172.20.13.0",
+        "172.20.13.1",
+        "172.20.13.2",
+        "172.20.13.25",
+        "172.20.13.254",
+        "172.20.14.0",
+        "172.20.14.1",
+        "172.20.14.2",
+        "172.20.14.25",
+        "172.20.14.254",
+        "172.20.15.0",
+        "172.20.15.1",
+        "172.20.15.2",
+        "172.20.15.25",
+        "172.20.15.254",
+        "172.20.16.0",
+        "172.20.16.1",
+        "172.20.16.2",
+        "172.20.16.25",
+        "172.20.16.254"
+      ],
+      "kind": "private4"
+    },
+    {
+      "network": "192.168.0.0",
+      "prefix": 16,
+      "members": [
+        "192.168.1.20",
+        "192.168.1.0",
+        "192.168.1.1",
+        "192.168.1.2",
+        "192.168.1.25",
+        "192.168.1.254",
+        "192.168.2.0",
+        "192.168.2.1",
+        "192.168.2.2",
+        "192.168.2.25",
+        "192.168.2.254",
+        "192.168.3.0",
+        "192.168.3.1",
+        "192.168.3.2",
+        "192.168.3.25",
+        "192.168.3.254",
+        "192.168.4.0",
+        "192.168.4.1",
+        "192.168.4.2",
+        "192.168.4.25",
+        "192.168.4.254",
+        "192.168.5.0",
+        "192.168.5.1",
+        "192.168.5.2",
+        "192.168.5.25",
+        "192.168.5.254",
+        "192.168.6.0",
+        "192.168.6.1",
+        "192.168.6.2",
+        "192.168.6.25",
+        "192.168.6.254",
+        "192.168.7.0",
+        "192.168.7.1",
+        "192.168.7.2",
+        "192.168.7.25",
+        "192.168.7.254",
+        "192.168.8.0",
+        "192.168.8.1",
+        "192.168.8.2",
+        "192.168.8.25",
+        "192.168.8.254",
+        "192.168.9.0",
+        "192.168.9.1",
+        "192.168.9.2",
+        "192.168.9.25",
+        "192.168.9.254",
+        "192.168.10.0",
+        "192.168.10.1",
+        "192.168.10.2",
+        "192.168.10.25",
+        "192.168.10.254",
+        "192.168.11.0",
+        "192.168.11.1",
+        "192.168.11.2",
+        "192.168.11.25",
+        "192.168.11.254",
+        "192.168.12.0",
+        "192.168.12.1",
+        "192.168.12.2",
+        "192.168.12.25",
+        "192.168.12.254",
+        "192.168.13.0",
+        "192.168.13.1",
+        "192.168.13.2",
+        "192.168.13.25",
+        "192.168.13.254",
+        "192.168.14.0",
+        "192.168.14.1",
+        "192.168.14.2",
+        "192.168.14.25",
+        "192.168.14.254",
+        "192.168.15.0",
+        "192.168.15.1",
+        "192.168.15.2",
+        "192.168.15.25",
+        "192.168.15.254",
+        "192.168.16.0",
+        "192.168.16.1",
+        "192.168.16.2",
+        "192.168.16.25",
+        "192.168.16.254"
+      ],
+      "kind": "private4"
+    }
+  ]
+}

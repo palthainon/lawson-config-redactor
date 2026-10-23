@@ -12,3 +12,5 @@ Retrieved on 2026-10-23:
 - [IANA IPv4 registry](https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml) and [IANA IPv6 registry](https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml): special address ranges. The mapper uses a conservative classification. It does not check ownership or reachability.
 
 The additional credential matrix contains synthetic command cases. The matrix is not a claim of support for every Cisco release or every credential command.
+
+The larger file `large-cisco.ios` combines synthetic command cases from the same command families. The generator is `scripts/generate-large-fixture.js`. The public addresses are artificial topology values. They are not Lawson Cyber LLC addresses. No connection to an address occurs. The expected file records seeded secrets and network relationships for automated checks.

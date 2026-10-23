@@ -11,5 +11,20 @@ exports.run=async()=>{
  const editor=await vscode.window.showTextDocument(document,vscode.ViewColumn.One);editor.selection=new vscode.Selection(0,9,0,17);await vscode.commands.executeCommand('lawsonRedactor.selection');assert.equal(document.getText(),original);assert.equal(api.metadata().reviewed,false);
  await api.compare();await api.dispatch({type:'reviewed',value:true});const outdated=path.join(directory,'outdated.txt');api.setSaveDialog(async()=>{const edit=new vscode.WorkspaceEdit();edit.insert(document.uri,new vscode.Position(0,0),'! edited\n');await vscode.workspace.applyEdit(edit);return vscode.Uri.file(outdated);});await api.dispatch({type:'save'});assert.equal(fs.existsSync(outdated),false);assert.equal(api.metadata().stale,true);assert.throws(()=>api.session().export(document.version));api.close();assert.equal(api.metadata(),undefined);
  const sourceFile=path.join(directory,'source.ios');fs.writeFileSync(sourceFile,original);const saved=await vscode.workspace.openTextDocument(vscode.Uri.file(sourceFile));await vscode.window.showTextDocument(saved);await vscode.commands.executeCommand('lawsonRedactor.preview');await api.compare();await api.dispatch({type:'reviewed',value:true});api.setSaveDialog(async()=>vscode.Uri.file(sourceFile));await api.dispatch({type:'save'});assert.equal(fs.readFileSync(sourceFile,'utf8'),original);api.close();
+
+ const largePath=path.join(__dirname,'fixtures/large-cisco.ios'),largeSource=fs.readFileSync(largePath,'utf8'),largeExpected=require('./fixtures/large-cisco.expected.json'),{verifyLarge}=require('./large-checks');
+ const largeDocument=await vscode.workspace.openTextDocument(vscode.Uri.file(largePath));await vscode.window.showTextDocument(largeDocument);await vscode.commands.executeCommand('lawsonRedactor.preview');
+ const previousClipboard=await vscode.env.clipboard.readText();
+ try {
+  for(const mode of ['labels','addresses']) {
+   await api.dispatch({type:'mode',mode});assert.equal(api.metadata().canExport,false);await api.compare();await api.dispatch({type:'reviewed',value:true});assert.equal(api.metadata().canExport,true);
+   const result=api.session().result;verifyLarge(largeSource,result,largeExpected,mode);
+   await api.dispatch({type:'copy'});assert.equal(await vscode.env.clipboard.readText(),result.output);
+   const largeFile=path.join(directory,`large-${mode}.txt`);api.setSaveDialog(async()=>vscode.Uri.file(largeFile));await api.dispatch({type:'save'});
+   verifyLarge(largeSource,{...result,output:fs.readFileSync(largeFile,'utf8')},largeExpected,mode);
+   assert.equal(largeDocument.getText(),largeSource);assert.equal(fs.readFileSync(largePath,'utf8'),largeSource);
+  }
+ } finally {await vscode.env.clipboard.writeText(previousClipboard);api.close();}
+ console.log(`Large Cisco editor checks passed: ${largeExpected.lines} lines, ${largeExpected.secrets.length} distinct secrets removed, ${largeExpected.addresses.length} addresses, ${largeExpected.networks.length} subnet checks, both modes, clipboard and saved output, source unchanged.`);
  console.log('Editor integration passed: activation, address mode changes, review reset, numeric clipboard and file output, unsaved source, review panel, read-only comparison, clipboard, cancelled save, saved export, source overwrite rejection, manual selection, stale preview, and disposal.');
 };

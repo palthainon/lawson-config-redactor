@@ -1,0 +1,1567 @@
+! Synthetic Cisco IOS-XE review input. Do not deploy this file.
+! Public ranges are artificial topology values. They are not company addresses.
+hostname CLIENT-A
+ip domain name review.invalid
+service password-encryption
+enable secret 5 $1$LabOnly1$5uCW9.eeLZPF0OF2rgRB81
+enable password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+username SEED-ADMIN privilege 15 secret 9 SEED-ADMIN-TYPE9
+username SEED-OPERATOR secret 8 SEED-OPERATOR-TYPE8
+aaa new-model
+aaa authentication login default group tacacs+ local
+tacacs server REVIEW-TACACS
+ address ipv4 10.42.1.20
+ key 6 SEED-TACACS-TYPE6
+!
+radius server REVIEW-RADIUS
+ address ipv4 172.20.1.20 auth-port 1812 acct-port 1813
+ key 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+!
+aaa group server tacacs+ REVIEW-AAA
+ server-private 192.168.1.20 key 0 SEED-PRIVATE-SERVER
+!
+tacacs-server key 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+radius-server key 0 SEED-LEGACY-RADIUS
+snmp-server community SEED-SNMP-COMMUNITY RO
+snmp-server user SEED-SNMP-USER REVIEW-SNMP v3 auth md5 SEED-SNMP-AUTH priv aes 128 SEED-SNMP-PRIV
+snmp-server host 8.8.8.25 version 2c SEED-SNMP-DESTINATION
+ntp authentication-key 10 md5 SEED-NTP-MD5 7
+crypto isakmp key SEED-IPSEC-SHARED address 9.9.9.25
+crypto ikev2 keyring REVIEW-IKE
+ peer REVIEW-PEER
+  address 9.9.9.2
+  pre-shared-key local 6 SEED-IKE-LOCAL
+  pre-shared-key remote 6 SEED-IKE-REMOTE
+!
+banner login ^C
+Synthetic review banner. Contact SEED-BANNER-OWNER.
+^C
+!
+interface GigabitEthernet0/0/0
+ description Synthetic public uplink 0
+ ip address 8.8.8.1 255.255.255.0
+!
+ip prefix-list PUBLIC-0 seq 10 permit 8.8.8.0/24
+interface GigabitEthernet0/0/1
+ description Synthetic public uplink 1
+ ip address 9.9.9.1 255.255.255.0
+!
+ip prefix-list PUBLIC-1 seq 10 permit 9.9.9.0/24
+ipv6 prefix-list PUBLIC-V6 permit 2606:4700:42::/48 le 64
+ipv6 prefix-list PRIVATE-V6 permit fd42:1234:5678::/48 le 64
+key chain OSPF-CHAIN-001
+ key 1
+  key-string 0 SEED-CHAIN-001
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-001
+ 10 remark Synthetic subnet 001
+ 20 permit ip 10.42.1.0 0.0.0.255 any
+ 30 permit tcp host 10.42.1.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-001 seq 10 permit 10.42.1.0/24
+ipv6 prefix-list PUBLIC-SUBNET-001 permit 2606:4700:42:1::/64
+ipv6 prefix-list PRIVATE-SUBNET-001 permit fd42:1234:5678:1::/64
+interface Vlan101
+ description Synthetic engineering subnet 001
+ ip address 10.42.1.1 255.255.255.0
+ ipv6 address 2606:4700:42:1::1/64
+ ipv6 address fd42:1234:5678:1::1/64
+ ip access-group REVIEW-ACL-001 in
+ ip ospf authentication key-chain OSPF-CHAIN-001
+ standby 1 authentication md5 key-string 0 SEED-HSRP-001
+!
+ip route 10.42.1.0 255.255.255.0 10.42.1.254
+ipv6 route 2606:4700:42:1::/64 2606:4700:42:1::2
+ipv6 route fd42:1234:5678:1::/64 fd42:1234:5678:1::2
+key chain OSPF-CHAIN-002
+ key 1
+  key-string 0 SEED-CHAIN-002
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-002
+ 10 remark Synthetic subnet 002
+ 20 permit ip 172.20.1.0 0.0.0.255 any
+ 30 permit tcp host 172.20.1.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-002 seq 10 permit 172.20.1.0/24
+ipv6 prefix-list PUBLIC-SUBNET-002 permit 2606:4700:42:2::/64
+ipv6 prefix-list PRIVATE-SUBNET-002 permit fd42:1234:5678:2::/64
+interface Vlan102
+ description Synthetic engineering subnet 002
+ ip address 172.20.1.1 255.255.255.0
+ ipv6 address 2606:4700:42:2::1/64
+ ipv6 address fd42:1234:5678:2::1/64
+ ip access-group REVIEW-ACL-002 in
+ ip ospf authentication key-chain OSPF-CHAIN-002
+ standby 1 authentication md5 key-string 0 SEED-HSRP-002
+!
+ip route 172.20.1.0 255.255.255.0 172.20.1.254
+ipv6 route 2606:4700:42:2::/64 2606:4700:42:2::2
+ipv6 route fd42:1234:5678:2::/64 fd42:1234:5678:2::2
+key chain OSPF-CHAIN-003
+ key 1
+  key-string 0 SEED-CHAIN-003
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-003
+ 10 remark Synthetic subnet 003
+ 20 permit ip 192.168.1.0 0.0.0.255 any
+ 30 permit tcp host 192.168.1.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-003 seq 10 permit 192.168.1.0/24
+ipv6 prefix-list PUBLIC-SUBNET-003 permit 2606:4700:42:3::/64
+ipv6 prefix-list PRIVATE-SUBNET-003 permit fd42:1234:5678:3::/64
+interface Vlan103
+ description Synthetic engineering subnet 003
+ ip address 192.168.1.1 255.255.255.0
+ ipv6 address 2606:4700:42:3::1/64
+ ipv6 address fd42:1234:5678:3::1/64
+ ip access-group REVIEW-ACL-003 in
+ ip ospf authentication key-chain OSPF-CHAIN-003
+ standby 1 authentication md5 key-string 0 SEED-HSRP-003
+!
+ip route 192.168.1.0 255.255.255.0 192.168.1.254
+ipv6 route 2606:4700:42:3::/64 2606:4700:42:3::2
+ipv6 route fd42:1234:5678:3::/64 fd42:1234:5678:3::2
+key chain OSPF-CHAIN-004
+ key 1
+  key-string 0 SEED-CHAIN-004
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-004
+ 10 remark Synthetic subnet 004
+ 20 permit ip 10.42.2.0 0.0.0.255 any
+ 30 permit tcp host 10.42.2.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-004 seq 10 permit 10.42.2.0/24
+ipv6 prefix-list PUBLIC-SUBNET-004 permit 2606:4700:42:4::/64
+ipv6 prefix-list PRIVATE-SUBNET-004 permit fd42:1234:5678:4::/64
+interface Vlan104
+ description Synthetic engineering subnet 004
+ ip address 10.42.2.1 255.255.255.0
+ ipv6 address 2606:4700:42:4::1/64
+ ipv6 address fd42:1234:5678:4::1/64
+ ip access-group REVIEW-ACL-004 in
+ ip ospf authentication key-chain OSPF-CHAIN-004
+ standby 1 authentication md5 key-string 0 SEED-HSRP-004
+!
+ip route 10.42.2.0 255.255.255.0 10.42.2.254
+ipv6 route 2606:4700:42:4::/64 2606:4700:42:4::2
+ipv6 route fd42:1234:5678:4::/64 fd42:1234:5678:4::2
+key chain OSPF-CHAIN-005
+ key 1
+  key-string 0 SEED-CHAIN-005
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-005
+ 10 remark Synthetic subnet 005
+ 20 permit ip 172.20.2.0 0.0.0.255 any
+ 30 permit tcp host 172.20.2.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-005 seq 10 permit 172.20.2.0/24
+ipv6 prefix-list PUBLIC-SUBNET-005 permit 2606:4700:42:5::/64
+ipv6 prefix-list PRIVATE-SUBNET-005 permit fd42:1234:5678:5::/64
+interface Vlan105
+ description Synthetic engineering subnet 005
+ ip address 172.20.2.1 255.255.255.0
+ ipv6 address 2606:4700:42:5::1/64
+ ipv6 address fd42:1234:5678:5::1/64
+ ip access-group REVIEW-ACL-005 in
+ ip ospf authentication key-chain OSPF-CHAIN-005
+ standby 1 authentication md5 key-string 0 SEED-HSRP-005
+!
+ip route 172.20.2.0 255.255.255.0 172.20.2.254
+ipv6 route 2606:4700:42:5::/64 2606:4700:42:5::2
+ipv6 route fd42:1234:5678:5::/64 fd42:1234:5678:5::2
+key chain OSPF-CHAIN-006
+ key 1
+  key-string 0 SEED-CHAIN-006
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-006
+ 10 remark Synthetic subnet 006
+ 20 permit ip 192.168.2.0 0.0.0.255 any
+ 30 permit tcp host 192.168.2.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-006 seq 10 permit 192.168.2.0/24
+ipv6 prefix-list PUBLIC-SUBNET-006 permit 2606:4700:42:6::/64
+ipv6 prefix-list PRIVATE-SUBNET-006 permit fd42:1234:5678:6::/64
+interface Vlan106
+ description Synthetic engineering subnet 006
+ ip address 192.168.2.1 255.255.255.0
+ ipv6 address 2606:4700:42:6::1/64
+ ipv6 address fd42:1234:5678:6::1/64
+ ip access-group REVIEW-ACL-006 in
+ ip ospf authentication key-chain OSPF-CHAIN-006
+ standby 1 authentication md5 key-string 0 SEED-HSRP-006
+!
+ip route 192.168.2.0 255.255.255.0 192.168.2.254
+ipv6 route 2606:4700:42:6::/64 2606:4700:42:6::2
+ipv6 route fd42:1234:5678:6::/64 fd42:1234:5678:6::2
+key chain OSPF-CHAIN-007
+ key 1
+  key-string 0 SEED-CHAIN-007
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-007
+ 10 remark Synthetic subnet 007
+ 20 permit ip 10.42.3.0 0.0.0.255 any
+ 30 permit tcp host 10.42.3.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-007 seq 10 permit 10.42.3.0/24
+ipv6 prefix-list PUBLIC-SUBNET-007 permit 2606:4700:42:7::/64
+ipv6 prefix-list PRIVATE-SUBNET-007 permit fd42:1234:5678:7::/64
+interface Vlan107
+ description Synthetic engineering subnet 007
+ ip address 10.42.3.1 255.255.255.0
+ ipv6 address 2606:4700:42:7::1/64
+ ipv6 address fd42:1234:5678:7::1/64
+ ip access-group REVIEW-ACL-007 in
+ ip ospf authentication key-chain OSPF-CHAIN-007
+ standby 1 authentication md5 key-string 0 SEED-HSRP-007
+!
+ip route 10.42.3.0 255.255.255.0 10.42.3.254
+ipv6 route 2606:4700:42:7::/64 2606:4700:42:7::2
+ipv6 route fd42:1234:5678:7::/64 fd42:1234:5678:7::2
+key chain OSPF-CHAIN-008
+ key 1
+  key-string 0 SEED-CHAIN-008
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-008
+ 10 remark Synthetic subnet 008
+ 20 permit ip 172.20.3.0 0.0.0.255 any
+ 30 permit tcp host 172.20.3.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-008 seq 10 permit 172.20.3.0/24
+ipv6 prefix-list PUBLIC-SUBNET-008 permit 2606:4700:42:8::/64
+ipv6 prefix-list PRIVATE-SUBNET-008 permit fd42:1234:5678:8::/64
+interface Vlan108
+ description Synthetic engineering subnet 008
+ ip address 172.20.3.1 255.255.255.0
+ ipv6 address 2606:4700:42:8::1/64
+ ipv6 address fd42:1234:5678:8::1/64
+ ip access-group REVIEW-ACL-008 in
+ ip ospf authentication key-chain OSPF-CHAIN-008
+ standby 1 authentication md5 key-string 0 SEED-HSRP-008
+!
+ip route 172.20.3.0 255.255.255.0 172.20.3.254
+ipv6 route 2606:4700:42:8::/64 2606:4700:42:8::2
+ipv6 route fd42:1234:5678:8::/64 fd42:1234:5678:8::2
+key chain OSPF-CHAIN-009
+ key 1
+  key-string 0 SEED-CHAIN-009
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-009
+ 10 remark Synthetic subnet 009
+ 20 permit ip 192.168.3.0 0.0.0.255 any
+ 30 permit tcp host 192.168.3.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-009 seq 10 permit 192.168.3.0/24
+ipv6 prefix-list PUBLIC-SUBNET-009 permit 2606:4700:42:9::/64
+ipv6 prefix-list PRIVATE-SUBNET-009 permit fd42:1234:5678:9::/64
+interface Vlan109
+ description Synthetic engineering subnet 009
+ ip address 192.168.3.1 255.255.255.0
+ ipv6 address 2606:4700:42:9::1/64
+ ipv6 address fd42:1234:5678:9::1/64
+ ip access-group REVIEW-ACL-009 in
+ ip ospf authentication key-chain OSPF-CHAIN-009
+ standby 1 authentication md5 key-string 0 SEED-HSRP-009
+!
+ip route 192.168.3.0 255.255.255.0 192.168.3.254
+ipv6 route 2606:4700:42:9::/64 2606:4700:42:9::2
+ipv6 route fd42:1234:5678:9::/64 fd42:1234:5678:9::2
+key chain OSPF-CHAIN-010
+ key 1
+  key-string 0 SEED-CHAIN-010
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-010
+ 10 remark Synthetic subnet 010
+ 20 permit ip 10.42.4.0 0.0.0.255 any
+ 30 permit tcp host 10.42.4.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-010 seq 10 permit 10.42.4.0/24
+ipv6 prefix-list PUBLIC-SUBNET-010 permit 2606:4700:42:a::/64
+ipv6 prefix-list PRIVATE-SUBNET-010 permit fd42:1234:5678:a::/64
+interface Vlan110
+ description Synthetic engineering subnet 010
+ ip address 10.42.4.1 255.255.255.0
+ ipv6 address 2606:4700:42:a::1/64
+ ipv6 address fd42:1234:5678:a::1/64
+ ip access-group REVIEW-ACL-010 in
+ ip ospf authentication key-chain OSPF-CHAIN-010
+ standby 1 authentication md5 key-string 0 SEED-HSRP-010
+!
+ip route 10.42.4.0 255.255.255.0 10.42.4.254
+ipv6 route 2606:4700:42:a::/64 2606:4700:42:a::2
+ipv6 route fd42:1234:5678:a::/64 fd42:1234:5678:a::2
+key chain OSPF-CHAIN-011
+ key 1
+  key-string 0 SEED-CHAIN-011
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-011
+ 10 remark Synthetic subnet 011
+ 20 permit ip 172.20.4.0 0.0.0.255 any
+ 30 permit tcp host 172.20.4.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-011 seq 10 permit 172.20.4.0/24
+ipv6 prefix-list PUBLIC-SUBNET-011 permit 2606:4700:42:b::/64
+ipv6 prefix-list PRIVATE-SUBNET-011 permit fd42:1234:5678:b::/64
+interface Vlan111
+ description Synthetic engineering subnet 011
+ ip address 172.20.4.1 255.255.255.0
+ ipv6 address 2606:4700:42:b::1/64
+ ipv6 address fd42:1234:5678:b::1/64
+ ip access-group REVIEW-ACL-011 in
+ ip ospf authentication key-chain OSPF-CHAIN-011
+ standby 1 authentication md5 key-string 0 SEED-HSRP-011
+!
+ip route 172.20.4.0 255.255.255.0 172.20.4.254
+ipv6 route 2606:4700:42:b::/64 2606:4700:42:b::2
+ipv6 route fd42:1234:5678:b::/64 fd42:1234:5678:b::2
+key chain OSPF-CHAIN-012
+ key 1
+  key-string 0 SEED-CHAIN-012
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-012
+ 10 remark Synthetic subnet 012
+ 20 permit ip 192.168.4.0 0.0.0.255 any
+ 30 permit tcp host 192.168.4.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-012 seq 10 permit 192.168.4.0/24
+ipv6 prefix-list PUBLIC-SUBNET-012 permit 2606:4700:42:c::/64
+ipv6 prefix-list PRIVATE-SUBNET-012 permit fd42:1234:5678:c::/64
+interface Vlan112
+ description Synthetic engineering subnet 012
+ ip address 192.168.4.1 255.255.255.0
+ ipv6 address 2606:4700:42:c::1/64
+ ipv6 address fd42:1234:5678:c::1/64
+ ip access-group REVIEW-ACL-012 in
+ ip ospf authentication key-chain OSPF-CHAIN-012
+ standby 1 authentication md5 key-string 0 SEED-HSRP-012
+!
+ip route 192.168.4.0 255.255.255.0 192.168.4.254
+ipv6 route 2606:4700:42:c::/64 2606:4700:42:c::2
+ipv6 route fd42:1234:5678:c::/64 fd42:1234:5678:c::2
+key chain OSPF-CHAIN-013
+ key 1
+  key-string 0 SEED-CHAIN-013
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-013
+ 10 remark Synthetic subnet 013
+ 20 permit ip 10.42.5.0 0.0.0.255 any
+ 30 permit tcp host 10.42.5.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-013 seq 10 permit 10.42.5.0/24
+ipv6 prefix-list PUBLIC-SUBNET-013 permit 2606:4700:42:d::/64
+ipv6 prefix-list PRIVATE-SUBNET-013 permit fd42:1234:5678:d::/64
+interface Vlan113
+ description Synthetic engineering subnet 013
+ ip address 10.42.5.1 255.255.255.0
+ ipv6 address 2606:4700:42:d::1/64
+ ipv6 address fd42:1234:5678:d::1/64
+ ip access-group REVIEW-ACL-013 in
+ ip ospf authentication key-chain OSPF-CHAIN-013
+ standby 1 authentication md5 key-string 0 SEED-HSRP-013
+!
+ip route 10.42.5.0 255.255.255.0 10.42.5.254
+ipv6 route 2606:4700:42:d::/64 2606:4700:42:d::2
+ipv6 route fd42:1234:5678:d::/64 fd42:1234:5678:d::2
+key chain OSPF-CHAIN-014
+ key 1
+  key-string 0 SEED-CHAIN-014
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-014
+ 10 remark Synthetic subnet 014
+ 20 permit ip 172.20.5.0 0.0.0.255 any
+ 30 permit tcp host 172.20.5.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-014 seq 10 permit 172.20.5.0/24
+ipv6 prefix-list PUBLIC-SUBNET-014 permit 2606:4700:42:e::/64
+ipv6 prefix-list PRIVATE-SUBNET-014 permit fd42:1234:5678:e::/64
+interface Vlan114
+ description Synthetic engineering subnet 014
+ ip address 172.20.5.1 255.255.255.0
+ ipv6 address 2606:4700:42:e::1/64
+ ipv6 address fd42:1234:5678:e::1/64
+ ip access-group REVIEW-ACL-014 in
+ ip ospf authentication key-chain OSPF-CHAIN-014
+ standby 1 authentication md5 key-string 0 SEED-HSRP-014
+!
+ip route 172.20.5.0 255.255.255.0 172.20.5.254
+ipv6 route 2606:4700:42:e::/64 2606:4700:42:e::2
+ipv6 route fd42:1234:5678:e::/64 fd42:1234:5678:e::2
+key chain OSPF-CHAIN-015
+ key 1
+  key-string 0 SEED-CHAIN-015
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-015
+ 10 remark Synthetic subnet 015
+ 20 permit ip 192.168.5.0 0.0.0.255 any
+ 30 permit tcp host 192.168.5.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-015 seq 10 permit 192.168.5.0/24
+ipv6 prefix-list PUBLIC-SUBNET-015 permit 2606:4700:42:f::/64
+ipv6 prefix-list PRIVATE-SUBNET-015 permit fd42:1234:5678:f::/64
+interface Vlan115
+ description Synthetic engineering subnet 015
+ ip address 192.168.5.1 255.255.255.0
+ ipv6 address 2606:4700:42:f::1/64
+ ipv6 address fd42:1234:5678:f::1/64
+ ip access-group REVIEW-ACL-015 in
+ ip ospf authentication key-chain OSPF-CHAIN-015
+ standby 1 authentication md5 key-string 0 SEED-HSRP-015
+!
+ip route 192.168.5.0 255.255.255.0 192.168.5.254
+ipv6 route 2606:4700:42:f::/64 2606:4700:42:f::2
+ipv6 route fd42:1234:5678:f::/64 fd42:1234:5678:f::2
+key chain OSPF-CHAIN-016
+ key 1
+  key-string 0 SEED-CHAIN-016
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-016
+ 10 remark Synthetic subnet 016
+ 20 permit ip 10.42.6.0 0.0.0.255 any
+ 30 permit tcp host 10.42.6.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-016 seq 10 permit 10.42.6.0/24
+ipv6 prefix-list PUBLIC-SUBNET-016 permit 2606:4700:42:10::/64
+ipv6 prefix-list PRIVATE-SUBNET-016 permit fd42:1234:5678:10::/64
+interface Vlan116
+ description Synthetic engineering subnet 016
+ ip address 10.42.6.1 255.255.255.0
+ ipv6 address 2606:4700:42:10::1/64
+ ipv6 address fd42:1234:5678:10::1/64
+ ip access-group REVIEW-ACL-016 in
+ ip ospf authentication key-chain OSPF-CHAIN-016
+ standby 1 authentication md5 key-string 0 SEED-HSRP-016
+!
+ip route 10.42.6.0 255.255.255.0 10.42.6.254
+ipv6 route 2606:4700:42:10::/64 2606:4700:42:10::2
+ipv6 route fd42:1234:5678:10::/64 fd42:1234:5678:10::2
+key chain OSPF-CHAIN-017
+ key 1
+  key-string 0 SEED-CHAIN-017
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-017
+ 10 remark Synthetic subnet 017
+ 20 permit ip 172.20.6.0 0.0.0.255 any
+ 30 permit tcp host 172.20.6.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-017 seq 10 permit 172.20.6.0/24
+ipv6 prefix-list PUBLIC-SUBNET-017 permit 2606:4700:42:11::/64
+ipv6 prefix-list PRIVATE-SUBNET-017 permit fd42:1234:5678:11::/64
+interface Vlan117
+ description Synthetic engineering subnet 017
+ ip address 172.20.6.1 255.255.255.0
+ ipv6 address 2606:4700:42:11::1/64
+ ipv6 address fd42:1234:5678:11::1/64
+ ip access-group REVIEW-ACL-017 in
+ ip ospf authentication key-chain OSPF-CHAIN-017
+ standby 1 authentication md5 key-string 0 SEED-HSRP-017
+!
+ip route 172.20.6.0 255.255.255.0 172.20.6.254
+ipv6 route 2606:4700:42:11::/64 2606:4700:42:11::2
+ipv6 route fd42:1234:5678:11::/64 fd42:1234:5678:11::2
+key chain OSPF-CHAIN-018
+ key 1
+  key-string 0 SEED-CHAIN-018
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-018
+ 10 remark Synthetic subnet 018
+ 20 permit ip 192.168.6.0 0.0.0.255 any
+ 30 permit tcp host 192.168.6.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-018 seq 10 permit 192.168.6.0/24
+ipv6 prefix-list PUBLIC-SUBNET-018 permit 2606:4700:42:12::/64
+ipv6 prefix-list PRIVATE-SUBNET-018 permit fd42:1234:5678:12::/64
+interface Vlan118
+ description Synthetic engineering subnet 018
+ ip address 192.168.6.1 255.255.255.0
+ ipv6 address 2606:4700:42:12::1/64
+ ipv6 address fd42:1234:5678:12::1/64
+ ip access-group REVIEW-ACL-018 in
+ ip ospf authentication key-chain OSPF-CHAIN-018
+ standby 1 authentication md5 key-string 0 SEED-HSRP-018
+!
+ip route 192.168.6.0 255.255.255.0 192.168.6.254
+ipv6 route 2606:4700:42:12::/64 2606:4700:42:12::2
+ipv6 route fd42:1234:5678:12::/64 fd42:1234:5678:12::2
+key chain OSPF-CHAIN-019
+ key 1
+  key-string 0 SEED-CHAIN-019
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-019
+ 10 remark Synthetic subnet 019
+ 20 permit ip 10.42.7.0 0.0.0.255 any
+ 30 permit tcp host 10.42.7.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-019 seq 10 permit 10.42.7.0/24
+ipv6 prefix-list PUBLIC-SUBNET-019 permit 2606:4700:42:13::/64
+ipv6 prefix-list PRIVATE-SUBNET-019 permit fd42:1234:5678:13::/64
+interface Vlan119
+ description Synthetic engineering subnet 019
+ ip address 10.42.7.1 255.255.255.0
+ ipv6 address 2606:4700:42:13::1/64
+ ipv6 address fd42:1234:5678:13::1/64
+ ip access-group REVIEW-ACL-019 in
+ ip ospf authentication key-chain OSPF-CHAIN-019
+ standby 1 authentication md5 key-string 0 SEED-HSRP-019
+!
+ip route 10.42.7.0 255.255.255.0 10.42.7.254
+ipv6 route 2606:4700:42:13::/64 2606:4700:42:13::2
+ipv6 route fd42:1234:5678:13::/64 fd42:1234:5678:13::2
+key chain OSPF-CHAIN-020
+ key 1
+  key-string 0 SEED-CHAIN-020
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-020
+ 10 remark Synthetic subnet 020
+ 20 permit ip 172.20.7.0 0.0.0.255 any
+ 30 permit tcp host 172.20.7.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-020 seq 10 permit 172.20.7.0/24
+ipv6 prefix-list PUBLIC-SUBNET-020 permit 2606:4700:42:14::/64
+ipv6 prefix-list PRIVATE-SUBNET-020 permit fd42:1234:5678:14::/64
+interface Vlan120
+ description Synthetic engineering subnet 020
+ ip address 172.20.7.1 255.255.255.0
+ ipv6 address 2606:4700:42:14::1/64
+ ipv6 address fd42:1234:5678:14::1/64
+ ip access-group REVIEW-ACL-020 in
+ ip ospf authentication key-chain OSPF-CHAIN-020
+ standby 1 authentication md5 key-string 0 SEED-HSRP-020
+!
+ip route 172.20.7.0 255.255.255.0 172.20.7.254
+ipv6 route 2606:4700:42:14::/64 2606:4700:42:14::2
+ipv6 route fd42:1234:5678:14::/64 fd42:1234:5678:14::2
+key chain OSPF-CHAIN-021
+ key 1
+  key-string 0 SEED-CHAIN-021
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-021
+ 10 remark Synthetic subnet 021
+ 20 permit ip 192.168.7.0 0.0.0.255 any
+ 30 permit tcp host 192.168.7.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-021 seq 10 permit 192.168.7.0/24
+ipv6 prefix-list PUBLIC-SUBNET-021 permit 2606:4700:42:15::/64
+ipv6 prefix-list PRIVATE-SUBNET-021 permit fd42:1234:5678:15::/64
+interface Vlan121
+ description Synthetic engineering subnet 021
+ ip address 192.168.7.1 255.255.255.0
+ ipv6 address 2606:4700:42:15::1/64
+ ipv6 address fd42:1234:5678:15::1/64
+ ip access-group REVIEW-ACL-021 in
+ ip ospf authentication key-chain OSPF-CHAIN-021
+ standby 1 authentication md5 key-string 0 SEED-HSRP-021
+!
+ip route 192.168.7.0 255.255.255.0 192.168.7.254
+ipv6 route 2606:4700:42:15::/64 2606:4700:42:15::2
+ipv6 route fd42:1234:5678:15::/64 fd42:1234:5678:15::2
+key chain OSPF-CHAIN-022
+ key 1
+  key-string 0 SEED-CHAIN-022
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-022
+ 10 remark Synthetic subnet 022
+ 20 permit ip 10.42.8.0 0.0.0.255 any
+ 30 permit tcp host 10.42.8.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-022 seq 10 permit 10.42.8.0/24
+ipv6 prefix-list PUBLIC-SUBNET-022 permit 2606:4700:42:16::/64
+ipv6 prefix-list PRIVATE-SUBNET-022 permit fd42:1234:5678:16::/64
+interface Vlan122
+ description Synthetic engineering subnet 022
+ ip address 10.42.8.1 255.255.255.0
+ ipv6 address 2606:4700:42:16::1/64
+ ipv6 address fd42:1234:5678:16::1/64
+ ip access-group REVIEW-ACL-022 in
+ ip ospf authentication key-chain OSPF-CHAIN-022
+ standby 1 authentication md5 key-string 0 SEED-HSRP-022
+!
+ip route 10.42.8.0 255.255.255.0 10.42.8.254
+ipv6 route 2606:4700:42:16::/64 2606:4700:42:16::2
+ipv6 route fd42:1234:5678:16::/64 fd42:1234:5678:16::2
+key chain OSPF-CHAIN-023
+ key 1
+  key-string 0 SEED-CHAIN-023
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-023
+ 10 remark Synthetic subnet 023
+ 20 permit ip 172.20.8.0 0.0.0.255 any
+ 30 permit tcp host 172.20.8.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-023 seq 10 permit 172.20.8.0/24
+ipv6 prefix-list PUBLIC-SUBNET-023 permit 2606:4700:42:17::/64
+ipv6 prefix-list PRIVATE-SUBNET-023 permit fd42:1234:5678:17::/64
+interface Vlan123
+ description Synthetic engineering subnet 023
+ ip address 172.20.8.1 255.255.255.0
+ ipv6 address 2606:4700:42:17::1/64
+ ipv6 address fd42:1234:5678:17::1/64
+ ip access-group REVIEW-ACL-023 in
+ ip ospf authentication key-chain OSPF-CHAIN-023
+ standby 1 authentication md5 key-string 0 SEED-HSRP-023
+!
+ip route 172.20.8.0 255.255.255.0 172.20.8.254
+ipv6 route 2606:4700:42:17::/64 2606:4700:42:17::2
+ipv6 route fd42:1234:5678:17::/64 fd42:1234:5678:17::2
+key chain OSPF-CHAIN-024
+ key 1
+  key-string 0 SEED-CHAIN-024
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-024
+ 10 remark Synthetic subnet 024
+ 20 permit ip 192.168.8.0 0.0.0.255 any
+ 30 permit tcp host 192.168.8.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-024 seq 10 permit 192.168.8.0/24
+ipv6 prefix-list PUBLIC-SUBNET-024 permit 2606:4700:42:18::/64
+ipv6 prefix-list PRIVATE-SUBNET-024 permit fd42:1234:5678:18::/64
+interface Vlan124
+ description Synthetic engineering subnet 024
+ ip address 192.168.8.1 255.255.255.0
+ ipv6 address 2606:4700:42:18::1/64
+ ipv6 address fd42:1234:5678:18::1/64
+ ip access-group REVIEW-ACL-024 in
+ ip ospf authentication key-chain OSPF-CHAIN-024
+ standby 1 authentication md5 key-string 0 SEED-HSRP-024
+!
+ip route 192.168.8.0 255.255.255.0 192.168.8.254
+ipv6 route 2606:4700:42:18::/64 2606:4700:42:18::2
+ipv6 route fd42:1234:5678:18::/64 fd42:1234:5678:18::2
+key chain OSPF-CHAIN-025
+ key 1
+  key-string 0 SEED-CHAIN-025
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-025
+ 10 remark Synthetic subnet 025
+ 20 permit ip 10.42.9.0 0.0.0.255 any
+ 30 permit tcp host 10.42.9.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-025 seq 10 permit 10.42.9.0/24
+ipv6 prefix-list PUBLIC-SUBNET-025 permit 2606:4700:42:19::/64
+ipv6 prefix-list PRIVATE-SUBNET-025 permit fd42:1234:5678:19::/64
+interface Vlan125
+ description Synthetic engineering subnet 025
+ ip address 10.42.9.1 255.255.255.0
+ ipv6 address 2606:4700:42:19::1/64
+ ipv6 address fd42:1234:5678:19::1/64
+ ip access-group REVIEW-ACL-025 in
+ ip ospf authentication key-chain OSPF-CHAIN-025
+ standby 1 authentication md5 key-string 0 SEED-HSRP-025
+!
+ip route 10.42.9.0 255.255.255.0 10.42.9.254
+ipv6 route 2606:4700:42:19::/64 2606:4700:42:19::2
+ipv6 route fd42:1234:5678:19::/64 fd42:1234:5678:19::2
+key chain OSPF-CHAIN-026
+ key 1
+  key-string 0 SEED-CHAIN-026
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-026
+ 10 remark Synthetic subnet 026
+ 20 permit ip 172.20.9.0 0.0.0.255 any
+ 30 permit tcp host 172.20.9.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-026 seq 10 permit 172.20.9.0/24
+ipv6 prefix-list PUBLIC-SUBNET-026 permit 2606:4700:42:1a::/64
+ipv6 prefix-list PRIVATE-SUBNET-026 permit fd42:1234:5678:1a::/64
+interface Vlan126
+ description Synthetic engineering subnet 026
+ ip address 172.20.9.1 255.255.255.0
+ ipv6 address 2606:4700:42:1a::1/64
+ ipv6 address fd42:1234:5678:1a::1/64
+ ip access-group REVIEW-ACL-026 in
+ ip ospf authentication key-chain OSPF-CHAIN-026
+ standby 1 authentication md5 key-string 0 SEED-HSRP-026
+!
+ip route 172.20.9.0 255.255.255.0 172.20.9.254
+ipv6 route 2606:4700:42:1a::/64 2606:4700:42:1a::2
+ipv6 route fd42:1234:5678:1a::/64 fd42:1234:5678:1a::2
+key chain OSPF-CHAIN-027
+ key 1
+  key-string 0 SEED-CHAIN-027
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-027
+ 10 remark Synthetic subnet 027
+ 20 permit ip 192.168.9.0 0.0.0.255 any
+ 30 permit tcp host 192.168.9.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-027 seq 10 permit 192.168.9.0/24
+ipv6 prefix-list PUBLIC-SUBNET-027 permit 2606:4700:42:1b::/64
+ipv6 prefix-list PRIVATE-SUBNET-027 permit fd42:1234:5678:1b::/64
+interface Vlan127
+ description Synthetic engineering subnet 027
+ ip address 192.168.9.1 255.255.255.0
+ ipv6 address 2606:4700:42:1b::1/64
+ ipv6 address fd42:1234:5678:1b::1/64
+ ip access-group REVIEW-ACL-027 in
+ ip ospf authentication key-chain OSPF-CHAIN-027
+ standby 1 authentication md5 key-string 0 SEED-HSRP-027
+!
+ip route 192.168.9.0 255.255.255.0 192.168.9.254
+ipv6 route 2606:4700:42:1b::/64 2606:4700:42:1b::2
+ipv6 route fd42:1234:5678:1b::/64 fd42:1234:5678:1b::2
+key chain OSPF-CHAIN-028
+ key 1
+  key-string 0 SEED-CHAIN-028
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-028
+ 10 remark Synthetic subnet 028
+ 20 permit ip 10.42.10.0 0.0.0.255 any
+ 30 permit tcp host 10.42.10.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-028 seq 10 permit 10.42.10.0/24
+ipv6 prefix-list PUBLIC-SUBNET-028 permit 2606:4700:42:1c::/64
+ipv6 prefix-list PRIVATE-SUBNET-028 permit fd42:1234:5678:1c::/64
+interface Vlan128
+ description Synthetic engineering subnet 028
+ ip address 10.42.10.1 255.255.255.0
+ ipv6 address 2606:4700:42:1c::1/64
+ ipv6 address fd42:1234:5678:1c::1/64
+ ip access-group REVIEW-ACL-028 in
+ ip ospf authentication key-chain OSPF-CHAIN-028
+ standby 1 authentication md5 key-string 0 SEED-HSRP-028
+!
+ip route 10.42.10.0 255.255.255.0 10.42.10.254
+ipv6 route 2606:4700:42:1c::/64 2606:4700:42:1c::2
+ipv6 route fd42:1234:5678:1c::/64 fd42:1234:5678:1c::2
+key chain OSPF-CHAIN-029
+ key 1
+  key-string 0 SEED-CHAIN-029
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-029
+ 10 remark Synthetic subnet 029
+ 20 permit ip 172.20.10.0 0.0.0.255 any
+ 30 permit tcp host 172.20.10.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-029 seq 10 permit 172.20.10.0/24
+ipv6 prefix-list PUBLIC-SUBNET-029 permit 2606:4700:42:1d::/64
+ipv6 prefix-list PRIVATE-SUBNET-029 permit fd42:1234:5678:1d::/64
+interface Vlan129
+ description Synthetic engineering subnet 029
+ ip address 172.20.10.1 255.255.255.0
+ ipv6 address 2606:4700:42:1d::1/64
+ ipv6 address fd42:1234:5678:1d::1/64
+ ip access-group REVIEW-ACL-029 in
+ ip ospf authentication key-chain OSPF-CHAIN-029
+ standby 1 authentication md5 key-string 0 SEED-HSRP-029
+!
+ip route 172.20.10.0 255.255.255.0 172.20.10.254
+ipv6 route 2606:4700:42:1d::/64 2606:4700:42:1d::2
+ipv6 route fd42:1234:5678:1d::/64 fd42:1234:5678:1d::2
+key chain OSPF-CHAIN-030
+ key 1
+  key-string 0 SEED-CHAIN-030
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-030
+ 10 remark Synthetic subnet 030
+ 20 permit ip 192.168.10.0 0.0.0.255 any
+ 30 permit tcp host 192.168.10.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-030 seq 10 permit 192.168.10.0/24
+ipv6 prefix-list PUBLIC-SUBNET-030 permit 2606:4700:42:1e::/64
+ipv6 prefix-list PRIVATE-SUBNET-030 permit fd42:1234:5678:1e::/64
+interface Vlan130
+ description Synthetic engineering subnet 030
+ ip address 192.168.10.1 255.255.255.0
+ ipv6 address 2606:4700:42:1e::1/64
+ ipv6 address fd42:1234:5678:1e::1/64
+ ip access-group REVIEW-ACL-030 in
+ ip ospf authentication key-chain OSPF-CHAIN-030
+ standby 1 authentication md5 key-string 0 SEED-HSRP-030
+!
+ip route 192.168.10.0 255.255.255.0 192.168.10.254
+ipv6 route 2606:4700:42:1e::/64 2606:4700:42:1e::2
+ipv6 route fd42:1234:5678:1e::/64 fd42:1234:5678:1e::2
+key chain OSPF-CHAIN-031
+ key 1
+  key-string 0 SEED-CHAIN-031
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-031
+ 10 remark Synthetic subnet 031
+ 20 permit ip 10.42.11.0 0.0.0.255 any
+ 30 permit tcp host 10.42.11.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-031 seq 10 permit 10.42.11.0/24
+ipv6 prefix-list PUBLIC-SUBNET-031 permit 2606:4700:42:1f::/64
+ipv6 prefix-list PRIVATE-SUBNET-031 permit fd42:1234:5678:1f::/64
+interface Vlan131
+ description Synthetic engineering subnet 031
+ ip address 10.42.11.1 255.255.255.0
+ ipv6 address 2606:4700:42:1f::1/64
+ ipv6 address fd42:1234:5678:1f::1/64
+ ip access-group REVIEW-ACL-031 in
+ ip ospf authentication key-chain OSPF-CHAIN-031
+ standby 1 authentication md5 key-string 0 SEED-HSRP-031
+!
+ip route 10.42.11.0 255.255.255.0 10.42.11.254
+ipv6 route 2606:4700:42:1f::/64 2606:4700:42:1f::2
+ipv6 route fd42:1234:5678:1f::/64 fd42:1234:5678:1f::2
+key chain OSPF-CHAIN-032
+ key 1
+  key-string 0 SEED-CHAIN-032
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-032
+ 10 remark Synthetic subnet 032
+ 20 permit ip 172.20.11.0 0.0.0.255 any
+ 30 permit tcp host 172.20.11.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-032 seq 10 permit 172.20.11.0/24
+ipv6 prefix-list PUBLIC-SUBNET-032 permit 2606:4700:42:20::/64
+ipv6 prefix-list PRIVATE-SUBNET-032 permit fd42:1234:5678:20::/64
+interface Vlan132
+ description Synthetic engineering subnet 032
+ ip address 172.20.11.1 255.255.255.0
+ ipv6 address 2606:4700:42:20::1/64
+ ipv6 address fd42:1234:5678:20::1/64
+ ip access-group REVIEW-ACL-032 in
+ ip ospf authentication key-chain OSPF-CHAIN-032
+ standby 1 authentication md5 key-string 0 SEED-HSRP-032
+!
+ip route 172.20.11.0 255.255.255.0 172.20.11.254
+ipv6 route 2606:4700:42:20::/64 2606:4700:42:20::2
+ipv6 route fd42:1234:5678:20::/64 fd42:1234:5678:20::2
+key chain OSPF-CHAIN-033
+ key 1
+  key-string 0 SEED-CHAIN-033
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-033
+ 10 remark Synthetic subnet 033
+ 20 permit ip 192.168.11.0 0.0.0.255 any
+ 30 permit tcp host 192.168.11.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-033 seq 10 permit 192.168.11.0/24
+ipv6 prefix-list PUBLIC-SUBNET-033 permit 2606:4700:42:21::/64
+ipv6 prefix-list PRIVATE-SUBNET-033 permit fd42:1234:5678:21::/64
+interface Vlan133
+ description Synthetic engineering subnet 033
+ ip address 192.168.11.1 255.255.255.0
+ ipv6 address 2606:4700:42:21::1/64
+ ipv6 address fd42:1234:5678:21::1/64
+ ip access-group REVIEW-ACL-033 in
+ ip ospf authentication key-chain OSPF-CHAIN-033
+ standby 1 authentication md5 key-string 0 SEED-HSRP-033
+!
+ip route 192.168.11.0 255.255.255.0 192.168.11.254
+ipv6 route 2606:4700:42:21::/64 2606:4700:42:21::2
+ipv6 route fd42:1234:5678:21::/64 fd42:1234:5678:21::2
+key chain OSPF-CHAIN-034
+ key 1
+  key-string 0 SEED-CHAIN-034
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-034
+ 10 remark Synthetic subnet 034
+ 20 permit ip 10.42.12.0 0.0.0.255 any
+ 30 permit tcp host 10.42.12.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-034 seq 10 permit 10.42.12.0/24
+ipv6 prefix-list PUBLIC-SUBNET-034 permit 2606:4700:42:22::/64
+ipv6 prefix-list PRIVATE-SUBNET-034 permit fd42:1234:5678:22::/64
+interface Vlan134
+ description Synthetic engineering subnet 034
+ ip address 10.42.12.1 255.255.255.0
+ ipv6 address 2606:4700:42:22::1/64
+ ipv6 address fd42:1234:5678:22::1/64
+ ip access-group REVIEW-ACL-034 in
+ ip ospf authentication key-chain OSPF-CHAIN-034
+ standby 1 authentication md5 key-string 0 SEED-HSRP-034
+!
+ip route 10.42.12.0 255.255.255.0 10.42.12.254
+ipv6 route 2606:4700:42:22::/64 2606:4700:42:22::2
+ipv6 route fd42:1234:5678:22::/64 fd42:1234:5678:22::2
+key chain OSPF-CHAIN-035
+ key 1
+  key-string 0 SEED-CHAIN-035
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-035
+ 10 remark Synthetic subnet 035
+ 20 permit ip 172.20.12.0 0.0.0.255 any
+ 30 permit tcp host 172.20.12.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-035 seq 10 permit 172.20.12.0/24
+ipv6 prefix-list PUBLIC-SUBNET-035 permit 2606:4700:42:23::/64
+ipv6 prefix-list PRIVATE-SUBNET-035 permit fd42:1234:5678:23::/64
+interface Vlan135
+ description Synthetic engineering subnet 035
+ ip address 172.20.12.1 255.255.255.0
+ ipv6 address 2606:4700:42:23::1/64
+ ipv6 address fd42:1234:5678:23::1/64
+ ip access-group REVIEW-ACL-035 in
+ ip ospf authentication key-chain OSPF-CHAIN-035
+ standby 1 authentication md5 key-string 0 SEED-HSRP-035
+!
+ip route 172.20.12.0 255.255.255.0 172.20.12.254
+ipv6 route 2606:4700:42:23::/64 2606:4700:42:23::2
+ipv6 route fd42:1234:5678:23::/64 fd42:1234:5678:23::2
+key chain OSPF-CHAIN-036
+ key 1
+  key-string 0 SEED-CHAIN-036
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-036
+ 10 remark Synthetic subnet 036
+ 20 permit ip 192.168.12.0 0.0.0.255 any
+ 30 permit tcp host 192.168.12.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-036 seq 10 permit 192.168.12.0/24
+ipv6 prefix-list PUBLIC-SUBNET-036 permit 2606:4700:42:24::/64
+ipv6 prefix-list PRIVATE-SUBNET-036 permit fd42:1234:5678:24::/64
+interface Vlan136
+ description Synthetic engineering subnet 036
+ ip address 192.168.12.1 255.255.255.0
+ ipv6 address 2606:4700:42:24::1/64
+ ipv6 address fd42:1234:5678:24::1/64
+ ip access-group REVIEW-ACL-036 in
+ ip ospf authentication key-chain OSPF-CHAIN-036
+ standby 1 authentication md5 key-string 0 SEED-HSRP-036
+!
+ip route 192.168.12.0 255.255.255.0 192.168.12.254
+ipv6 route 2606:4700:42:24::/64 2606:4700:42:24::2
+ipv6 route fd42:1234:5678:24::/64 fd42:1234:5678:24::2
+key chain OSPF-CHAIN-037
+ key 1
+  key-string 0 SEED-CHAIN-037
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-037
+ 10 remark Synthetic subnet 037
+ 20 permit ip 10.42.13.0 0.0.0.255 any
+ 30 permit tcp host 10.42.13.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-037 seq 10 permit 10.42.13.0/24
+ipv6 prefix-list PUBLIC-SUBNET-037 permit 2606:4700:42:25::/64
+ipv6 prefix-list PRIVATE-SUBNET-037 permit fd42:1234:5678:25::/64
+interface Vlan137
+ description Synthetic engineering subnet 037
+ ip address 10.42.13.1 255.255.255.0
+ ipv6 address 2606:4700:42:25::1/64
+ ipv6 address fd42:1234:5678:25::1/64
+ ip access-group REVIEW-ACL-037 in
+ ip ospf authentication key-chain OSPF-CHAIN-037
+ standby 1 authentication md5 key-string 0 SEED-HSRP-037
+!
+ip route 10.42.13.0 255.255.255.0 10.42.13.254
+ipv6 route 2606:4700:42:25::/64 2606:4700:42:25::2
+ipv6 route fd42:1234:5678:25::/64 fd42:1234:5678:25::2
+key chain OSPF-CHAIN-038
+ key 1
+  key-string 0 SEED-CHAIN-038
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-038
+ 10 remark Synthetic subnet 038
+ 20 permit ip 172.20.13.0 0.0.0.255 any
+ 30 permit tcp host 172.20.13.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-038 seq 10 permit 172.20.13.0/24
+ipv6 prefix-list PUBLIC-SUBNET-038 permit 2606:4700:42:26::/64
+ipv6 prefix-list PRIVATE-SUBNET-038 permit fd42:1234:5678:26::/64
+interface Vlan138
+ description Synthetic engineering subnet 038
+ ip address 172.20.13.1 255.255.255.0
+ ipv6 address 2606:4700:42:26::1/64
+ ipv6 address fd42:1234:5678:26::1/64
+ ip access-group REVIEW-ACL-038 in
+ ip ospf authentication key-chain OSPF-CHAIN-038
+ standby 1 authentication md5 key-string 0 SEED-HSRP-038
+!
+ip route 172.20.13.0 255.255.255.0 172.20.13.254
+ipv6 route 2606:4700:42:26::/64 2606:4700:42:26::2
+ipv6 route fd42:1234:5678:26::/64 fd42:1234:5678:26::2
+key chain OSPF-CHAIN-039
+ key 1
+  key-string 0 SEED-CHAIN-039
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-039
+ 10 remark Synthetic subnet 039
+ 20 permit ip 192.168.13.0 0.0.0.255 any
+ 30 permit tcp host 192.168.13.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-039 seq 10 permit 192.168.13.0/24
+ipv6 prefix-list PUBLIC-SUBNET-039 permit 2606:4700:42:27::/64
+ipv6 prefix-list PRIVATE-SUBNET-039 permit fd42:1234:5678:27::/64
+interface Vlan139
+ description Synthetic engineering subnet 039
+ ip address 192.168.13.1 255.255.255.0
+ ipv6 address 2606:4700:42:27::1/64
+ ipv6 address fd42:1234:5678:27::1/64
+ ip access-group REVIEW-ACL-039 in
+ ip ospf authentication key-chain OSPF-CHAIN-039
+ standby 1 authentication md5 key-string 0 SEED-HSRP-039
+!
+ip route 192.168.13.0 255.255.255.0 192.168.13.254
+ipv6 route 2606:4700:42:27::/64 2606:4700:42:27::2
+ipv6 route fd42:1234:5678:27::/64 fd42:1234:5678:27::2
+key chain OSPF-CHAIN-040
+ key 1
+  key-string 0 SEED-CHAIN-040
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-040
+ 10 remark Synthetic subnet 040
+ 20 permit ip 10.42.14.0 0.0.0.255 any
+ 30 permit tcp host 10.42.14.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-040 seq 10 permit 10.42.14.0/24
+ipv6 prefix-list PUBLIC-SUBNET-040 permit 2606:4700:42:28::/64
+ipv6 prefix-list PRIVATE-SUBNET-040 permit fd42:1234:5678:28::/64
+interface Vlan140
+ description Synthetic engineering subnet 040
+ ip address 10.42.14.1 255.255.255.0
+ ipv6 address 2606:4700:42:28::1/64
+ ipv6 address fd42:1234:5678:28::1/64
+ ip access-group REVIEW-ACL-040 in
+ ip ospf authentication key-chain OSPF-CHAIN-040
+ standby 1 authentication md5 key-string 0 SEED-HSRP-040
+!
+ip route 10.42.14.0 255.255.255.0 10.42.14.254
+ipv6 route 2606:4700:42:28::/64 2606:4700:42:28::2
+ipv6 route fd42:1234:5678:28::/64 fd42:1234:5678:28::2
+key chain OSPF-CHAIN-041
+ key 1
+  key-string 0 SEED-CHAIN-041
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-041
+ 10 remark Synthetic subnet 041
+ 20 permit ip 172.20.14.0 0.0.0.255 any
+ 30 permit tcp host 172.20.14.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-041 seq 10 permit 172.20.14.0/24
+ipv6 prefix-list PUBLIC-SUBNET-041 permit 2606:4700:42:29::/64
+ipv6 prefix-list PRIVATE-SUBNET-041 permit fd42:1234:5678:29::/64
+interface Vlan141
+ description Synthetic engineering subnet 041
+ ip address 172.20.14.1 255.255.255.0
+ ipv6 address 2606:4700:42:29::1/64
+ ipv6 address fd42:1234:5678:29::1/64
+ ip access-group REVIEW-ACL-041 in
+ ip ospf authentication key-chain OSPF-CHAIN-041
+ standby 1 authentication md5 key-string 0 SEED-HSRP-041
+!
+ip route 172.20.14.0 255.255.255.0 172.20.14.254
+ipv6 route 2606:4700:42:29::/64 2606:4700:42:29::2
+ipv6 route fd42:1234:5678:29::/64 fd42:1234:5678:29::2
+key chain OSPF-CHAIN-042
+ key 1
+  key-string 0 SEED-CHAIN-042
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-042
+ 10 remark Synthetic subnet 042
+ 20 permit ip 192.168.14.0 0.0.0.255 any
+ 30 permit tcp host 192.168.14.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-042 seq 10 permit 192.168.14.0/24
+ipv6 prefix-list PUBLIC-SUBNET-042 permit 2606:4700:42:2a::/64
+ipv6 prefix-list PRIVATE-SUBNET-042 permit fd42:1234:5678:2a::/64
+interface Vlan142
+ description Synthetic engineering subnet 042
+ ip address 192.168.14.1 255.255.255.0
+ ipv6 address 2606:4700:42:2a::1/64
+ ipv6 address fd42:1234:5678:2a::1/64
+ ip access-group REVIEW-ACL-042 in
+ ip ospf authentication key-chain OSPF-CHAIN-042
+ standby 1 authentication md5 key-string 0 SEED-HSRP-042
+!
+ip route 192.168.14.0 255.255.255.0 192.168.14.254
+ipv6 route 2606:4700:42:2a::/64 2606:4700:42:2a::2
+ipv6 route fd42:1234:5678:2a::/64 fd42:1234:5678:2a::2
+key chain OSPF-CHAIN-043
+ key 1
+  key-string 0 SEED-CHAIN-043
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-043
+ 10 remark Synthetic subnet 043
+ 20 permit ip 10.42.15.0 0.0.0.255 any
+ 30 permit tcp host 10.42.15.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-043 seq 10 permit 10.42.15.0/24
+ipv6 prefix-list PUBLIC-SUBNET-043 permit 2606:4700:42:2b::/64
+ipv6 prefix-list PRIVATE-SUBNET-043 permit fd42:1234:5678:2b::/64
+interface Vlan143
+ description Synthetic engineering subnet 043
+ ip address 10.42.15.1 255.255.255.0
+ ipv6 address 2606:4700:42:2b::1/64
+ ipv6 address fd42:1234:5678:2b::1/64
+ ip access-group REVIEW-ACL-043 in
+ ip ospf authentication key-chain OSPF-CHAIN-043
+ standby 1 authentication md5 key-string 0 SEED-HSRP-043
+!
+ip route 10.42.15.0 255.255.255.0 10.42.15.254
+ipv6 route 2606:4700:42:2b::/64 2606:4700:42:2b::2
+ipv6 route fd42:1234:5678:2b::/64 fd42:1234:5678:2b::2
+key chain OSPF-CHAIN-044
+ key 1
+  key-string 0 SEED-CHAIN-044
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-044
+ 10 remark Synthetic subnet 044
+ 20 permit ip 172.20.15.0 0.0.0.255 any
+ 30 permit tcp host 172.20.15.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-044 seq 10 permit 172.20.15.0/24
+ipv6 prefix-list PUBLIC-SUBNET-044 permit 2606:4700:42:2c::/64
+ipv6 prefix-list PRIVATE-SUBNET-044 permit fd42:1234:5678:2c::/64
+interface Vlan144
+ description Synthetic engineering subnet 044
+ ip address 172.20.15.1 255.255.255.0
+ ipv6 address 2606:4700:42:2c::1/64
+ ipv6 address fd42:1234:5678:2c::1/64
+ ip access-group REVIEW-ACL-044 in
+ ip ospf authentication key-chain OSPF-CHAIN-044
+ standby 1 authentication md5 key-string 0 SEED-HSRP-044
+!
+ip route 172.20.15.0 255.255.255.0 172.20.15.254
+ipv6 route 2606:4700:42:2c::/64 2606:4700:42:2c::2
+ipv6 route fd42:1234:5678:2c::/64 fd42:1234:5678:2c::2
+key chain OSPF-CHAIN-045
+ key 1
+  key-string 0 SEED-CHAIN-045
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-045
+ 10 remark Synthetic subnet 045
+ 20 permit ip 192.168.15.0 0.0.0.255 any
+ 30 permit tcp host 192.168.15.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-045 seq 10 permit 192.168.15.0/24
+ipv6 prefix-list PUBLIC-SUBNET-045 permit 2606:4700:42:2d::/64
+ipv6 prefix-list PRIVATE-SUBNET-045 permit fd42:1234:5678:2d::/64
+interface Vlan145
+ description Synthetic engineering subnet 045
+ ip address 192.168.15.1 255.255.255.0
+ ipv6 address 2606:4700:42:2d::1/64
+ ipv6 address fd42:1234:5678:2d::1/64
+ ip access-group REVIEW-ACL-045 in
+ ip ospf authentication key-chain OSPF-CHAIN-045
+ standby 1 authentication md5 key-string 0 SEED-HSRP-045
+!
+ip route 192.168.15.0 255.255.255.0 192.168.15.254
+ipv6 route 2606:4700:42:2d::/64 2606:4700:42:2d::2
+ipv6 route fd42:1234:5678:2d::/64 fd42:1234:5678:2d::2
+key chain OSPF-CHAIN-046
+ key 1
+  key-string 0 SEED-CHAIN-046
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-046
+ 10 remark Synthetic subnet 046
+ 20 permit ip 10.42.16.0 0.0.0.255 any
+ 30 permit tcp host 10.42.16.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-046 seq 10 permit 10.42.16.0/24
+ipv6 prefix-list PUBLIC-SUBNET-046 permit 2606:4700:42:2e::/64
+ipv6 prefix-list PRIVATE-SUBNET-046 permit fd42:1234:5678:2e::/64
+interface Vlan146
+ description Synthetic engineering subnet 046
+ ip address 10.42.16.1 255.255.255.0
+ ipv6 address 2606:4700:42:2e::1/64
+ ipv6 address fd42:1234:5678:2e::1/64
+ ip access-group REVIEW-ACL-046 in
+ ip ospf authentication key-chain OSPF-CHAIN-046
+ standby 1 authentication md5 key-string 0 SEED-HSRP-046
+!
+ip route 10.42.16.0 255.255.255.0 10.42.16.254
+ipv6 route 2606:4700:42:2e::/64 2606:4700:42:2e::2
+ipv6 route fd42:1234:5678:2e::/64 fd42:1234:5678:2e::2
+key chain OSPF-CHAIN-047
+ key 1
+  key-string 0 SEED-CHAIN-047
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-047
+ 10 remark Synthetic subnet 047
+ 20 permit ip 172.20.16.0 0.0.0.255 any
+ 30 permit tcp host 172.20.16.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-047 seq 10 permit 172.20.16.0/24
+ipv6 prefix-list PUBLIC-SUBNET-047 permit 2606:4700:42:2f::/64
+ipv6 prefix-list PRIVATE-SUBNET-047 permit fd42:1234:5678:2f::/64
+interface Vlan147
+ description Synthetic engineering subnet 047
+ ip address 172.20.16.1 255.255.255.0
+ ipv6 address 2606:4700:42:2f::1/64
+ ipv6 address fd42:1234:5678:2f::1/64
+ ip access-group REVIEW-ACL-047 in
+ ip ospf authentication key-chain OSPF-CHAIN-047
+ standby 1 authentication md5 key-string 0 SEED-HSRP-047
+!
+ip route 172.20.16.0 255.255.255.0 172.20.16.254
+ipv6 route 2606:4700:42:2f::/64 2606:4700:42:2f::2
+ipv6 route fd42:1234:5678:2f::/64 fd42:1234:5678:2f::2
+key chain OSPF-CHAIN-048
+ key 1
+  key-string 0 SEED-CHAIN-048
+  cryptographic-algorithm hmac-sha-256
+!
+ip access-list extended REVIEW-ACL-048
+ 10 remark Synthetic subnet 048
+ 20 permit ip 192.168.16.0 0.0.0.255 any
+ 30 permit tcp host 192.168.16.25 host 8.8.8.25 eq 443
+ 40 deny ip any any
+!
+ip prefix-list PRIVATE-048 seq 10 permit 192.168.16.0/24
+ipv6 prefix-list PUBLIC-SUBNET-048 permit 2606:4700:42:30::/64
+ipv6 prefix-list PRIVATE-SUBNET-048 permit fd42:1234:5678:30::/64
+interface Vlan148
+ description Synthetic engineering subnet 048
+ ip address 192.168.16.1 255.255.255.0
+ ipv6 address 2606:4700:42:30::1/64
+ ipv6 address fd42:1234:5678:30::1/64
+ ip access-group REVIEW-ACL-048 in
+ ip ospf authentication key-chain OSPF-CHAIN-048
+ standby 1 authentication md5 key-string 0 SEED-HSRP-048
+!
+ip route 192.168.16.0 255.255.255.0 192.168.16.254
+ipv6 route 2606:4700:42:30::/64 2606:4700:42:30::2
+ipv6 route fd42:1234:5678:30::/64 fd42:1234:5678:30::2
+ip prefix-list SUMMARY-10-42 seq 10 permit 10.42.0.0/16 le 24
+ip prefix-list SUMMARY-172-20 seq 10 permit 172.20.0.0/16 le 24
+ip prefix-list SUMMARY-192-168 seq 10 permit 192.168.0.0/16 le 24
+router ospf 100
+ network 10.42.1.0 0.0.0.255 area 0
+ network 172.20.1.0 0.0.0.255 area 0
+ network 192.168.1.0 0.0.0.255 area 0
+ network 10.42.2.0 0.0.0.255 area 0
+ network 172.20.2.0 0.0.0.255 area 0
+ network 192.168.2.0 0.0.0.255 area 0
+ network 10.42.3.0 0.0.0.255 area 0
+ network 172.20.3.0 0.0.0.255 area 0
+ network 192.168.3.0 0.0.0.255 area 0
+ network 10.42.4.0 0.0.0.255 area 0
+ network 172.20.4.0 0.0.0.255 area 0
+ network 192.168.4.0 0.0.0.255 area 0
+ network 10.42.5.0 0.0.0.255 area 0
+ network 172.20.5.0 0.0.0.255 area 0
+ network 192.168.5.0 0.0.0.255 area 0
+ network 10.42.6.0 0.0.0.255 area 0
+ network 172.20.6.0 0.0.0.255 area 0
+ network 192.168.6.0 0.0.0.255 area 0
+ network 10.42.7.0 0.0.0.255 area 0
+ network 172.20.7.0 0.0.0.255 area 0
+ network 192.168.7.0 0.0.0.255 area 0
+ network 10.42.8.0 0.0.0.255 area 0
+ network 172.20.8.0 0.0.0.255 area 0
+ network 192.168.8.0 0.0.0.255 area 0
+ network 10.42.9.0 0.0.0.255 area 0
+ network 172.20.9.0 0.0.0.255 area 0
+ network 192.168.9.0 0.0.0.255 area 0
+ network 10.42.10.0 0.0.0.255 area 0
+ network 172.20.10.0 0.0.0.255 area 0
+ network 192.168.10.0 0.0.0.255 area 0
+ network 10.42.11.0 0.0.0.255 area 0
+ network 172.20.11.0 0.0.0.255 area 0
+ network 192.168.11.0 0.0.0.255 area 0
+ network 10.42.12.0 0.0.0.255 area 0
+ network 172.20.12.0 0.0.0.255 area 0
+ network 192.168.12.0 0.0.0.255 area 0
+ network 10.42.13.0 0.0.0.255 area 0
+ network 172.20.13.0 0.0.0.255 area 0
+ network 192.168.13.0 0.0.0.255 area 0
+ network 10.42.14.0 0.0.0.255 area 0
+ network 172.20.14.0 0.0.0.255 area 0
+ network 192.168.14.0 0.0.0.255 area 0
+ network 10.42.15.0 0.0.0.255 area 0
+ network 172.20.15.0 0.0.0.255 area 0
+ network 192.168.15.0 0.0.0.255 area 0
+ network 10.42.16.0 0.0.0.255 area 0
+ network 172.20.16.0 0.0.0.255 area 0
+ network 192.168.16.0 0.0.0.255 area 0
+!
+router bgp 65000
+ neighbor 10.42.1.2 remote-as 65001
+ neighbor 10.42.1.2 password 0 SEED-BGP-001
+ neighbor 2606:4700:42:1::2 remote-as 65002
+ neighbor 2606:4700:42:1::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.1.2 remote-as 65001
+ neighbor 172.20.1.2 password 0 SEED-BGP-002
+ neighbor 2606:4700:42:2::2 remote-as 65002
+ neighbor 2606:4700:42:2::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.1.2 remote-as 65001
+ neighbor 192.168.1.2 password 0 SEED-BGP-003
+ neighbor 2606:4700:42:3::2 remote-as 65002
+ neighbor 2606:4700:42:3::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.2.2 remote-as 65001
+ neighbor 10.42.2.2 password 0 SEED-BGP-004
+ neighbor 2606:4700:42:4::2 remote-as 65002
+ neighbor 2606:4700:42:4::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.2.2 remote-as 65001
+ neighbor 172.20.2.2 password 0 SEED-BGP-005
+ neighbor 2606:4700:42:5::2 remote-as 65002
+ neighbor 2606:4700:42:5::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.2.2 remote-as 65001
+ neighbor 192.168.2.2 password 0 SEED-BGP-006
+ neighbor 2606:4700:42:6::2 remote-as 65002
+ neighbor 2606:4700:42:6::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.3.2 remote-as 65001
+ neighbor 10.42.3.2 password 0 SEED-BGP-007
+ neighbor 2606:4700:42:7::2 remote-as 65002
+ neighbor 2606:4700:42:7::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.3.2 remote-as 65001
+ neighbor 172.20.3.2 password 0 SEED-BGP-008
+ neighbor 2606:4700:42:8::2 remote-as 65002
+ neighbor 2606:4700:42:8::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.3.2 remote-as 65001
+ neighbor 192.168.3.2 password 0 SEED-BGP-009
+ neighbor 2606:4700:42:9::2 remote-as 65002
+ neighbor 2606:4700:42:9::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.4.2 remote-as 65001
+ neighbor 10.42.4.2 password 0 SEED-BGP-010
+ neighbor 2606:4700:42:a::2 remote-as 65002
+ neighbor 2606:4700:42:a::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.4.2 remote-as 65001
+ neighbor 172.20.4.2 password 0 SEED-BGP-011
+ neighbor 2606:4700:42:b::2 remote-as 65002
+ neighbor 2606:4700:42:b::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.4.2 remote-as 65001
+ neighbor 192.168.4.2 password 0 SEED-BGP-012
+ neighbor 2606:4700:42:c::2 remote-as 65002
+ neighbor 2606:4700:42:c::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.5.2 remote-as 65001
+ neighbor 10.42.5.2 password 0 SEED-BGP-013
+ neighbor 2606:4700:42:d::2 remote-as 65002
+ neighbor 2606:4700:42:d::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.5.2 remote-as 65001
+ neighbor 172.20.5.2 password 0 SEED-BGP-014
+ neighbor 2606:4700:42:e::2 remote-as 65002
+ neighbor 2606:4700:42:e::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.5.2 remote-as 65001
+ neighbor 192.168.5.2 password 0 SEED-BGP-015
+ neighbor 2606:4700:42:f::2 remote-as 65002
+ neighbor 2606:4700:42:f::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.6.2 remote-as 65001
+ neighbor 10.42.6.2 password 0 SEED-BGP-016
+ neighbor 2606:4700:42:10::2 remote-as 65002
+ neighbor 2606:4700:42:10::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.6.2 remote-as 65001
+ neighbor 172.20.6.2 password 0 SEED-BGP-017
+ neighbor 2606:4700:42:11::2 remote-as 65002
+ neighbor 2606:4700:42:11::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.6.2 remote-as 65001
+ neighbor 192.168.6.2 password 0 SEED-BGP-018
+ neighbor 2606:4700:42:12::2 remote-as 65002
+ neighbor 2606:4700:42:12::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.7.2 remote-as 65001
+ neighbor 10.42.7.2 password 0 SEED-BGP-019
+ neighbor 2606:4700:42:13::2 remote-as 65002
+ neighbor 2606:4700:42:13::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.7.2 remote-as 65001
+ neighbor 172.20.7.2 password 0 SEED-BGP-020
+ neighbor 2606:4700:42:14::2 remote-as 65002
+ neighbor 2606:4700:42:14::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.7.2 remote-as 65001
+ neighbor 192.168.7.2 password 0 SEED-BGP-021
+ neighbor 2606:4700:42:15::2 remote-as 65002
+ neighbor 2606:4700:42:15::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.8.2 remote-as 65001
+ neighbor 10.42.8.2 password 0 SEED-BGP-022
+ neighbor 2606:4700:42:16::2 remote-as 65002
+ neighbor 2606:4700:42:16::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.8.2 remote-as 65001
+ neighbor 172.20.8.2 password 0 SEED-BGP-023
+ neighbor 2606:4700:42:17::2 remote-as 65002
+ neighbor 2606:4700:42:17::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.8.2 remote-as 65001
+ neighbor 192.168.8.2 password 0 SEED-BGP-024
+ neighbor 2606:4700:42:18::2 remote-as 65002
+ neighbor 2606:4700:42:18::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.9.2 remote-as 65001
+ neighbor 10.42.9.2 password 0 SEED-BGP-025
+ neighbor 2606:4700:42:19::2 remote-as 65002
+ neighbor 2606:4700:42:19::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.9.2 remote-as 65001
+ neighbor 172.20.9.2 password 0 SEED-BGP-026
+ neighbor 2606:4700:42:1a::2 remote-as 65002
+ neighbor 2606:4700:42:1a::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.9.2 remote-as 65001
+ neighbor 192.168.9.2 password 0 SEED-BGP-027
+ neighbor 2606:4700:42:1b::2 remote-as 65002
+ neighbor 2606:4700:42:1b::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.10.2 remote-as 65001
+ neighbor 10.42.10.2 password 0 SEED-BGP-028
+ neighbor 2606:4700:42:1c::2 remote-as 65002
+ neighbor 2606:4700:42:1c::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.10.2 remote-as 65001
+ neighbor 172.20.10.2 password 0 SEED-BGP-029
+ neighbor 2606:4700:42:1d::2 remote-as 65002
+ neighbor 2606:4700:42:1d::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.10.2 remote-as 65001
+ neighbor 192.168.10.2 password 0 SEED-BGP-030
+ neighbor 2606:4700:42:1e::2 remote-as 65002
+ neighbor 2606:4700:42:1e::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.11.2 remote-as 65001
+ neighbor 10.42.11.2 password 0 SEED-BGP-031
+ neighbor 2606:4700:42:1f::2 remote-as 65002
+ neighbor 2606:4700:42:1f::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.11.2 remote-as 65001
+ neighbor 172.20.11.2 password 0 SEED-BGP-032
+ neighbor 2606:4700:42:20::2 remote-as 65002
+ neighbor 2606:4700:42:20::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.11.2 remote-as 65001
+ neighbor 192.168.11.2 password 0 SEED-BGP-033
+ neighbor 2606:4700:42:21::2 remote-as 65002
+ neighbor 2606:4700:42:21::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.12.2 remote-as 65001
+ neighbor 10.42.12.2 password 0 SEED-BGP-034
+ neighbor 2606:4700:42:22::2 remote-as 65002
+ neighbor 2606:4700:42:22::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.12.2 remote-as 65001
+ neighbor 172.20.12.2 password 0 SEED-BGP-035
+ neighbor 2606:4700:42:23::2 remote-as 65002
+ neighbor 2606:4700:42:23::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.12.2 remote-as 65001
+ neighbor 192.168.12.2 password 0 SEED-BGP-036
+ neighbor 2606:4700:42:24::2 remote-as 65002
+ neighbor 2606:4700:42:24::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.13.2 remote-as 65001
+ neighbor 10.42.13.2 password 0 SEED-BGP-037
+ neighbor 2606:4700:42:25::2 remote-as 65002
+ neighbor 2606:4700:42:25::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.13.2 remote-as 65001
+ neighbor 172.20.13.2 password 0 SEED-BGP-038
+ neighbor 2606:4700:42:26::2 remote-as 65002
+ neighbor 2606:4700:42:26::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.13.2 remote-as 65001
+ neighbor 192.168.13.2 password 0 SEED-BGP-039
+ neighbor 2606:4700:42:27::2 remote-as 65002
+ neighbor 2606:4700:42:27::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.14.2 remote-as 65001
+ neighbor 10.42.14.2 password 0 SEED-BGP-040
+ neighbor 2606:4700:42:28::2 remote-as 65002
+ neighbor 2606:4700:42:28::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.14.2 remote-as 65001
+ neighbor 172.20.14.2 password 0 SEED-BGP-041
+ neighbor 2606:4700:42:29::2 remote-as 65002
+ neighbor 2606:4700:42:29::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.14.2 remote-as 65001
+ neighbor 192.168.14.2 password 0 SEED-BGP-042
+ neighbor 2606:4700:42:2a::2 remote-as 65002
+ neighbor 2606:4700:42:2a::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.15.2 remote-as 65001
+ neighbor 10.42.15.2 password 0 SEED-BGP-043
+ neighbor 2606:4700:42:2b::2 remote-as 65002
+ neighbor 2606:4700:42:2b::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.15.2 remote-as 65001
+ neighbor 172.20.15.2 password 0 SEED-BGP-044
+ neighbor 2606:4700:42:2c::2 remote-as 65002
+ neighbor 2606:4700:42:2c::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.15.2 remote-as 65001
+ neighbor 192.168.15.2 password 0 SEED-BGP-045
+ neighbor 2606:4700:42:2d::2 remote-as 65002
+ neighbor 2606:4700:42:2d::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 10.42.16.2 remote-as 65001
+ neighbor 10.42.16.2 password 0 SEED-BGP-046
+ neighbor 2606:4700:42:2e::2 remote-as 65002
+ neighbor 2606:4700:42:2e::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 172.20.16.2 remote-as 65001
+ neighbor 172.20.16.2 password 0 SEED-BGP-047
+ neighbor 2606:4700:42:2f::2 remote-as 65002
+ neighbor 2606:4700:42:2f::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 192.168.16.2 remote-as 65001
+ neighbor 192.168.16.2 password 0 SEED-BGP-048
+ neighbor 2606:4700:42:30::2 remote-as 65002
+ neighbor 2606:4700:42:30::2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 8.8.8.2 remote-as 65010
+ neighbor 8.8.8.2 password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ neighbor 9.9.9.2 remote-as 65020
+ neighbor 9.9.9.2 password 0 SEED-PUBLIC-BGP
+ network 8.8.8.0 mask 255.255.255.0
+ network 9.9.9.0 mask 255.255.255.0
+!
+interface Tunnel10
+ ip ospf authentication-key 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ ip ospf message-digest-key 1 md5 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+!
+line console 0
+ password 0 SEED-CONSOLE
+ login
+!
+line vty 0 15
+ password 7 003736232016242823180160262D48365F2F293203080165031411372429367F
+ login authentication default
+!
+ip route 0.0.0.0 0.0.0.0 8.8.8.2
+ipv6 route ::/0 2606:4700:42:1::2
+end

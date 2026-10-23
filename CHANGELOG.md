@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — Unreleased
+
+- Added a vendor and format selector with eight device profiles.
+- Added Palo Alto set and XML formats, Junos set and hierarchy formats, and Dell OS6, OS9, and OS10 rules.
+- Required a new scan and review after a profile change.
+- Blocked export for unsupported structures and unknown sensitive fields.
+- Retained local processing and both address modes.
+
 ## 0.3.0 — 2026-10-23
 
 - Prepared the Lawson Cyber LLC Marketplace description and screenshots.

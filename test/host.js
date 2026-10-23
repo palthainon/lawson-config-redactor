@@ -26,5 +26,13 @@ exports.run=async()=>{
   }
  } finally {await vscode.env.clipboard.writeText(previousClipboard);api.close();}
  console.log(`Large Cisco editor checks passed: ${largeExpected.lines} lines, ${largeExpected.secrets.length} distinct secrets removed, ${largeExpected.addresses.length} addresses, ${largeExpected.networks.length} subnet checks, both modes, clipboard and saved output, source unchanged.`);
+
+ for(const item of require('./fixtures/vendor-cases.json')) {
+  const doc=await vscode.workspace.openTextDocument({content:item.source,language:'plaintext'});await vscode.window.showTextDocument(doc);await vscode.commands.executeCommand('lawsonRedactor.preview');
+  await api.dispatch({type:'profile',profile:item.profile});assert.equal(api.metadata().profile,item.profile);assert.equal(api.metadata().canExport,false);
+  for(const mode of ['labels','addresses']) {await api.dispatch({type:'mode',mode});await api.compare();await api.dispatch({type:'reviewed',value:true});assert.equal(api.metadata().canExport,true);const output=api.session().export(doc.version);for(const seed of item.remove)assert.ok(!output.includes(seed));}
+  await api.dispatch({type:'profile',profile:item.profile==='cisco-ios'?'junos-set':'cisco-ios'});assert.equal(api.metadata().canExport,false);assert.equal(api.metadata().reviewed,false);assert.equal(doc.getText(),item.source);api.close();
+ }
+ console.log('Eight vendor profiles passed in the editor host with both address modes and profile review reset.');
  console.log('Editor integration passed: activation, address mode changes, review reset, numeric clipboard and file output, unsaved source, review panel, read-only comparison, clipboard, cancelled save, saved export, source overwrite rejection, manual selection, stale preview, and disposal.');
 };

@@ -1,6 +1,6 @@
 # Network Config Redactor — Lawson Cyber LLC
 
-Prepare a Cisco IOS or IOS-XE configuration for technical review. Replace supported passwords, keys, names, and addresses. Review the comparison before you share the output.
+Prepare a supported network device configuration for technical review. Replace supported passwords, keys, names, and addresses. Review the comparison before you share the output.
 
 ## Your configs stay local
 
@@ -22,6 +22,19 @@ The scanner treats encoded values as secrets. It does not decrypt them. Unknown 
 
 The screenshots use synthetic input. The original values appear in the comparison for review.
 
+## Device profiles
+
+| Vendor | Supported input |
+| --- | --- |
+| Cisco | IOS and IOS-XE CLI configuration |
+| Palo Alto Networks | PAN-OS set commands or XML export |
+| Juniper | Junos display set or brace hierarchy |
+| Dell | OS6, OS9 and FTOS, or SmartFabric OS10 CLI configuration |
+
+Changing the profile clears the previous scan and manual masks. Review the new comparison before export. These profiles cover the tested forms. They do not cover every product or software version.
+
+XML mode masks text values and attributes conservatively. It rejects external entity declarations and unsupported structure. The output is review text, not valid import data. Unsupported sensitive commands and incomplete structures require manual masking.
+
 ## Choose the address format
 
 | Option | Result |
@@ -38,7 +51,7 @@ If the extension cannot map a network consistently, it blocks export. Select nam
 ## Start a review
 
 1. Open one local configuration file or an unsaved text document.
-2. Run **Lawson Cyber: Preview Redacted Configuration** from the command palette.
+2. Run **Lawson Cyber: Preview Redacted Configuration** from the command palette. Select the vendor and configuration format.
 3. Choose the address format. Select **Open comparison**.
 4. Review the full output. If a section blocks export, select **Mask this section**.
 5. If the scanner missed content, select the content in the source. Run **Lawson Cyber: Redact Selected Text**. The extension also masks identical occurrences.
@@ -52,7 +65,7 @@ Saving requires a new local filename. The suggested name is `redacted-config.txt
 ## Scope and limits
 
 - Desktop Visual Studio Code 1.102.0 or later.
-- One Cisco IOS or IOS-XE configuration per review.
+- One device configuration per review. Select the exact vendor and format.
 - Local files and unsaved text documents. Remote document sources are not supported.
 - Input limit: 5 MiB, or 5,242,880 bytes. Scanning supports cancellation.
 - No batch processing, device connection, configuration validation, or format conversion.

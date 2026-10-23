@@ -7,6 +7,7 @@ const send = type => api.postMessage({type});
 function node(tag, text) {const element = document.createElement(tag); if (text !== undefined) element.textContent = text; return element;}
 function draw() {
   $('scan').disabled = false;
+  $('device-profile').value = metadata.profile || 'cisco-ios'; $('device-profile').disabled=false;
   $('state').textContent = metadata.stale ? 'Preview outdated. Scan the current source before export.' : metadata.flags.length ? 'Export blocked. Mask each flagged section.' : 'Preview ready. Review the comparison before export.';
   $('address-mode').value = metadata.addressMode || 'labels'; $('address-mode').disabled=metadata.stale;
   $('totals').replaceChildren();
@@ -24,6 +25,7 @@ function draw() {
   $('more').hidden = visibleRows >= metadata.replacements.length;
 }
 for (const id of ['scan','compare','source','copy','save','website']) $(id).addEventListener('click',()=>send(id));
+$('device-profile').addEventListener('change',()=>{compared=false;for(const id of ['copy','save','reviewed','compare'])$(id).disabled=true;api.postMessage({type:'profile',profile:$('device-profile').value});});
 $('address-mode').addEventListener('change',()=>{compared=false; $('copy').disabled=true;$('save').disabled=true;$('reviewed').disabled=true;api.postMessage({type:'mode',mode:$('address-mode').value});});
 $('reviewed').addEventListener('change',()=>api.postMessage({type:'reviewed',value:$('reviewed').checked}));
 $('more').addEventListener('click',()=>{visibleRows+=200;draw();});
@@ -31,6 +33,6 @@ window.addEventListener('message',event=>{
   const message=event.data;
   if(message.type==='state') {metadata=message.data; if(!metadata.reviewed) compared=false; if(metadata.stale) visibleRows=200;draw();}
   if(message.type==='compared') {compared=true;draw();}
-  if(message.type==='busy') {for(const id of ['scan','compare','reviewed','copy','save']) $(id).disabled=true; $('state').textContent='Scanning configuration…';}
+  if(message.type==='busy') {for(const id of ['scan','compare','reviewed','copy','save','device-profile','address-mode']) $(id).disabled=true; $('state').textContent='Scanning configuration…';}
 });
 send('ready');

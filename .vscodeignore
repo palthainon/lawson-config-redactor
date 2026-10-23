@@ -7,3 +7,4 @@ artifacts/**
 .vscode-test/**
 tsconfig.json
 package-lock.json
+RELEASE.md

@@ -1,0 +1,23 @@
+! Synthetic listing example. No device connection occurs.
+hostname CLIENT-A
+username REVIEW-USER privilege 15 secret 9 DEMO-USER-SECRET
+enable secret 9 DEMO-ENABLE-SECRET
+interface GigabitEthernet0/0
+ ip address 8.8.8.1 255.255.255.0
+interface GigabitEthernet0/1
+ ip address 10.42.10.1 255.255.255.0
+router bgp 65000
+ neighbor 8.8.8.2 remote-as 65001
+ neighbor 8.8.8.2 password 7 DEMO-BGP-KEY
+ neighbor 10.42.10.2 remote-as 65002
+ neighbor 10.42.10.2 password 0 DEMO-INTERNAL-KEY
+tacacs server REVIEW-SERVER
+ address ipv4 10.42.10.20
+ key 6 DEMO-SERVER-KEY
+!
+ip route 10.42.20.0 255.255.255.0 10.42.10.2
+line vty 0 15
+ password 7 DEMO-LINE-PASSWORD
+ login local
+!
+end

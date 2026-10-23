@@ -1,11 +1,11 @@
 {
   "name": "lawson-config-redactor",
-  "displayName": "Network Config Redactor — Lawson Cyber LLC",
-  "description": "Preview a redacted Cisco IOS or IOS-XE configuration for technical review.",
-  "version": "0.2.1",
+  "displayName": "Network Config Redactor \u00e2\u20ac\u201d Lawson Cyber LLC",
+  "description": "Redact Cisco configs locally. Review passwords, keys, and address replacements before sharing. No uploads or telemetry.",
+  "version": "0.3.0",
   "publisher": "DerickL",
   "author": "Lawson Cyber LLC",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "preview": true,
   "icon": "media/logo.png",
@@ -49,5 +49,30 @@
     "@types/vscode": "1.102.0",
     "@vscode/test-electron": "3.1.0",
     "typescript": "5.9.3"
+  },
+  "homepage": "https://lawsoncyber.com",
+  "galleryBanner": {
+    "color": "#3a2414",
+    "theme": "dark"
+  },
+  "keywords": [
+    "cisco",
+    "ios",
+    "ios-xe",
+    "network",
+    "config",
+    "redact",
+    "redaction",
+    "password",
+    "secret",
+    "privacy",
+    "offline",
+    "local"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "bugs": {
+    "email": "derick@lawsoncyber.com"
   }
 }

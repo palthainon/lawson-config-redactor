@@ -1,61 +1,74 @@
 # Network Config Redactor — Lawson Cyber LLC
 
-Prepare one Cisco IOS or IOS-XE configuration for technical review. The extension replaces supported sensitive values with consistent replacement values. The engineer reviews a comparison before copying or saving the output.
+Prepare a Cisco IOS or IOS-XE configuration for technical review. Replace supported passwords, keys, names, and addresses. Review the comparison before you share the output.
 
-The output is review text. Do not deploy it to a device. Unknown sensitive content can still remain. Review the full comparison before export.
+## Your configs stay local
 
-## Use the prototype
+Configuration processing runs in your local desktop extension host. This extension does not upload configurations. It makes no network requests. It uses no telemetry, cloud analysis, or AI service. Configuration processing works offline.
 
-1. In Visual Studio Code, run **Extensions: Install from VSIX**. Select the local prototype package.
-2. Open a configuration, or run **Lawson Cyber: Open Redactor Demo** for synthetic input.
-3. Run **Lawson Cyber: Preview Redacted Configuration**.
-4. Choose **Named labels** or **New IP addresses** in the review panel. Select **Open comparison**. Review the original snapshot and the proposed output.
-5. If a section blocks export, select **Mask this section**. If detection missed other content, select that content in the original source. Run **Lawson Cyber: Redact Selected Text**.
+The extension keeps the source snapshot and replacement mappings in memory. It clears its review state when you close the review panel. It writes no source logs, mapping files, or review history.
+
+The extension changes the clipboard only when you select **Copy redacted text**. It writes an output file only when you select **Save redacted copy**. The source stays unchanged. The About button opens the company website only when you select it.
+
+These statements describe this extension. They do not change the behavior of Visual Studio Code, other extensions, or file sync software.
+
+## Review secrets before sharing
+
+The scanner replaces supported cleartext passwords, encoded password values, community strings, authentication keys, and shared keys. It also replaces configured hostnames, domains, usernames, declared object names, comments, descriptions, and banner content.
+
+The scanner treats encoded values as secrets. It does not decrypt them. Unknown sensitive forms and incomplete blocks can block export until you mask the flagged section.
+
+![Named labels in a Visual Studio Code comparison](media/screenshots/named-labels.jpg)
+
+The screenshots use synthetic input. The original values appear in the comparison for review.
+
+## Choose the address format
+
+| Option | Result |
+| --- | --- |
+| Named labels | Repeated addresses use labels such as `<IP_001>`. |
+| New IP addresses | Repeated addresses use the same new address. Public and private classes remain consistent. Observed subnets and host positions remain consistent. |
+
+Internet Protocol version 4 addresses and version 6 addresses are supported. Masks and prefix lengths remain visible where the command syntax identifies them. Default routes keep their zero address in the new-address mode.
+
+If the extension cannot map a network consistently, it blocks export. Select named labels or mask the flagged address. New-address maps support up to 2,048 distinct addresses.
+
+![New addresses in a Visual Studio Code comparison](media/screenshots/new-addresses.jpg)
+
+## Start a review
+
+1. Open one local configuration file or an unsaved text document.
+2. Run **Lawson Cyber: Preview Redacted Configuration** from the command palette.
+3. Choose the address format. Select **Open comparison**.
+4. Review the full output. If a section blocks export, select **Mask this section**.
+5. If the scanner missed content, select the content in the source. Run **Lawson Cyber: Redact Selected Text**. The extension also masks identical occurrences.
 6. Open the updated comparison. Confirm the review checkbox.
 7. Select **Copy redacted text** or **Save redacted copy**.
 
-Saving requires a new local filename. The suggested name is `redacted-config.txt`. Existing files, including the source, cannot be overwritten. A cancelled save writes nothing. Source edits invalidate the preview. A new scan resets manual masks.
+To try synthetic input, run **Lawson Cyber: Open Redactor Demo**.
 
-## Detection coverage
+Saving requires a new local filename. The suggested name is `redacted-config.txt`. The save action cannot overwrite the source or an existing file. Source edits invalidate the preview. A new scan clears manual masks. An address mode change requires another comparison and review.
 
-The scanner supports enable and user passwords and secrets, line passwords, SNMP community and user authentication values, legacy and named authentication server keys, key chain values, time authentication keys, routing passwords, selected routing authentication forms, and shared keys. Plaintext and encoded values are opaque text. The scanner does not decrypt them.
+## Scope and limits
 
-SNMP authentication rules preserve recognized protocol options and ports. Certificate bodies and encoded key bodies are opaque. Unsupported sensitive forms and incomplete blocks require a manual mask before export.
+- Desktop Visual Studio Code 1.102.0 or later.
+- One Cisco IOS or IOS-XE configuration per review.
+- Local files and unsaved text documents. Remote document sources are not supported.
+- Input limit: 5 MiB, or 5,242,880 bytes. Scanning supports cancellation.
+- No batch processing, device connection, configuration validation, or format conversion.
 
-The scanner also replaces configured hostnames, domains, usernames, IPv4 and IPv6 addresses, MAC addresses, declared object names, and exact token references. Names must differ from command keywords. Unsupported identifiers, unknown hostnames, addresses embedded in arbitrary expressions, and data outside the supported command forms need an engineer's review.
+The output is review text. Do not deploy it to a device. Unknown sensitive content can still remain. New public addresses can belong to other networks. Preserved network relationships disclose some structure. Review the full output before sharing it.
 
-Masks and prefix lengths remain visible where the command syntax identifies them. Descriptions, remarks, comments, contact and location fields, and banner content are redacted by default. The extension preserves indentation, line endings, and line count. Placeholder numbering follows source order within each category. Identical values share a label within that category.
+## Verification
 
-## Address modes
+The test suite uses synthetic values. The larger example has 1,567 lines. Its checks cover 161 distinct secret values, 544 distinct addresses, and 151 network relationships. Tests check both address modes, repeated references, masks, prefixes, manual selections, cancelled scans, and export controls.
 
-Named labels use values such as `<IP_001>`. This mode remains the default.
+Tests in Visual Studio Code check the comparison, clipboard output, saved output, and source protection. Editor verification ran on Windows. These tests establish coverage for the seeded values and supported forms. They do not establish detection of every Cisco secret.
 
-New IP addresses preserve public or private classification. Repeated addresses use the same replacement. Observed subnet relationships and host offsets remain consistent. Masks and prefix lengths remain visible. IPv4 and IPv6 use separate mappings. Documentation, shared, link-local, and benchmark ranges retain their range category where the mapper supports them. Default routes retain `0.0.0.0` or `::` as structural values.
+## Support and license
 
-The mapper uses a random key for each scan. It stores no key or mapping file. Changing the address mode clears the review confirmation. Manual masks remain in effect. Open the comparison again before export.
+For help, email [derick@lawsoncyber.com](mailto:derick@lawsoncyber.com). Send the extension version, editor version, and reproduction steps. Use synthetic input. Do not send production configurations or live credentials.
 
-If the mapper cannot allocate a different network in the required range category, it uses a label and blocks export. Select labels or mask the flagged address. A complete private network such as `10.0.0.0/8` has no different private network of the same size. Special ranges, noncontiguous wildcard masks, and maps with more than 2,048 distinct addresses also require labels or manual masks.
+Lawson Cyber LLC publishes this release under the MIT license. The company name and logo identify Lawson Cyber LLC. They do not imply endorsement of a modified copy.
 
-New public addresses can belong to other networks. The output remains review text. It is not a valid device deployment. Preserved subnet relationships and host offsets disclose some network structure. The mapper does not provide cryptographic anonymity.
-
-## Test examples
-
-The test suite adapts command structure from public Cisco lab configurations. The local source record at `test/fixtures/SOURCES.md` identifies the documents. The examples contain synthetic secrets. Additional tests cover password types 0, 4, 5, 6, 7, 8, and 9. Type 7 values use reversible encoding. Type 5 values use MD5. The scanner removes both without decoding them.
-
-The credential matrix checks value removal. It does not validate commands for a device release. The tests also cover subnet relationships, repeated references, address classes, address mode changes, manual masks, and blocked exports. Editor tests check clipboard and file output in the new address mode.
-
-## Data handling
-
-The extension makes no network requests. The About button opens the company website only when selected. The extension runs no device commands and uses no external analysis service or telemetry.
-
-Source snapshots, original values, and mappings stay in extension memory. Closing the review clears its state and closes its comparison tabs. The review panel receives labels, categories, rule names, and line references. It does not receive original values. Only the selected export action writes output or changes the clipboard.
-
-The input limit is 5 MiB. Scanning runs in a worker that can be cancelled. The extension supports local files and unsaved documents in desktop Visual Studio Code. The source document remains editable in its normal editor.
-
-## Development
-
-Run `npm ci`, then `npm test`. Run `npm run test:host` for tests in an isolated official Visual Studio Code 1.102.0 copy. The test runner downloads that copy on its first run. The runner does not change the installed editor.
-
-Run `npx @vscode/vsce package --allow-missing-repository --skip-license --no-dependencies` to build the local package. The extension has no runtime dependencies. Release licensing and Marketplace publication remain separate decisions.
-
-The samples contain synthetic values and documentation addresses. They contain no customer configurations or live credentials. Syntax references came from the existing Cisco highlighting grammar and the local Cisco syntax reference. The virtual document implementation follows the [Visual Studio Code documentation](https://code.visualstudio.com/api/extension-guides/virtual-documents).
+[Lawson Cyber LLC](https://lawsoncyber.com)

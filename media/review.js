@@ -7,6 +7,7 @@ const send = type => api.postMessage({type});
 function node(tag, text) {const element = document.createElement(tag); if (text !== undefined) element.textContent = text; return element;}
 function draw() {
   $('state').textContent = metadata.stale ? 'Preview outdated. Scan the current source before export.' : metadata.flags.length ? 'Export blocked. Mask each flagged section.' : 'Preview ready. Review the comparison before export.';
+  $('address-mode').value = metadata.addressMode || 'labels'; $('address-mode').disabled=metadata.stale;
   $('totals').replaceChildren();
   const counts = {};
   metadata.replacements.forEach(item => counts[item.category] = (counts[item.category] || 0) + 1);
@@ -22,6 +23,7 @@ function draw() {
   $('more').hidden = visibleRows >= metadata.replacements.length;
 }
 for (const id of ['scan','compare','source','copy','save','website']) $(id).addEventListener('click',()=>send(id));
+$('address-mode').addEventListener('change',()=>{compared=false; $('copy').disabled=true;$('save').disabled=true;$('reviewed').disabled=true;api.postMessage({type:'mode',mode:$('address-mode').value});});
 $('reviewed').addEventListener('change',()=>api.postMessage({type:'reviewed',value:$('reviewed').checked}));
 $('more').addEventListener('click',()=>{visibleRows+=200;draw();});
 window.addEventListener('message',event=>{

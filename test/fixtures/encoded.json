@@ -1,0 +1,6 @@
+{
+  "note": "Synthetic password only. Type 5 uses MD5 crypt with salt LabOnly1. Type 7 uses seed 00. No device credentials.",
+  "password": "SEED-ONLY-NOT-A-DEVICE-PASSWORD",
+  "type5": "$1$LabOnly1$5uCW9.eeLZPF0OF2rgRB81",
+  "type7": "003736232016242823180160262D48365F2F293203080165031411372429367F"
+}

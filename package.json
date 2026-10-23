@@ -2,7 +2,7 @@
   "name": "lawson-config-redactor",
   "displayName": "Network Config Redactor — Lawson Cyber LLC",
   "description": "Preview a redacted Cisco IOS or IOS-XE configuration for technical review.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "DerickL",
   "author": "Lawson Cyber LLC",
   "license": "UNLICENSED",

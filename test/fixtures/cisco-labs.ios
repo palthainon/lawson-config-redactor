@@ -1,0 +1,43 @@
+! Synthetic values. Command structure adapted from Cisco lab examples.
+hostname CLIENT-A
+username SEED-ADMIN privilege 15 secret 9 SEED-TYPE9
+username SEED-LOCAL password 7 SEED-TYPE7
+username SEED-MD5 secret 5 SEED-TYPE5
+aaa new-model
+aaa authentication login default group tacacs+ local
+aaa authorization exec default group tacacs+ local
+tacacs server REVIEW-SERVER
+ address ipv4 192.0.2.182
+ key 6 SEED-TACACS
+!
+aaa group server tacacs+ REVIEW-GROUP
+ server-private 192.0.2.183 key 7 SEED-PRIVATE-SERVER
+!
+interface Loopback70
+ ip address 10.70.70.70 255.255.255.255
+interface Serial1/0
+ ip address 10.10.10.1 255.255.255.0
+ serial restart-delay 0
+router bgp 400
+ no synchronization
+ bgp log-neighbor-changes
+ neighbor 10.80.80.80 remote-as 400
+ neighbor 10.80.80.80 password 7 SEED-BGP
+ neighbor 10.80.80.80 update-source Loopback70
+ no auto-summary
+ip route 10.80.80.80 255.255.255.255 10.10.10.2
+!
+interface Serial0
+ ip address 192.168.64.10 255.255.255.0
+ ip ospf message-digest-key 1 md5 7 SEED-OSPF-MD5
+router ospf 10
+ network 192.168.64.0 0.0.0.255 area 0
+ area 0 authentication message-digest
+!
+key chain REVIEW-CHAIN
+ key 1
+  key-string SEED-OSPF-CHAIN
+  cryptographic-algorithm hmac-sha-256
+interface GigabitEthernet0/0/0
+ ip ospf authentication key-chain REVIEW-CHAIN
+!

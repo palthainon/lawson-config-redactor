@@ -80,6 +80,8 @@ export function scan(source: string): Scan {
     }
     if(['radius','tacacs'].includes(head) && w[1]==='server') declare(t[2],'NAME','Authentication server name');
     if (head === 'username') declare(t[1], 'USER', 'Local username');
+    if (head === 'ppp' && w[1] === 'chap' && w[2] === 'hostname') declare(t[3], 'USER', 'PPP username');
+    const sentUser = w.indexOf('sent-username'); if (head === 'ppp' && sentUser >= 0) declare(t[sentUser+1], 'USER', 'PPP username');
     if (head === 'ip' && w[1] === 'access-list') declare(t[3], 'NAME', 'Access list name');
     if (head === 'ipv6' && w[1] === 'access-list') declare(t[2], 'NAME', 'Access list name');
     if (head === 'access-list') declare(t[1], 'NAME', 'Access list name');
@@ -95,7 +97,8 @@ export function scan(source: string): Scan {
     if (free || comment) {const match = (free || comment)!; add(line.start + match[1].length, line.end, 'TEXT', 'Free text', 70); continue;}
     const secretTail = (index: number, rule: string) => {
       if (w[index] === 'level' && /^\d+$/.test(w[index + 1] || '')) index += 2;
-      if (/^(?:0|5|6|7|8|9)$/.test(w[index] || '')) index++;
+      if (/^(?:0|4|5|6|7|8|9)$/.test(w[index] || '')) index++;
+      else if (/^\d+$/.test(w[index] || '') && t[index+1]) flag(line,'Unknown credential encoding type');
       if (!t[index]) {flag(line, 'Missing or unknown credential value'); return;}
       add(t[index].start, line.end, 'SECRET', rule, 100);
     };
@@ -129,7 +132,7 @@ export function scan(source: string): Scan {
       else {
         const key = w.findIndex((value, index) => ['password','secret','authentication-key'].includes(value) && (index > 0 || value !== 'authentication-key'));
         if (key >= 0 && !['encryption','recovery','policy','strength-check'].includes(w[key + 1])) {secretTail(key + 1, 'Password or secret'); credentialHandled = true;}
-        const legacyKey = ['tacacs-server','radius-server'].includes(head) ? w.indexOf('key') : -1;
+        const legacyKey = ['tacacs-server','radius-server','server-private'].includes(head) ? w.indexOf('key') : -1;
         if (legacyKey >= 0) {secretTail(legacyKey + 1, 'Authentication server key'); credentialHandled = true;}
         const digest = w.indexOf('message-digest-key');
         if (digest >= 0) {secretTail(digest + 3, 'Routing authentication key'); credentialHandled = true;}
@@ -145,18 +148,27 @@ export function scan(source: string): Scan {
     if (!credentialHandled && head !== 'no' && /\b(?:password|secret|community|key-string|pre-shared-key|private-key|authentication-key)\b/i.test(line.text) && !/^(?:\s*service password-encryption|\s*no\s)/i.test(line.text)) flag(line, 'Unrecognized sensitive command');
     if (head === 'key' && !serverContext && w[1] !== 'chain' && !/^\d+$/.test(w[1] || '')) flag(line, 'Unrecognized key command');
     // Address masks are retained only where the command grammar identifies their role.
-    const masks = new Set<number>();
+    const masks = new Set<number>(), prefixes = new Map<number,number>();
+    const maskPrefix = (index: number, wildcard = false) => {
+      if (!t[index+1] || isIP(t[index+1].value)!==4) return;
+      let value = t[index+1].value.split('.').reduce((n,part) => (n*256+Number(part))>>>0,0);
+      if (wildcard) value = (~value)>>>0;
+      const binary = value.toString(2).padStart(32,'0');
+      masks.add(index+1); prefixes.set(index,/^1*0*$/.test(binary) ? (binary.indexOf('0')<0 ? 32 : binary.indexOf('0')) : -1);
+    };
     const address = w[0] === 'ip' && w[1] === 'address' ? 2 : w[0] === 'ip' && w[1] === 'route' ? (w[2] === 'vrf' ? 4 : 2) : -1;
-    if (address >= 0 && isIP(t[address]?.value || '') === 4 && isIP(t[address + 1]?.value || '') === 4) masks.add(address + 1);
+    if (address >= 0 && isIP(t[address]?.value || '') === 4 && isIP(t[address + 1]?.value || '') === 4) maskPrefix(address);
+    if (head === 'network' && w.includes('area')) maskPrefix(1,true);
+    if (head === 'network' && w[2] === 'mask' && isIP(t[3]?.value || '')===4) {const value=t[3].value.split('.').map(v=>Number(v).toString(2).padStart(8,'0')).join(''); if(/^1*0*$/.test(value)){masks.add(3);prefixes.set(1,value.indexOf('0')<0?32:value.indexOf('0'));}}
     if (w.includes('access-list') || head === 'access-list' || w.includes('access-group') || ['permit','deny'].includes(head) || /^\d+$/.test(head)) {
       for (let i=0; i+1<t.length; i++) {
         if(w[i-1]==='host') continue;
-        if(isIP(t[i].value)===4 && isIP(t[i+1].value)===4) {masks.add(i+1);i++;}
+        if(isIP(t[i].value)===4 && isIP(t[i+1].value)===4) {maskPrefix(i,true);i++;}
       }
     }
     for (let i = 0; i < t.length; i++) {
       const value = t[i].value.replace(/^"|"$/g, ''), slash = value.indexOf('/'), base = slash < 0 ? value : value.slice(0, slash);
-      if (!masks.has(i) && isIP(base)) {const skip = t[i].value.startsWith('"') ? 1 : 0; add(t[i].start + skip, t[i].start + skip + base.length, 'IP', 'Network address', 40);}
+      if (!masks.has(i) && isIP(base)) {const skip = t[i].value.startsWith('"') ? 1 : 0; add(t[i].start + skip, t[i].start + skip + base.length, 'IP', 'Network address', 40); const span=spans.at(-1)!; const cidr=slash<0?undefined:Number(value.slice(slash+1)); span.prefix=prefixes.get(i) ?? (cidr!==undefined && Number.isInteger(cidr) && cidr>=0 && cidr<=(isIP(base)===4?32:128) ? cidr : undefined);}
       if (/^(?:[\da-f]{2}:){5}[\da-f]{2}$/i.test(value) || /^(?:[\da-f]{4}\.){2}[\da-f]{4}$/i.test(value) || /^(?:[\da-f]{2}-){5}[\da-f]{2}$/i.test(value)) token(t[i], 'MAC', 'Hardware address', 40);
     }
   }

@@ -5,12 +5,12 @@ const root=path.join(__dirname,'..'),source=fs.readFileSync(path.join(root,'samp
 const sandbox={exports:{},require(name){return name==='vscode'?{Uri:{joinPath:(_root,...parts)=>'/'+parts.join('/')}}:require(name);}};
 vm.runInNewContext(fs.readFileSync(path.join(root,'dist/view.js'),'utf8'),sandbox);
 const bridge=`window.acquireVsCodeApi=()=>({postMessage:async message=>{const response=await fetch('/message',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(message)});for(const item of await response.json())window.postMessage(item,'*');}});`;
-const dark=':root{--vscode-editor-background:#1f2225;--vscode-editor-foreground:#e5e3dd;--vscode-descriptionForeground:#b1b2ad;--vscode-panel-border:#45494d;--vscode-textBlockQuote-background:#302b25;--vscode-button-background:#a8431a;--vscode-button-foreground:#ffffff;--vscode-button-hoverBackground:#c9531a;--vscode-focusBorder:#f2c53d}';
+const dark=':root{--vscode-editor-background:#1f2225;--vscode-editor-foreground:#e5e3dd;--vscode-descriptionForeground:#b1b2ad;--vscode-panel-border:#45494d;--vscode-textBlockQuote-background:#302b25;--vscode-button-background:#a8431a;--vscode-button-foreground:#ffffff;--vscode-button-hoverBackground:#c9531a;--vscode-focusBorder:#f2c53d;--vscode-dropdown-background:#292d31;--vscode-dropdown-foreground:#e5e3dd;--vscode-dropdown-border:#777}';
 const server=http.createServer((request,response)=>{
  const url=new URL(request.url,'http://127.0.0.1:4179');
  if(url.pathname==='/message' && request.method==='POST'){
   let body='';request.on('data',chunk=>{body+=chunk;if(body.length>4096)request.destroy();});request.on('end',()=>{
-   let messages=[];try{const message=JSON.parse(body);if(message.type==='scan')session.load(source,1,scan(source));if(message.type==='reviewed')session.acknowledge(message.value);messages=[{type:'state',data:session.metadata()}];if(message.type==='compare'||session.reviewed)messages.push({type:'compared'});}catch{messages=[];}
+   let messages=[];try{const message=JSON.parse(body);if(message.type==='scan')session.load(source,1,scan(source));if(message.type==='mode')session.setAddressMode(message.mode);if(message.type==='reviewed')session.acknowledge(message.value);messages=[{type:'state',data:session.metadata()}];if(message.type==='compare'||session.reviewed)messages.push({type:'compared'});}catch{messages=[];}
    response.writeHead(200,{'Content-Type':'application/json'});response.end(JSON.stringify(messages));
   });return;
  }

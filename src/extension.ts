@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
   const provider = vscode.workspace.registerTextDocumentContentProvider(SCHEME, {provideTextDocumentContent(uri) {return documents.get(uri.toString()) || '';}});
   let current: {document: vscode.TextDocument; session: ReviewSession; panel: vscode.WebviewPanel; refresh: () => Promise<void>; publish: () => void; compare: () => Promise<void>; resetComparison: () => void} | undefined;
   let chooseSave: typeof vscode.window.showSaveDialog = options => vscode.window.showSaveDialog(options);
-  let dispatch: ((message: {type: string; index?: number; value?: boolean}) => Promise<void>) | undefined;
+  let dispatch: ((message: {type: string; index?: number; value?: boolean; mode?: unknown}) => Promise<void>) | undefined;
   const cleanViews = async () => {
     documents.clear();
     const tabs = vscode.window.tabGroups.all.flatMap(group => group.tabs).filter(tab => (tab.input instanceof vscode.TabInputText && tab.input.uri.scheme === SCHEME) || (tab.input instanceof vscode.TabInputTextDiff && tab.input.original.scheme === SCHEME));
@@ -57,7 +57,7 @@ export function activate(context: vscode.ExtensionContext) {
     current={document,session,panel,refresh,publish,compare,resetComparison:()=>{compared=false;}};
     const changed=vscode.workspace.onDidChangeTextDocument(event=>{if(event.document===document){generation++;void worker?.terminate();session.invalidate();compared=false;publish();void cleanViews();}});
     const closed=vscode.workspace.onDidCloseTextDocument(doc=>{if(doc===document)panel.dispose();});
-    const handleMessage = async (message: {type: string; index?: number; value?: boolean})=>{
+    const handleMessage = async (message: {type: string; index?: number; value?: boolean; mode?: unknown})=>{
       if(disposed) return;
       try {
         switch(message?.type) {
@@ -69,6 +69,7 @@ export function activate(context: vscode.ExtensionContext) {
             if(session.stale || document.version!==session.version || !Number.isInteger(message.index)) throw new Error('Scan the current source first.');
             const flag=session.result?.flags[message.index!];if(!flag) return;session.mask(flag.start,flag.end);compared=false;await cleanViews();publish();break;
           }
+          case 'mode': session.setAddressMode(message.mode);compared=false;await cleanViews();publish();break;
           case 'reviewed': session.acknowledge(compared && message.value===true);publish();if(compared)void panel.webview.postMessage({type:'compared'});break;
           case 'copy': {const output=session.export(document.version);await vscode.env.clipboard.writeText(output);void vscode.window.showInformationMessage('Redacted review text copied.');break;}
           case 'save': {
@@ -96,5 +97,5 @@ export function activate(context: vscode.ExtensionContext) {
   };
   context.subscriptions.push(provider,{dispose(){current?.panel.dispose();documents.clear();}},vscode.commands.registerCommand('lawsonRedactor.preview',preview),vscode.commands.registerCommand('lawsonRedactor.selection',selection),vscode.commands.registerCommand('lawsonRedactor.demo',async()=>{await vscode.window.showTextDocument(vscode.Uri.joinPath(context.extensionUri,'samples','demo.ios'));await preview();}));
   // Test hooks contain no source values and exist only in the extension development host.
-  return context.extensionMode!==vscode.ExtensionMode.Production ? {metadata:()=>current?.session.metadata(),compare:()=>current?.compare(),session:()=>current?.session,close:()=>current?.panel.dispose(),dispatch:(message:{type:string;index?:number;value?:boolean})=>dispatch?.(message),setSaveDialog:(dialog:typeof vscode.window.showSaveDialog)=>{chooseSave=dialog;}} : undefined;
+  return context.extensionMode!==vscode.ExtensionMode.Production ? {metadata:()=>current?.session.metadata(),compare:()=>current?.compare(),session:()=>current?.session,close:()=>current?.panel.dispose(),dispatch:(message:{type:string;index?:number;value?:boolean;mode?:unknown})=>dispatch?.(message),setSaveDialog:(dialog:typeof vscode.window.showSaveDialog)=>{chooseSave=dialog;}} : undefined;
 }

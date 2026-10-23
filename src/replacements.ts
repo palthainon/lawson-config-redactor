@@ -1,4 +1,5 @@
-import {Flag, Replacement, Result, Scan, Span} from './types';
+import {mapAddresses} from './addresses';
+import {AddressMode, Flag, Replacement, Result, Scan, Span} from './types';
 function lineIndex(text: string): number[] {return [0, ...[...text.matchAll(/\r\n|\r|\n/g)].map(match => match.index! + match[0].length)];}
 function lineAt(offset: number, starts: number[]): number {let low = 0, high = starts.length; while (low < high) {const mid = (low + high) >>> 1; if (starts[mid] <= offset) low = mid + 1; else high = mid;} return low;}
 export function manualSpans(source: string, selections: {start: number; end: number}[]): Span[] {
@@ -10,7 +11,7 @@ export function manualSpans(source: string, selections: {start: number; end: num
   }
   return spans;
 }
-export function replace(source: string, scan: Scan, manual: Span[] = []): Result {
+export function replace(source: string, scan: Scan, manual: Span[] = [], options?: {addressMode: AddressMode; key: Buffer}): Result {
   // Split at boundaries so a partial manual selection never exposes the rest of a secret.
   const candidates = [...scan.spans, ...manual].filter(x => x.start >= 0 && x.end <= source.length && x.end > x.start);
   const events = new Map<number, {add: number[]; remove: number[]}>();
@@ -27,10 +28,13 @@ export function replace(source: string, scan: Scan, manual: Span[] = []): Result
   }
   const labels = new Map<string, string>(), counters = new Map<string, number>(), starts = lineIndex(source);
   const reserved = new Set([...source.matchAll(/<[A-Z]+_\d+>/g)].map(match => match[0]));
+  const mapped = options?.addressMode === 'addresses' ? mapAddresses(source,selected,options.key) : undefined;
+  const mappingFlags: Flag[] = [];
   const replacements: Replacement[] = selected.map(span => {
     const original = source.slice(span.start, span.end), key = span.category + '\0' + original;
     let label = labels.get(key);
     if (!label) {let next = counters.get(span.category) || 0; do {label = `<${span.category}_${String(++next).padStart(3, '0')}>`;} while (reserved.has(label)); counters.set(span.category, next); labels.set(key, label);}
+    if (span.category === 'IP' && mapped) {const address=mapped.get(span.start); if(address) label=address; else mappingFlags.push({start:span.start,end:span.end,rule:'Cannot replace this address while preserving its network class and subnet. Use labels or mask this address.'});}
     return {...span, label, line: lineAt(span.start, starts)};
   });
   let output = '', cursor = 0;
@@ -42,5 +46,5 @@ export function replace(source: string, scan: Scan, manual: Span[] = []): Result
   }
   output += source.slice(cursor);
   const covered = (flag: Flag) => {let cursor = flag.start; for (const span of [...manual].sort((a,b) => a.start-b.start)) {if (span.start <= cursor && span.end > cursor) cursor = span.end; if (cursor >= flag.end) return true;} return false;};
-  return {output, replacements, flags: scan.flags.filter(flag => !covered(flag)).map(flag => ({...flag, line: lineAt(flag.start, starts)}))};
+  return {output, replacements, flags: [...scan.flags,...mappingFlags].filter(flag => !covered(flag)).map(flag => ({...flag, line: lineAt(flag.start, starts)}))};
 }

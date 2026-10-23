@@ -6,6 +6,7 @@ const labels = {SECRET:'Credentials',HOST:'Hostnames',DOMAIN:'Domains',USER:'Use
 const send = type => api.postMessage({type});
 function node(tag, text) {const element = document.createElement(tag); if (text !== undefined) element.textContent = text; return element;}
 function draw() {
+  $('scan').disabled = false;
   $('state').textContent = metadata.stale ? 'Preview outdated. Scan the current source before export.' : metadata.flags.length ? 'Export blocked. Mask each flagged section.' : 'Preview ready. Review the comparison before export.';
   $('address-mode').value = metadata.addressMode || 'labels'; $('address-mode').disabled=metadata.stale;
   $('totals').replaceChildren();

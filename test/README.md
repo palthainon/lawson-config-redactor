@@ -10,6 +10,7 @@ Run these commands from the repository root.
 | --- | --- |
 | `cisco.test.js` | Check credential removal and address replacement. |
 | `core.test.js` | Check scanner rules, manual masks, review state, and file protection. |
+| `review-ui.test.js` | Check that scanning becomes available after a completed or cancelled scan. |
 | `worker.test.js` | Check scanning and cancellation. |
 | `host.js` | Check editor commands, comparisons, clipboard output, and file output. |
 | `fixtures/cisco-labs.ios` | Provide the reusable Cisco lab input with synthetic secrets. |

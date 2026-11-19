@@ -1,4 +1,6 @@
 export const PROFILES = [
+  {id:'generic-json', label:'General JSON', format:'Strict JSON; text values are masked conservatively'},
+  {id:'generic-xml', label:'General XML', format:'XML without DTDs; text values are masked conservatively'},
   {id:'cisco-ios', label:'Cisco IOS / IOS-XE', format:'CLI configuration'},
   {id:'panos-set', label:'Palo Alto PAN-OS — set commands', format:'Full set configuration'},
   {id:'panos-xml', label:'Palo Alto PAN-OS — XML', format:'XML export; values are masked conservatively'},

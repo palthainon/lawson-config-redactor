@@ -149,15 +149,15 @@ export function scanDell(source:string,profile:DeviceProfile,result:Scan):Scan {
   }
   return result;
 }
-export function scanXml(source:string):Scan {
+export function scanXml(source:string,general=false):Scan {
   const result:Scan={spans:[],flags:[]},stack:string[]=[],ids:number[]=[];
   const masks=new Map<number,number>(),maskedAddresses:{span:Span;scope:number}[]=[];let nextId=0;
-  const fail=()=>block(result,source,'Unsupported or malformed PAN-OS XML. Mask the configuration or use set commands.');
+  const fail=()=>block(result,source,general?'Unsupported or malformed XML. DTDs and processing instructions are not supported.':'Unsupported or malformed PAN-OS XML. Mask the configuration or use set commands.');
   if(/<!DOCTYPE|<!ENTITY/i.test(source)) {fail();return result;}
   let at=0,roots=0,declaration=false;
   while(at<source.length) {
     if(source.startsWith('<!--',at)) {
-      const end=source.indexOf('-->',at+4);if(end<0){fail();break;}
+      const end=source.indexOf('-->',at+4);if(end<0 || source.slice(at+4,end).includes('--')){fail();break;}
       add(result,at+4,end,'TEXT','XML comment',80);at=end+3;continue;
     }
     if(source.startsWith('<![CDATA[',at)) {
@@ -170,14 +170,14 @@ export function scanXml(source:string):Scan {
       declaration=true;at=end+2;continue;
     }
     if(source[at]==='<') {
-      const match=/^<(\/?)([A-Za-z_][\w.-]*)((?:\s+[A-Za-z_][\w.-]*\s*=\s*(?:"[^"]*"|'[^']*'))*)\s*(\/?)>/.exec(source.slice(at));
+      const match=/^<(\/?)([A-Za-z_][\w.:-]*)((?:\s+[A-Za-z_][\w.:-]*\s*=\s*(?:"[^"]*"|'[^']*'))*)\s*(\/?)>/.exec(source.slice(at));
       if(!match){fail();break;}
       const [,closing,tag,attributes='',selfClosing]=match;
       if(closing) {
         if(attributes.trim() || selfClosing || stack.pop()!==tag){fail();break;}ids.pop();
       } else {
-        if(!stack.length) {roots++;if(!['config','response'].includes(tag) || roots>1){fail();break;}}
-        const attr=/\s+([A-Za-z_][\w.-]*)\s*=\s*("[^"]*"|'[^']*')/gy;
+        if(!stack.length) {roots++;if((!general && !['config','response'].includes(tag)) || roots>1){fail();break;}}
+        const attr=/\s+([A-Za-z_][\w.:-]*)\s*=\s*("[^"]*"|'[^']*')/gy;
         let position=0,item:RegExpExecArray|null;const seen=new Set<string>();
         while(position<attributes.length) {
           if(!attributes.slice(position).trim())break;
@@ -186,7 +186,8 @@ export function scanXml(source:string):Scan {
           seen.add(item[1]);position=attr.lastIndex;
           const valueStart=at+1+tag.length+item.index+item[0].lastIndexOf(item[2])+1;
           const value=item[2].slice(1,-1);
-          if(sensitive.test(item[1]))add(result,valueStart,valueStart+value.length,'SECRET','XML credential attribute',100);
+          if(general && (item[1]==='xmlns' || item[1].startsWith('xmlns:')))continue;
+          if(sensitive.test(item[1]) || (general && [tag,...stack].some(name=>sensitive.test(name) || name==='key')))add(result,valueStart,valueStart+value.length,'SECRET','XML credential attribute',100);
           else if(!address(result,{value,start:valueStart,end:valueStart+value.length}))add(result,valueStart,valueStart+value.length,'NAME','XML attribute',60);
         }
         if(!selfClosing){stack.push(tag);ids.push(++nextId);}
@@ -199,7 +200,7 @@ export function scanXml(source:string):Scan {
     if(value) {
       if(!stack.length){fail();break;}
       const start=at+raw.indexOf(value),tag=stack.at(-1)!;
-      if(sensitive.test(tag) || tag==='key')add(result,start,start+value.length,'SECRET','XML credential',100);
+      if(sensitive.test(tag) || tag==='key' || (general && stack.some(name=>sensitive.test(name) || name==='key')))add(result,start,start+value.length,'SECRET','XML credential',100);
       else if(tag==='netmask' && isIP(value)===4) {
         // Retain only a valid contiguous netmask.
         const bits=value.split('.').map(n=>Number(n).toString(2).padStart(8,'0')).join('');

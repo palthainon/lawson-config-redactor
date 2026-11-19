@@ -26,6 +26,8 @@ The screenshots use synthetic input. The original values appear in the compariso
 
 | Vendor | Supported input |
 | --- | --- |
+| General JSON | Strict JSON objects, arrays, and scalar values |
+| General XML | Arbitrary root elements, attributes, and namespaced elements without DTDs |
 | Cisco | IOS and IOS-XE CLI configuration |
 | Palo Alto Networks | PAN-OS set commands or XML export |
 | Juniper | Junos display set or brace hierarchy |
@@ -48,14 +50,16 @@ If the extension cannot map a network consistently, it blocks export. Select nam
 
 ![New addresses in a Visual Studio Code comparison](media/screenshots/new-addresses.jpg)
 
+General JSON and XML profiles replace literal address values, including address prefixes. They mask other text values conservatively. JSON property names remain visible, except literal address keys. JSON numbers, booleans, and null remain visible unless they occur in a recognized sensitive field. Encoded addresses and addresses inside longer text receive text labels. Review property names for private identifiers. XML namespace declarations remain visible. The profiles reject JSON comments, trailing commas, XML document type declarations, and unsupported processing instructions. The output is review text. It is not guaranteed to remain valid JSON or XML.
+
 ## Start a review
 
 1. Open one local configuration file or an unsaved text document.
-2. Run **Lawson Cyber: Preview Redacted Configuration** from the command palette. Select the vendor and configuration format.
+2. Run **Lawson Cyber: Preview Redacted Configuration** from the command palette. Select the vendor and configuration format. JSON and XML documents select their general profile automatically.
 3. Choose the address format. Select **Open comparison**.
 4. Review the full output. If a section blocks export, select **Mask this section**.
 5. If the scanner missed content, select the content in the source. Run **Lawson Cyber: Redact Selected Text**. The extension also masks identical occurrences.
-6. Open the updated comparison. Confirm the review checkbox.
+6. Open the updated comparison. Copy and Save become available when no flagged sections remain.
 7. Select **Copy redacted text** or **Save redacted copy**.
 
 To try synthetic input, run **Lawson Cyber: Open Redactor Demo**.

@@ -2,7 +2,7 @@
   "name": "lawson-config-redactor",
   "displayName": "Network Config Redactor — Lawson Cyber LLC",
   "description": "Redact supported Cisco, Palo Alto, Juniper, and Dell configurations locally. Choose the device format. Review before sharing. No uploads.",
-  "version": "0.4.0",
+  "version": "0.5.2",
   "publisher": "DerickL",
   "author": "Lawson Cyber LLC",
   "license": "MIT",

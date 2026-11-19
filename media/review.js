@@ -14,8 +14,8 @@ function draw() {
   const counts = {};
   metadata.replacements.forEach(item => counts[item.category] = (counts[item.category] || 0) + 1);
   for (const [key,count] of Object.entries(counts)) {const card = node('div');card.append(node('strong',String(count)),node('span',labels[key]));$('totals').append(card);}
-  $('compare').disabled = metadata.stale; $('reviewed').disabled = metadata.stale || !!metadata.flags.length || !compared;
-  $('reviewed').checked = metadata.reviewed === true;
+  $('compare').disabled = metadata.stale;
+  $('review-help').textContent = metadata.stale ? 'Scan the current source before review.' : metadata.flags.length ? 'Mask each section listed above before review.' : !compared ? 'Open the comparison to enable Copy and Save.' : 'Copy or save the redacted text. Review the output before sharing.';
   $('copy').disabled = !metadata.canExport; $('save').disabled = !metadata.canExport;
   $('flag-summary').textContent = metadata.stale ? 'Scan required.' : metadata.flags.length ? `${metadata.flags.length} section(s) block export.` : 'No unsupported sensitive sections were detected.';
   $('flags').replaceChildren();
@@ -25,14 +25,12 @@ function draw() {
   $('more').hidden = visibleRows >= metadata.replacements.length;
 }
 for (const id of ['scan','compare','source','copy','save','website']) $(id).addEventListener('click',()=>send(id));
-$('device-profile').addEventListener('change',()=>{compared=false;for(const id of ['copy','save','reviewed','compare'])$(id).disabled=true;api.postMessage({type:'profile',profile:$('device-profile').value});});
-$('address-mode').addEventListener('change',()=>{compared=false; $('copy').disabled=true;$('save').disabled=true;$('reviewed').disabled=true;api.postMessage({type:'mode',mode:$('address-mode').value});});
-$('reviewed').addEventListener('change',()=>api.postMessage({type:'reviewed',value:$('reviewed').checked}));
+$('device-profile').addEventListener('change',()=>{compared=false;for(const id of ['copy','save','compare'])$(id).disabled=true;api.postMessage({type:'profile',profile:$('device-profile').value});});
+$('address-mode').addEventListener('change',()=>{compared=false; $('copy').disabled=true;$('save').disabled=true;api.postMessage({type:'mode',mode:$('address-mode').value});});
 $('more').addEventListener('click',()=>{visibleRows+=200;draw();});
 window.addEventListener('message',event=>{
   const message=event.data;
-  if(message.type==='state') {metadata=message.data; if(!metadata.reviewed) compared=false; if(metadata.stale) visibleRows=200;draw();}
-  if(message.type==='compared') {compared=true;draw();}
-  if(message.type==='busy') {for(const id of ['scan','compare','reviewed','copy','save','device-profile','address-mode']) $(id).disabled=true; $('state').textContent='Scanning configuration…';}
+  if(message.type==='state') {metadata=message.data; compared=metadata.compared===true; if(metadata.stale) visibleRows=200;draw();}
+  if(message.type==='busy') {for(const id of ['scan','compare','copy','save','device-profile','address-mode']) $(id).disabled=true; $('state').textContent='Scanning configuration…';}
 });
 send('ready');

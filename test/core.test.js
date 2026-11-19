@@ -42,7 +42,7 @@ test('free text and banners keep all newline styles and indentation',()=>{
 test('single-line banner preserves delimiters',()=>assert.match(redact('banner login #SEED-BANNER#').output,/^banner login #<TEXT_001>#$/));
 test('unknown and incomplete blocks block export until fully masked',()=>{
  for(const source of ['banner motd ^C\nSEED-UNCLOSED','crypto private-key unsupported SEED-KEY','-----BEGIN PRIVATE KEY-----\nSEED-KEY']){
-  const session=new ReviewSession();session.load(source,1,scan(source));assert.ok(session.result.flags.length);session.acknowledge(true);assert.throws(()=>session.export(1));const flag=session.result.flags[0];session.mask(flag.start,flag.end);assert.equal(session.result.flags.length,0);session.acknowledge(true);assert.ok(!session.export(1).includes('SEED-'));}
+  const session=new ReviewSession();session.load(source,1,scan(source));assert.ok(session.result.flags.length);session.markCompared();assert.throws(()=>session.export(1));const flag=session.result.flags[0];session.mask(flag.start,flag.end);assert.equal(session.result.flags.length,0);session.markCompared();assert.ok(!session.export(1).includes('SEED-'));}
 });
 test('partial masks cannot dismiss flags',()=>{const source='crypto private-key unsupported SEED-KEY';const session=new ReviewSession();session.load(source,1,scan(source));session.mask(0,6);assert.equal(session.result.flags.length,1);});
 test('encoded key and certificate blocks are opaque',()=>{
@@ -52,10 +52,10 @@ test('certificate quit delimiters remain visible',()=>assert.match(redact('crypt
 test('manual literals redact every occurrence and do not expose overlapping secrets',()=>{
  const source='password SEED-ORIGINALTAIL\ndescription other\nunknown SEED-ORIGINALTAIL';const scanResult=scan(source),start=source.indexOf('SEED');const result=replace(source,scanResult,manualSpans(source,[{start,end:start+4}]));assert.ok(!result.output.includes('SEED'));assert.ok(!result.output.split('\n')[0].includes('ORIGINALTAIL'));
 });
-test('unknown credential blocks include their indented body',()=>{const source='crypto private-key unknown\n SEED-BODY\n!\nend';const session=new ReviewSession();session.load(source,1,scan(source));const flag=session.result.flags[0];assert.ok(source.slice(flag.start,flag.end).includes('SEED-BODY'));session.mask(flag.start,flag.end);session.acknowledge(true);assert.ok(!session.export(1).includes('SEED-BODY'));});
+test('unknown credential blocks include their indented body',()=>{const source='crypto private-key unknown\n SEED-BODY\n!\nend';const session=new ReviewSession();session.load(source,1,scan(source));const flag=session.result.flags[0];assert.ok(source.slice(flag.start,flag.end).includes('SEED-BODY'));session.mask(flag.start,flag.end);session.markCompared();assert.ok(!session.export(1).includes('SEED-BODY'));});
 test('placeholder collisions are skipped and source order defines numbering',()=>{const result=redact('token <IP_001>\naddress 192.0.2.1\naddress 198.51.100.1');assert.ok(result.output.includes('<IP_002>'));assert.ok(result.output.includes('<IP_003>'));});
-test('source versions, acknowledgement, and disposal gate exports',()=>{
- const session=new ReviewSession();session.load('hostname CLIENT-A',2,scan('hostname CLIENT-A'));assert.throws(()=>session.export(2));session.acknowledge(true);assert.ok(session.export(2));assert.throws(()=>session.export(3));session.invalidate();assert.throws(()=>session.export(2));session.dispose();assert.equal(session.source,'');assert.equal(session.result,undefined);
+test('source versions, comparison, and disposal gate exports',()=>{
+ const session=new ReviewSession();session.load('hostname CLIENT-A',2,scan('hostname CLIENT-A'));assert.throws(()=>session.export(2));session.markCompared();assert.ok(session.export(2));assert.throws(()=>session.export(3));session.invalidate();assert.throws(()=>session.export(2));session.dispose();assert.equal(session.source,'');assert.equal(session.result,undefined);
 });
 test('metadata contains labels and line references but no original values',()=>{
  const source='hostname SEED-HOST\npassword SEED-PASSWORD';const session=new ReviewSession();session.load(source,1,scan(source));const metadata=JSON.stringify(session.metadata());assert.ok(!metadata.includes('SEED-HOST'));assert.ok(!metadata.includes('SEED-PASSWORD'));assert.ok(!metadata.includes('start'));assert.ok(!metadata.includes('output'));

@@ -1,5 +1,27 @@
 [
   {
+    "profile": "generic-json",
+    "source": "{\"ip\":\"192.0.2.10\",\"password\":\"PRIVATE-JSON\",\"enabled\":true}",
+    "remove": [
+      "PRIVATE-JSON"
+    ],
+    "keep": [
+      "\"ip\"",
+      "true"
+    ]
+  },
+  {
+    "profile": "generic-xml",
+    "source": "<settings><ip>192.0.2.10</ip><password>PRIVATE-XML</password></settings>",
+    "remove": [
+      "PRIVATE-XML"
+    ],
+    "keep": [
+      "<settings>",
+      "<ip>"
+    ]
+  },
+  {
     "profile": "cisco-ios",
     "source": "hostname SEED-HOST\nusername SEED-USER secret 9 SEED-HASH\ninterface GigabitEthernet0/1\n ip address 192.0.2.10 255.255.255.0\n",
     "remove": [

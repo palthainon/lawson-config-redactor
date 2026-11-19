@@ -1,3 +1,4 @@
+import {scanJson} from './structured';
 import {scan as scanCisco, linesOf} from './cisco';
 import {DeviceProfile, isProfile} from './profiles';
 import {scanCli, scanXml, scanDell} from './vendors';
@@ -7,6 +8,8 @@ export function scan(source: string, profile: DeviceProfile = 'cisco-ios'): Scan
   if (Buffer.byteLength(source) > LIMIT) throw new Error('The configuration exceeds the 5 MiB limit.');
   if (!isProfile(profile)) throw new Error('Choose a supported device profile.');
   const blocked = (rule: string): Scan => ({spans:[],flags:[{start:0,end:source.length,rule}]});
+  if (profile === 'generic-json') return scanJson(source);
+  if (profile === 'generic-xml') return scanXml(source, true);
   if (profile === 'panos-xml') return scanXml(source);
   if (profile === 'panos-set' || profile === 'junos-set' || profile === 'junos-hierarchical') return scanCli(source,profile);
   if (/^\s*</.test(source) || linesOf(source).some(line => /^\s*(?:set|delete|activate|deactivate)\s/.test(line.text)) ||

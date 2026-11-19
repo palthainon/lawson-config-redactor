@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.5.2 — 2026-10-30
+
+- Remove the review checkbox.
+- Enable Copy and Save after the current comparison opens, if no flagged sections remain.
+
+## 0.5.1 — 2026-10-30
+
+- Restore comparison state when the review panel reloads.
+- Show the reason when the review checkbox is disabled.
+
+## 0.5.0 — 2026-10-30
+
+- Add general JSON and XML profiles for configuration review.
+- Select the general profile automatically for JSON and XML documents.
+- Replace literal address values. Mask other text values conservatively.
+
+
 ## 0.4.0 — Unreleased
 
 - Mask Junos privacy keys and passwords. Block unsupported privacy credential forms before export.

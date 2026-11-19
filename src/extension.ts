@@ -23,17 +23,21 @@ export function activate(context: vscode.ExtensionContext) {
     if (!document || !['file','untitled'].includes(document.uri.scheme)) {void vscode.window.showInformationMessage('Open a local configuration document first.'); return;}
     current?.panel.dispose();
     await vscode.window.showTextDocument(document,{viewColumn:vscode.ViewColumn.One,preview:false,preserveFocus:true});
-    const session = new ReviewSession(), panel = vscode.window.createWebviewPanel('lawsonRedactor.review','Network Config Redactor',vscode.ViewColumn.Beside,{enableScripts:true,localResourceRoots:[vscode.Uri.joinPath(context.extensionUri,'media')]});
+    const session = new ReviewSession();
+    if(document.languageId==='json' || /\.json$/i.test(document.fileName))session.setProfile('generic-json');
+    else if(document.languageId==='xml' || /\.xml$/i.test(document.fileName))session.setProfile('generic-xml');
+    const panel = vscode.window.createWebviewPanel('lawsonRedactor.review','Network Config Redactor',vscode.ViewColumn.Beside,{enableScripts:true,localResourceRoots:[vscode.Uri.joinPath(context.extensionUri,'media')]});
     panel.webview.html = render(panel.webview, context.extensionUri);
     let disposed = false, generation = 0, worker: Worker | undefined, compared = false;
-    const publish = () => {void panel.webview.postMessage({type:'state',data:session.metadata()});};
+    const publish = () => {void panel.webview.postMessage({type:'state',data:{...session.metadata(),compared}});};
     const compare = async () => {
       if (session.stale || document.version !== session.version || !session.result) throw new Error('Scan the current source first.');
       await cleanViews();
+      const comparedResult=session.result, comparedVersion=document.version;
       const id=randomUUID(), original=vscode.Uri.parse(`${SCHEME}:/${id}/original.txt`), redacted=vscode.Uri.parse(`${SCHEME}:/${id}/redacted.txt`);
       documents.set(original.toString(),session.source); documents.set(redacted.toString(),session.result.output);
       await vscode.commands.executeCommand('vscode.diff', original, redacted, 'Original snapshot ↔ Redacted review text', {preview:false,viewColumn:vscode.ViewColumn.One});
-      if (!session.stale) {compared=true; void panel.webview.postMessage({type:'compared'});}
+      if (!session.stale && session.result===comparedResult && document.version===comparedVersion) {compared=true; session.markCompared(); publish();}
     };
     const refresh = async () => {
       const request = ++generation; worker?.terminate(); session.invalidate(); compared=false; publish(); void cleanViews();
@@ -71,7 +75,6 @@ export function activate(context: vscode.ExtensionContext) {
           }
           case 'profile': session.setProfile(message.profile);await refresh();break;
           case 'mode': session.setAddressMode(message.mode);compared=false;await cleanViews();publish();break;
-          case 'reviewed': session.acknowledge(compared && message.value===true);publish();if(compared)void panel.webview.postMessage({type:'compared'});break;
           case 'copy': {const output=session.export(document.version);await vscode.env.clipboard.writeText(output);void vscode.window.showInformationMessage('Redacted review text copied.');break;}
           case 'save': {
             session.export(document.version);

@@ -27,6 +27,18 @@ test('device selector requests a scan and disables export immediately',()=>{
  const view=panel();view.send({type:'state',data:{profile:'cisco-ios',stale:false,reviewed:true,canExport:true,replacements:[],flags:[]}});
  view.get('device-profile').value='panos-xml';view.get('device-profile').listeners.change();
  assert.equal(view.sent.at(-1).type,'profile');assert.equal(view.sent.at(-1).profile,'panos-xml');
- for(const id of ['copy','save','reviewed','compare'])assert.equal(view.get(id).disabled,true);
+ for(const id of ['copy','save','compare'])assert.equal(view.get(id).disabled,true);
  view.send({type:'busy'});assert.equal(view.get('device-profile').disabled,true);
+});
+
+test('comparison enables exports without a checkbox or confirmation message',()=>{
+ const view=panel();
+ view.send({type:'state',data:{stale:false,compared:false,canExport:false,replacements:[],flags:[]}});
+ assert.equal(view.get('copy').disabled,true);assert.ok(view.get('review-help').textContent.includes('Open the comparison'));
+ const ready={stale:false,compared:true,canExport:true,replacements:[],flags:[]};
+ view.send({type:'state',data:ready});assert.equal(view.get('copy').disabled,false);assert.equal(view.get('save').disabled,false);
+ const restored=panel();restored.send({type:'state',data:ready});assert.equal(restored.get('copy').disabled,false);
+ assert.ok(!view.sent.some(message=>message.type==='reviewed'));
+ assert.ok(!fs.readFileSync(path.join(__dirname,'../src/view.ts'),'utf8').includes('type="checkbox"'));
+ view.send({type:'state',data:{...ready,compared:false,canExport:false}});assert.equal(view.get('copy').disabled,true);
 });

@@ -54,7 +54,7 @@ test('Cisco lab fixture removes every seeded secret in both export modes',()=>{
  const source=fs.readFileSync(path.join(__dirname,'fixtures/cisco-labs.ios'),'utf8');
  for(const mode of ['labels','addresses']) {
    const session=new ReviewSession();session.load(source,1,scan(source));session.setAddressMode(mode);
-   assert.equal(session.result.flags.length,0);session.acknowledge(true);
+   assert.equal(session.result.flags.length,0);session.markCompared();
    const output=session.export(1);assert.ok(!output.includes('SEED-'));assert.equal(session.source,source);
    assert.equal(output.split('\n').length,source.split('\n').length);
    assert.ok(output.includes('network '));assert.ok(output.includes(' 0.0.0.255 area 0'));
@@ -96,9 +96,9 @@ test('default route zero addresses remain structural in the new address mode',()
 });
 test('impossible remapping blocks export and labels provide a safe alternative',()=>{
  const source='ip route 10.0.0.0 255.0.0.0 192.0.2.1';const session=new ReviewSession();session.load(source,1,scan(source));session.setAddressMode('addresses');
- assert.ok(session.result.flags.length);session.acknowledge(true);assert.throws(()=>session.export(1),/flagged/);
+ assert.ok(session.result.flags.length);session.markCompared();assert.throws(()=>session.export(1),/flagged/);
  assert.ok(!session.result.output.includes('10.0.0.0'));session.setAddressMode('labels');assert.equal(session.result.flags.length,0);
- session.acknowledge(true);assert.match(session.export(1),/<IP_001>/);
+ session.markCompared();assert.match(session.export(1),/<IP_001>/);
 });
 test('special addresses and noncontiguous wildcards fail closed in numeric mode',()=>{
  for(const source of ['neighbor 224.0.0.1 remote-as 65001','permit ip 10.1.2.3 0.255.0.255 any']) {
@@ -106,8 +106,8 @@ test('special addresses and noncontiguous wildcards fail closed in numeric mode'
  }
 });
 test('address mode changes require another review and retain manual masks',()=>{
- const source='ip address 10.23.45.1 255.255.255.0\nunknown SEED-MANUAL';const session=new ReviewSession();session.load(source,1,scan(source));session.mask(source.indexOf('SEED-'),source.length);session.acknowledge(true);
- session.setAddressMode('addresses');assert.equal(session.reviewed,false);assert.throws(()=>session.export(1),/Review/);assert.ok(!session.result.output.includes('SEED-'));
+ const source='ip address 10.23.45.1 255.255.255.0\nunknown SEED-MANUAL';const session=new ReviewSession();session.load(source,1,scan(source));session.mask(source.indexOf('SEED-'),source.length);session.markCompared();
+ session.setAddressMode('addresses');assert.equal(session.compared,false);assert.throws(()=>session.export(1),/comparison/);assert.ok(!session.result.output.includes('SEED-'));
  const output=session.result.output;session.setAddressMode('labels');session.setAddressMode('addresses');assert.equal(session.result.output,output);
  assert.throws(()=>session.setAddressMode('external'),/supported/);session.invalidate();assert.throws(()=>session.setAddressMode('labels'),/Scan/);
 });

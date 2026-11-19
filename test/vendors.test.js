@@ -11,8 +11,8 @@ for(const item of cases)for(const mode of ['labels','addresses'])test(item.profi
  assert.deepEqual(result.output.match(/\r\n|\r|\n/g),item.source.match(/\r\n|\r|\n/g));
 });
 test('profile change invalidates result and manual masks',()=>{
- const session=new ReviewSession(),item=cases[0];session.load(item.source,1,scan(item.source));session.acknowledge(true);session.export(1);
- session.setProfile('junos-set');assert.equal(session.stale,true);assert.equal(session.result,undefined);assert.equal(session.reviewed,false);assert.throws(()=>session.export(1));assert.equal(session.metadata().profile,'junos-set');
+ const session=new ReviewSession(),item=cases.find(item=>item.profile==='cisco-ios');session.load(item.source,1,scan(item.source));session.markCompared();session.export(1);
+ session.setProfile('junos-set');assert.equal(session.stale,true);assert.equal(session.result,undefined);assert.equal(session.compared,false);assert.throws(()=>session.export(1));assert.equal(session.metadata().profile,'junos-set');
  assert.throws(()=>session.setProfile('unknown'));assert.throws(()=>scan('secret x','unknown'));
 });
 for(const [profile,source] of [
@@ -31,7 +31,7 @@ for(const [profile,source] of [
  ['dell-os10','credential-token PRIVATE']
 ])test('unsupported content blocks export: '+profile+' '+source.slice(0,25),()=>{
  const detected=scan(source,profile);assert.ok(detected.flags.length);
- const session=new ReviewSession();session.setProfile(profile);session.load(source,1,detected);session.acknowledge(true);assert.throws(()=>session.export(1));
+ const session=new ReviewSession();session.setProfile(profile);session.load(source,1,detected);session.markCompared();assert.throws(()=>session.export(1));
  const masked=replace(source,detected,manualSpans(source,[{start:0,end:source.length}]));
  assert.equal(masked.flags.length,0);assert.ok(!masked.output.includes('PRIVATE'));
 });
@@ -69,7 +69,7 @@ test('Junos privacy credentials are masked before export: '+profile+' '+mode,()=
   assert.equal(session.result.flags.length,0,JSON.stringify(session.result.flags));
   const secrets=session.result.replacements.filter(r=>r.category==='SECRET');assert.equal(secrets.length,2);assert.equal(secrets[0].label,secrets[1].label);
   assert.equal(session.result.output.split('<SECRET_001>').length-1,2);
-  session.acknowledge(true);const output=session.export(1);
+  session.markCompared();const output=session.export(1);
   assert.ok(!output.includes(value),field+' '+value);assert.ok(output.includes(field));assert.ok(output.includes(algorithm));
   assert.deepEqual(output.match(/\r\n|\r|\n/g),source.match(/\r\n|\r|\n/g));assert.equal(session.source,source);
  }
@@ -81,11 +81,11 @@ test('unsupported Junos privacy values block export: '+profile,()=>{
    ?`set snmp v3 usm local-engine user LAB-USER privacy-aes128 ${leaf}`
    :`snmp { v3 { usm { local-engine { user LAB-USER { privacy-aes128 { ${leaf}; } } } } } }`;
   const session=new ReviewSession();session.setProfile(profile);session.load(source,1,scan(source,profile));
-  assert.ok(session.result.flags.length,leaf);session.acknowledge(true);assert.throws(()=>session.export(1));
+  assert.ok(session.result.flags.length,leaf);session.markCompared();assert.throws(()=>session.export(1));
  }
 });
 test('unsupported Junos privacy credential blocks prevent export',()=>{
  const source='snmp { v3 { usm { local-engine { user LAB-USER { privacy-aes128 { privacy-key { unsupported SEED-UNSUPPORTED; } } } } } } }';
  const session=new ReviewSession();session.setProfile('junos-hierarchical');session.load(source,1,scan(source,'junos-hierarchical'));
- assert.ok(session.result.flags.length);session.acknowledge(true);assert.throws(()=>session.export(1));
+ assert.ok(session.result.flags.length);session.markCompared();assert.throws(()=>session.export(1));
 });
